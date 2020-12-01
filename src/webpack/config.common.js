@@ -19,9 +19,6 @@ module.exports = (wp_isProduction) => {
         fs: false,
       },
     },
-    // node: {
-    //   fs: "empty",
-    // },
     plugins: configCommonPlugins(isProduction),
     output: configCommonOutput(isProduction),
     module: configCommonModule(isProduction),
