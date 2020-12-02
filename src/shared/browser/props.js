@@ -10,7 +10,7 @@ module.exports = {
   author: "Nameer Rizvi",
   // twitterUsername: "@username",
   description:
-    "Single-page-application boilerplate. Express server serving a react client via webpack bundler.",
+    "Single-page-application boilerplate. Express server serving a React client via Webpack bundler.",
   keywords: [
     "javascript",
     "node",

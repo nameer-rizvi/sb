@@ -4,6 +4,7 @@ module.exports = {
       "react/prop-types": 0,
       "react/display-name": 0,
     },
+    reportUnusedDisableDirectives: true,
   },
   historyApiFallback: {
     disableDotRule: true,

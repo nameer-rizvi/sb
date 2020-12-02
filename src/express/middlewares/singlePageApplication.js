@@ -1,8 +1,9 @@
-const { isProduction, path, browser, origin } = require("../../shared");
+const { isEnvProduction, path, browser, origin } = require("../../shared");
 const fs = require("fs");
 const express = require("express");
 
-const template = `<!DOCTYPE html>
+const template = `
+<!DOCTYPE html>
 <html
   style="min-height: 100%;
     display: flex;
@@ -67,6 +68,6 @@ const template = `<!DOCTYPE html>
 `;
 
 module.exports =
-  isProduction && fs.existsSync(path.html)
+  isEnvProduction && fs.existsSync(path.dist("index.html"))
     ? express.static(path.dist())
     : (req, res) => res.status(404).send(template);
