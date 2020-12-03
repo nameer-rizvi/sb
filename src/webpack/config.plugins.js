@@ -18,7 +18,7 @@ module.exports = ({ isEnvProduction }) => [
         }),
         new GenerateSW({ exclude: [/\.(?:png|jpg|jpeg|svg)$/] }),
         new WebpackManifestPlugin({ fileName: "asset-manifest.json" }),
-        new WebpackPwaManifest({ ...browser.pwa }),
+        new WebpackPwaManifest(browser.pwa),
       ]
     : [
         new ESLintPlugin({
