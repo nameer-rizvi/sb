@@ -6,6 +6,9 @@ const StyledDiv = styled.div`
   display: flex;
   flex-direction: column;
   margin: auto;
+  padding: 30px;
+  box-sizing: border-box;
+  word-break: break-word;
 `;
 
 const StyledH1 = styled.h1`
