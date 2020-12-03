@@ -1,4 +1,4 @@
-const { path, browser } = require("../shared");
+const { path } = require("../shared");
 
 module.exports = ({ isEnvProduction }) => ({
   path: path.dist(),
