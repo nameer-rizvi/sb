@@ -16,6 +16,7 @@ module.exports = ({ isEnvProduction }) => ({
           presets: ["@babel/preset-env", "@babel/preset-react"],
           plugins: [
             "@babel/plugin-proposal-class-properties",
+            "@babel/plugin-proposal-export-default-from",
             "@babel/plugin-transform-react-jsx-source",
             "@babel/plugin-syntax-dynamic-import",
           ],
