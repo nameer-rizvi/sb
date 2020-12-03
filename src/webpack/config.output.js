@@ -1,16 +1,19 @@
-const { path } = require("../shared");
+const { path, browser } = require("../shared");
 
 module.exports = ({ isEnvProduction }) => ({
   path: path.dist(),
+  // Some plugins are dependent on publicPath for generating paths.
+  // If not declared, "auto" is passed.
+  publicPath: "",
   filename: isEnvProduction
-    ? "static/js/[name].[contenthash].js"
-    : "static/js/[name].bundle.js",
+    ? "lib/js/[name].[contenthash:8].js"
+    : "lib/js/[name].bundle.js",
   chunkFilename: isEnvProduction
-    ? "static/js/[name].[contenthash].chunk.js"
-    : "static/js/[name].chunk.js",
+    ? "lib/js/[name].[contenthash:8].chunk.js"
+    : "lib/js/[name].chunk.js",
   assetModuleFilename: isEnvProduction
-    ? "static/assets/[name].[contenthash][ext]"
-    : "static/assets/[name][ext]",
+    ? "lib/assets/[name].[contenthash:8][ext]"
+    : "lib/assets/[name][ext]",
 });
 
 // https://webpack.js.org/configuration/output/

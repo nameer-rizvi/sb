@@ -13,16 +13,12 @@ module.exports = ({ isEnvProduction }) => [
   ...(isEnvProduction
     ? [
         new MiniCssExtractPlugin({
-          filename: "static/css/[name].[contenthash].css",
-          chunkFilename: "static/css/[name].[contenthash].chunk.css",
+          filename: "lib/css/[name].[contenthash].css",
+          chunkFilename: "lib/css/[name].[contenthash].chunk.css",
         }),
-        new GenerateSW({
-          clientsClaim: true,
-          skipWaiting: true,
-          exclude: [/asset-manifest\.json$/],
-        }),
+        new GenerateSW({ exclude: [/\.(?:png|jpg|jpeg|svg)$/] }),
         new WebpackManifestPlugin({ fileName: "asset-manifest.json" }),
-        new WebpackPwaManifest(browser.pwa),
+        new WebpackPwaManifest({ ...browser.pwa }),
       ]
     : [
         new ESLintPlugin({
@@ -36,7 +32,7 @@ module.exports = ({ isEnvProduction }) => [
         }),
       ]),
   new CleanWebpackPlugin(),
-  new HtmlWebpackPlugin({ ...browser.html, minify: isEnvProduction }),
+  new HtmlWebpackPlugin({ minify: isEnvProduction, ...browser.html }),
 ];
 
 // https://webpack.js.org/configuration/plugins/

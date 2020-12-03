@@ -11,7 +11,7 @@ module.exports = (env, argv) => {
     optimization: require("./config.optimization"),
     plugins: require("./config.plugins"),
     devServer: require("./config.devServer"),
-    devtool: require("./config.devtool"),
+    devtool: require("./config.devTool"),
   };
 
   return Object.keys(configs).reduce(

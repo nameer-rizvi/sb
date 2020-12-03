@@ -13,6 +13,7 @@ const {
 
 module.exports = {
   title: name,
+  favicon: faviconPath.src,
   meta: {
     viewport,
     author,
@@ -24,10 +25,9 @@ module.exports = {
     "od:site_name": name,
     "og:title": name,
     "og:description": description,
-    "og:image": faviconPath,
+    "og:image": faviconPath.destination,
     // "twitter:site": twitterUsername
   },
-  favicon: faviconPath,
 };
 
 // Html-webpack-plugin:

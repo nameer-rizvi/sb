@@ -4,7 +4,7 @@ const { color, backgroundColor, fontFamily } = require("./style");
 module.exports = {
   type: "website",
   url: "https://sb.herokuapp.com/",
-  start_url: "/",
+  start_url: ".",
   name: "[app name]",
   short_name: "[app]",
   author: "Nameer Rizvi",
@@ -38,6 +38,6 @@ module.exports = {
   viewport: "width=device-width, initial-scale=1, shrink-to-fit=no",
   display: "standalone",
   orientation: "omit",
-  faviconPath: icons[2].src,
+  faviconPath: icons[2],
   icons,
 };
