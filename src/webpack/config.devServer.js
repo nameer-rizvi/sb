@@ -10,7 +10,6 @@ module.exports = ({ isEnvProduction }) =>
         compress: true,
         stats: "minimal",
         clientLogLevel: "error",
-        // publicPath: "/",
         // open: true,
       }
     : {};
