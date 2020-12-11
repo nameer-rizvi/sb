@@ -1,26 +1,23 @@
-const { isEnvProduction, path, browser, origin } = require("../../shared");
+const { isEnvProduction, path, origin } = require("../../shared");
+const publicProps = require("../../public").props;
 const fs = require("fs");
 const express = require("express");
 
 const template = `
 <!DOCTYPE html>
-<html
-  style="min-height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;"
->
+<html>
   <head>
     <title>[server]</title>
   </head>
   <style>
+    ${publicProps.style.base}
     body {
-      max-width: 700px;
+      max-width: 760px;
+      justify-content: center;
       padding: 40px;
-      ${browser.props.style}
     }
-    a {
-      color: ${browser.props.theme_color};
+    p {
+      line-height: 23px;
     }
   </style>
   <body>
@@ -50,8 +47,8 @@ const template = `
         npm page</a
       >.
     </h3>
-    <p style="line-height: 20px;">
-      A temporary solution is to comment-out the historyApiFallback middleware
+    <p>
+      A temporary solution is to remove the historyApiFallback middleware
       in /src/express/middlewares/index.js. You should then be able to hit the
       route and see the intended result. It is not recommended, but if done,
       please don't forget to uncomment it again before working on the front-end

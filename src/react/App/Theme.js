@@ -1,32 +1,15 @@
-import { browser } from "../../shared";
+import _public from "../../public";
 import { createGlobalStyle } from "styled-components";
 
-const { background_color, theme_color, fontFamily } = browser.props;
+const { backgroundColor, color, fontFamily } = _public.props.style;
 
 export const ThemeConfig = {
   font: [fontFamily],
-  color: [background_color, theme_color],
+  color: [backgroundColor, color],
 };
 
 export const ThemeGlobalStyle = createGlobalStyle`
-  * {
-    box-sizing: border-box;
-  }
-
-  html,
-  body {
-    padding: 0;
-    margin: 0;
-  }
-
-  body {
-    display: flex;
-    min-height: 100vh;
-    margin: auto;
-    background-color: ${({ theme }) => theme.color[0]};
-    color: ${({ theme }) => theme.color[1]};
-    font-family: ${({ theme }) => theme.font[0]};
-  }
+  ${_public.props.style.base}
 
   #react-application {
     display: flex;

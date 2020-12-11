@@ -1,22 +1,20 @@
+import { isEnvProduction } from "../shared";
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { store, serviceWorker } from "./setup";
 import App from "./App";
-import { browser } from "../shared";
+import _public from "../public";
 
-// Tried having this be hosted in "/setup"
-// but it won't work in there (if making
-// another attempt, must refresh page to
-// see changes take effect). Must settle
-// for this line here if hmr is desired.
-module.hot && module.hot.accept();
+// Having this hosted in "/setup" does not work.
+// Must settle for this line here if hmr is desired.
+!isEnvProduction && module.hot && module.hot.accept();
 
 ReactDOM.render(
   <Provider store={store}>
     <App />
   </Provider>,
-  document.getElementById(browser.html.applicationId)
+  document.getElementById(_public.props.applicationId)
 );
 
 serviceWorker.register();

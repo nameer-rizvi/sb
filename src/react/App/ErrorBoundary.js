@@ -1,14 +1,15 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import { browser, isEnvProduction } from "../../shared";
+import _public from "../../public";
+import { isEnvProduction } from "../../shared";
 
 const StyledDiv = styled.div`
   display: flex;
   flex-direction: column;
   margin: auto;
   padding: 30px;
-  font-family: ${browser.props.fontFamily};
-  color: ${browser.props.theme_color};
+  font-family: ${_public.props.style.fontFamily};
+  color: ${_public.props.style.color};
   h1 {
     margin-bottom: 30px;
   }

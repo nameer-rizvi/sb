@@ -1,7 +1,8 @@
 import React, { useEffect, Fragment } from "react";
 import { api } from "../setup";
 import { logger } from "simpul";
-import { isEnvProduction, browser } from "../../shared";
+import _public from "../../public";
+import { isEnvProduction } from "../../shared";
 import "./style.scss";
 
 const GitHub = (
@@ -32,7 +33,7 @@ function Page() {
   }, []);
 
   const link = (
-    <a href={browser.props.url} target="_blank" rel="noopener noreferrer">
+    <a href={_public.props.url} target="_blank" rel="noopener noreferrer">
       {GitHub}
     </a>
   );

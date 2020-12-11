@@ -1,17 +1,18 @@
-const { ProvidePlugin, HotModuleReplacementPlugin } = require("webpack");
+const { ProvidePlugin } = require("webpack");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const _public = require("../public");
 // const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 // const { GenerateSW } = require("workbox-webpack-plugin");
 // const { WebpackManifestPlugin } = require("webpack-manifest-plugin");
 // const WebpackPwaManifest = require("webpack-pwa-manifest");
-const { browser, path, settings } = require("../shared");
 const ESLintPlugin = require("eslint-webpack-plugin");
+const { path, settings } = require("../shared");
 
 module.exports = ({ isEnvProduction }) => [
   new ProvidePlugin({ process: "process/browser" }),
   new CleanWebpackPlugin({ cleanStaleWebpackAssets: Boolean(isEnvProduction) }),
-  new HtmlWebpackPlugin({ minify: isEnvProduction, ...browser.html }),
+  new HtmlWebpackPlugin({ minify: isEnvProduction, ..._public.html }),
   ...(isEnvProduction
     ? [
         // new MiniCssExtractPlugin({
@@ -20,7 +21,7 @@ module.exports = ({ isEnvProduction }) => [
         // }),
         // new GenerateSW({ exclude: [/\.(?:png|jpg|jpeg|svg)$/] }),
         // new WebpackManifestPlugin({ fileName: "asset-manifest.json" }),
-        // new WebpackPwaManifest(browser.pwa),
+        // new WebpackPwaManifest(_public.pwa),
       ]
     : [
         new ESLintPlugin({
@@ -32,7 +33,6 @@ module.exports = ({ isEnvProduction }) => [
             ...settings.eslint,
           },
         }),
-        new HotModuleReplacementPlugin(),
       ]),
 ];
 
