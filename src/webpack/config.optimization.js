@@ -2,21 +2,10 @@ const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 
 module.exports = ({ isEnvProduction }) => ({
   minimize: isEnvProduction,
-  minimizer: [new CssMinimizerPlugin(), "..."],
+  minimizer: ["...", new CssMinimizerPlugin()],
   moduleIds: isEnvProduction ? "size" : "deterministic",
   chunkIds: isEnvProduction ? "total-size" : "named",
   runtimeChunk: "single",
-  // Is this needed in webpack 5??
-  //
-  // splitChunks: {
-  //   cacheGroups: {
-  //     vendor: {
-  //       test: /[\\/]node_modules[\\/]/,
-  //       name: "vendors",
-  //       chunks: "all",
-  //     },
-  //   },
-  // },
 });
 
 // https://webpack.js.org/configuration/optimization/

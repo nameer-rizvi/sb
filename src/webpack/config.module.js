@@ -1,5 +1,5 @@
 const { path } = require("../shared");
-const MiniCssExtractPluginLoader = require("mini-css-extract-plugin").loader;
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = ({ isEnvProduction }) => ({
   rules: [
@@ -19,11 +19,10 @@ module.exports = ({ isEnvProduction }) => ({
       },
     },
     {
-      test: /\.(sa|sc|c)ss$/,
+      test: /\.s[ac]ss$/i,
       use: [
-        isEnvProduction ? MiniCssExtractPluginLoader : "style-loader",
+        isEnvProduction ? MiniCssExtractPlugin.loader : "style-loader",
         "css-loader",
-        "postcss-loader",
         "sass-loader",
       ],
     },

@@ -3,7 +3,6 @@ import { api } from "../setup";
 import { logger } from "simpul";
 import _public from "../../public";
 import { isEnvProduction } from "../../shared";
-import "./style.scss";
 
 const GitHub = (
   <svg

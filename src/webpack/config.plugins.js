@@ -2,28 +2,31 @@ const { ProvidePlugin } = require("webpack");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const _public = require("../public");
-// const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-// const { GenerateSW } = require("workbox-webpack-plugin");
-// const { WebpackManifestPlugin } = require("webpack-manifest-plugin");
-// const WebpackPwaManifest = require("webpack-pwa-manifest");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const { GenerateSW } = require("workbox-webpack-plugin");
+const { WebpackManifestPlugin } = require("webpack-manifest-plugin");
+const WebpackPwaManifest = require("webpack-pwa-manifest");
 const ESLintPlugin = require("eslint-webpack-plugin");
 const { path, settings } = require("../shared");
 
 module.exports = ({ isEnvProduction }) => [
   new ProvidePlugin({ process: "process/browser" }),
-  new CleanWebpackPlugin({ cleanStaleWebpackAssets: Boolean(isEnvProduction) }),
+  new CleanWebpackPlugin({
+    cleanStaleWebpackAssets: Boolean(isEnvProduction),
+  }),
   new HtmlWebpackPlugin({ minify: isEnvProduction, ..._public.html }),
   ...(isEnvProduction
     ? [
-        // new MiniCssExtractPlugin({
-        //   filename: "lib/css/[name].[contenthash].css",
-        //   chunkFilename: "lib/css/[name].[contenthash].chunk.css",
-        // }),
-        // new GenerateSW({ exclude: [/\.(?:png|jpg|jpeg|svg)$/] }),
-        // new WebpackManifestPlugin({ fileName: "asset-manifest.json" }),
-        // new WebpackPwaManifest(_public.pwa),
+        new MiniCssExtractPlugin({
+          filename: "lib/css/[name].[contenthash:8].css",
+          chunkFilename: "lib/css/[name].[contenthash:8].chunk.css",
+        }),
+        new GenerateSW({ exclude: [/\.(?:png|jpg|jpeg|svg)$/] }),
+        new WebpackManifestPlugin({ fileName: "asset-manifest.json" }),
+        new WebpackPwaManifest({ filename: "manifest.json", ..._public.pwa }),
       ]
     : [
+        new MiniCssExtractPlugin(),
         new ESLintPlugin({
           eslintPath: require.resolve("eslint"),
           extensions: ["js", "mjs", "jsx", "ts", "tsx"],
