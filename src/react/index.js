@@ -5,7 +5,12 @@ import { store, serviceWorker } from "./setup";
 import App from "./App";
 import { browser } from "../shared";
 
-if (module.hot) module.hot.accept();
+// Tried having this be hosted in "/setup"
+// but it won't work in there (if making
+// another attempt, must refresh page to
+// see changes take effect). Must settle
+// for this line here if hmr is desired.
+module.hot && module.hot.accept();
 
 ReactDOM.render(
   <Provider store={store}>
