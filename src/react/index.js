@@ -1,16 +1,17 @@
-import { element, store, serviceWorker } from "./setup";
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
+import { store, serviceWorker } from "./setup";
 import App from "./App";
+import { browser } from "../shared";
 
-element.create();
+if (module.hot) module.hot.accept();
 
 ReactDOM.render(
   <Provider store={store}>
     <App />
   </Provider>,
-  element.get()
+  document.getElementById(browser.html.applicationId)
 );
 
 serviceWorker.register();

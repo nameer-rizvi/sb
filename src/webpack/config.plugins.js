@@ -1,24 +1,26 @@
-const { ProvidePlugin } = require("webpack");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const { GenerateSW } = require("workbox-webpack-plugin");
-const { WebpackManifestPlugin } = require("webpack-manifest-plugin");
-const WebpackPwaManifest = require("webpack-pwa-manifest");
-const { browser, path, settings } = require("../shared");
-const ESLintPlugin = require("eslint-webpack-plugin");
+const { ProvidePlugin, HotModuleReplacementPlugin } = require("webpack");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+// const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+// const { GenerateSW } = require("workbox-webpack-plugin");
+// const { WebpackManifestPlugin } = require("webpack-manifest-plugin");
+// const WebpackPwaManifest = require("webpack-pwa-manifest");
+const { browser, path, settings } = require("../shared");
+const ESLintPlugin = require("eslint-webpack-plugin");
 
 module.exports = ({ isEnvProduction }) => [
   new ProvidePlugin({ process: "process/browser" }),
+  new CleanWebpackPlugin({ cleanStaleWebpackAssets: Boolean(isEnvProduction) }),
+  new HtmlWebpackPlugin({ minify: isEnvProduction, ...browser.html }),
   ...(isEnvProduction
     ? [
-        new MiniCssExtractPlugin({
-          filename: "lib/css/[name].[contenthash].css",
-          chunkFilename: "lib/css/[name].[contenthash].chunk.css",
-        }),
-        new GenerateSW({ exclude: [/\.(?:png|jpg|jpeg|svg)$/] }),
-        new WebpackManifestPlugin({ fileName: "asset-manifest.json" }),
-        new WebpackPwaManifest(browser.pwa),
+        // new MiniCssExtractPlugin({
+        //   filename: "lib/css/[name].[contenthash].css",
+        //   chunkFilename: "lib/css/[name].[contenthash].chunk.css",
+        // }),
+        // new GenerateSW({ exclude: [/\.(?:png|jpg|jpeg|svg)$/] }),
+        // new WebpackManifestPlugin({ fileName: "asset-manifest.json" }),
+        // new WebpackPwaManifest(browser.pwa),
       ]
     : [
         new ESLintPlugin({
@@ -30,9 +32,8 @@ module.exports = ({ isEnvProduction }) => [
             ...settings.eslint,
           },
         }),
+        new HotModuleReplacementPlugin(),
       ]),
-  new CleanWebpackPlugin(),
-  new HtmlWebpackPlugin({ minify: isEnvProduction, ...browser.html }),
 ];
 
 // https://webpack.js.org/configuration/plugins/

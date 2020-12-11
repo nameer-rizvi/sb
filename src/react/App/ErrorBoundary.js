@@ -1,29 +1,24 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import { isEnvProduction } from "../../shared";
+import { browser, isEnvProduction } from "../../shared";
 
 const StyledDiv = styled.div`
   display: flex;
   flex-direction: column;
   margin: auto;
   padding: 30px;
-  box-sizing: border-box;
-  word-break: break-word;
-`;
-
-const StyledH1 = styled.h1`
-  font-size: revert;
-  margin-bottom: 30px;
-`;
-
-const StyledH2 = styled.h2`
-  font-size: revert;
-  margin-bottom: 15px;
-`;
-
-const StyledPre = styled.pre`
-  white-space: pre-wrap;
-  word-wrap: break-word;
+  font-family: ${browser.props.fontFamily};
+  color: ${browser.props.theme_color};
+  h1 {
+    margin-bottom: 30px;
+  }
+  h2 {
+    margin-bottom: 15px;
+  }
+  pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
 `;
 
 class ErrorBoundary extends Component {
@@ -36,12 +31,19 @@ class ErrorBoundary extends Component {
 
   render() {
     const { error } = this.state;
-    return error && !isEnvProduction ? (
-      <StyledDiv>
-        <StyledH1>React Error</StyledH1>
-        <StyledH2>{error.message}</StyledH2>
-        <StyledPre>{error.stack}</StyledPre>
-      </StyledDiv>
+    return error ? (
+      isEnvProduction ? (
+        <StyledDiv>
+          <h1>Oopsies! Looks like something went wrong...</h1>
+          <h2>Whatever it is, we're working on it!</h2>
+        </StyledDiv>
+      ) : (
+        <StyledDiv>
+          <h1>React Error</h1>
+          <h2>{error.message}</h2>
+          <pre>{error.stack}</pre>
+        </StyledDiv>
+      )
     ) : (
       this.props.children
     );
@@ -49,3 +51,5 @@ class ErrorBoundary extends Component {
 }
 
 export default ErrorBoundary;
+
+// https://reactjs.org/docs/error-boundaries.html

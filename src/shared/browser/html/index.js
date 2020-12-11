@@ -1,4 +1,8 @@
 const {
+  template,
+  lang,
+  dir,
+  applicationId,
   name,
   viewport,
   author,
@@ -8,10 +12,14 @@ const {
   type,
   url,
   faviconPath,
-  // twitterUsername
-} = require("./props");
+  twitterUsername,
+} = require("../props");
 
 module.exports = {
+  template,
+  lang,
+  dir,
+  applicationId,
   title: name,
   favicon: faviconPath.src,
   meta: {
@@ -26,7 +34,7 @@ module.exports = {
     "og:title": name,
     "og:description": description,
     "og:image": faviconPath.destination,
-    // "twitter:site": twitterUsername
+    "twitter:site": twitterUsername,
   },
 };
 

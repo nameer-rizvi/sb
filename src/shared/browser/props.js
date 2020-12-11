@@ -1,9 +1,14 @@
+const path = require("path");
 const icons = require("./favicon");
 const { color, backgroundColor, fontFamily } = require("./style");
 
 module.exports = {
+  template: path.resolve(__dirname, "html/template.html"),
+  lang: "en",
+  dir: "ltr",
+  applicationId: "react-application",
   type: "website",
-  url: "https://sb.herokuapp.com/",
+  url: "https://github.com/nameer-rizvi/sb",
   start_url: ".",
   name: "[app name]",
   short_name: "[app]",

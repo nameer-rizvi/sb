@@ -4,13 +4,13 @@ module.exports = ({ isEnvProduction }) =>
   !isEnvProduction
     ? {
         port: port.client,
-        contentBase: path.dist(),
+        contentBase: path.client(),
         historyApiFallback: settings.historyApiFallback,
         hot: true,
         compress: true,
+        open: true,
         stats: "minimal",
         clientLogLevel: "error",
-        // open: true,
       }
     : {};
 

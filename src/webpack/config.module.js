@@ -3,22 +3,17 @@ const MiniCssExtractPluginLoader = require("mini-css-extract-plugin").loader;
 
 module.exports = ({ isEnvProduction }) => ({
   rules: [
-    { parser: { requireEnsure: false } },
     {
       test: /\.(js|jsx)$/,
       exclude: /node_modules/,
       include: path.client(),
-      // *** From previous config ***
-      // enforce: !isEnvProduction ? "pre" : null,
       use: {
         loader: "babel-loader",
         options: {
           presets: ["@babel/preset-env", "@babel/preset-react"],
           plugins: [
             "@babel/plugin-proposal-class-properties",
-            "@babel/plugin-proposal-export-default-from",
             "@babel/plugin-transform-react-jsx-source",
-            "@babel/plugin-syntax-dynamic-import",
           ],
         },
       },
@@ -28,6 +23,7 @@ module.exports = ({ isEnvProduction }) => ({
       use: [
         isEnvProduction ? MiniCssExtractPluginLoader : "style-loader",
         "css-loader",
+        "postcss-loader",
         "sass-loader",
       ],
     },
