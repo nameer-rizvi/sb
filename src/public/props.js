@@ -11,6 +11,7 @@ module.exports = {
   dir: "ltr",
   display: "standalone",
   favicon: icons[2],
+  HTMLTemplate: path.resolve(__dirname, "html/template.html"),
   icons,
   keywords: [
     "javascript",
@@ -35,7 +36,6 @@ module.exports = {
   },
   orientation: "portrait",
   style,
-  template: path.resolve(__dirname, "html/template.html"),
   twitter: {
     username: "@username",
   },

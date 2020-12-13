@@ -4,11 +4,11 @@ const {
   description,
   dir,
   favicon,
+  HTMLTemplate,
   keywords,
   lang,
   name,
   style,
-  template,
   type,
   twitter,
   url,
@@ -34,7 +34,7 @@ module.exports = {
     "twitter:site": twitter.username,
     viewport,
   },
-  template,
+  template: HTMLTemplate,
   title: name.full,
 };
 
