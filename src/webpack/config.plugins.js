@@ -1,8 +1,8 @@
-const { ProvidePlugin } = require("webpack");
+const { ProvidePlugin, HotModuleReplacementPlugin } = require("webpack");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const _public = require("../public");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const MiniCSSExtractPlugin = require("mini-css-extract-plugin");
 const { GenerateSW } = require("workbox-webpack-plugin");
 const { WebpackManifestPlugin } = require("webpack-manifest-plugin");
 const WebpackPwaManifest = require("webpack-pwa-manifest");
@@ -17,7 +17,7 @@ module.exports = ({ isEnvProduction }) => [
   new HtmlWebpackPlugin({ minify: isEnvProduction, ..._public.html }),
   ...(isEnvProduction
     ? [
-        new MiniCssExtractPlugin({
+        new MiniCSSExtractPlugin({
           filename: "lib/css/[name].[contenthash:8].css",
           chunkFilename: "lib/css/[name].[contenthash:8].chunk.css",
         }),
@@ -26,7 +26,8 @@ module.exports = ({ isEnvProduction }) => [
         new WebpackPwaManifest({ filename: "manifest.json", ..._public.pwa }),
       ]
     : [
-        new MiniCssExtractPlugin(),
+        new HotModuleReplacementPlugin(),
+        new MiniCSSExtractPlugin(),
         new ESLintPlugin({
           eslintPath: require.resolve("eslint"),
           extensions: ["js", "mjs", "jsx", "ts", "tsx"],

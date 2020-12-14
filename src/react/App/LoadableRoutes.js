@@ -1,6 +1,6 @@
 import React from "react";
 import loadable from "@loadable/component";
-import { Route } from "react-router";
+import { Route } from "react-router-dom";
 
 const Loader = () => "Loading...";
 

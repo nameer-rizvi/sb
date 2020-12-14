@@ -35,7 +35,7 @@ class ErrorBoundary extends Component {
     return error ? (
       isEnvProduction ? (
         <StyledDiv>
-          <h1>Oopsies! Looks like something went wrong...</h1>
+          <h1>Oops! Looks like something went wrong...</h1>
           <h2>Whatever it is, we're working on it!</h2>
         </StyledDiv>
       ) : (

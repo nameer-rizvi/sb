@@ -13,6 +13,7 @@ module.exports = (env, argv) => {
     plugins: require("./config.plugins"),
     devServer: require("./config.devServer"),
     devtool: require("./config.devtool"),
+    externals: require("./config.externals"),
   };
 
   return Object.keys(configs).reduce(

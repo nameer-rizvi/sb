@@ -1,22 +1,25 @@
 import React from "react";
 import ErrorBoundary from "./ErrorBoundary";
+import { Provider } from "react-redux";
 import { ConnectedRouter } from "connected-react-router";
-import { history } from "../setup";
-import { Switch } from "react-router";
+import { store, history } from "../redux";
 import { ThemeProvider } from "styled-components";
 import { ThemeConfig, ThemeGlobalStyle } from "./Theme";
+import { Switch } from "react-router-dom";
 import LoadableRoutes from "./LoadableRoutes";
 
 const App = () => (
   <ErrorBoundary>
-    <ConnectedRouter history={history}>
-      <Switch>
+    <Provider store={store}>
+      <ConnectedRouter history={history}>
         <ThemeProvider theme={ThemeConfig}>
           <ThemeGlobalStyle />
-          <LoadableRoutes />
+          <Switch>
+            <LoadableRoutes />
+          </Switch>
         </ThemeProvider>
-      </Switch>
-    </ConnectedRouter>
+      </ConnectedRouter>
+    </Provider>
   </ErrorBoundary>
 );
 
