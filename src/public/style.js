@@ -41,11 +41,8 @@ module.exports = {
     textarea,
     select,
     a {
-      margin: 0;
-      padding: 0;
       border: 0;
       background: unset;
-      font-size: inherit;
       font-family: inherit;
       width: fit-content;
       color: inherit
