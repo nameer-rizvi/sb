@@ -1,10 +1,10 @@
 const {
-  applicationId,
   author,
+  charset,
   description,
   dir,
+  elementId,
   favicon,
-  HTMLTemplate,
   keywords,
   lang,
   name,
@@ -13,10 +13,12 @@ const {
   twitter,
   url,
   viewport,
-} = require("../props");
+} = require("../constants");
+
+const path = require("path");
 
 module.exports = {
-  applicationId,
+  charset,
   dir,
   favicon: favicon.src,
   lang,
@@ -34,7 +36,13 @@ module.exports = {
     "twitter:site": twitter.username,
     viewport,
   },
-  template: HTMLTemplate,
+  reactElementId: elementId.react,
+  splashDiv: require("./splash")({
+    id: elementId.splash,
+    style,
+    title: name.full,
+  }),
+  template: path.resolve(__dirname, "template.html"),
   title: name.full,
 };
 

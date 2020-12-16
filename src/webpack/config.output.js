@@ -4,7 +4,7 @@ module.exports = ({ isEnvProduction }) => ({
   path: path.dist(),
   // Some plugins are dependent on publicPath for generating paths.
   // If not declared, "auto" is passed.
-  publicPath: "",
+  publicPath: "/",
   filename: isEnvProduction
     ? "lib/js/[name].[contenthash:8].js"
     : "lib/js/[name].bundle.js",

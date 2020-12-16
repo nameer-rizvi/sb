@@ -1,5 +1,5 @@
 module.exports = {
-  html: require("./html"),
+  constants: require("./constants"),
   pwa: require("./pwa"),
-  props: require("./props"),
+  html: require("./html"),
 };

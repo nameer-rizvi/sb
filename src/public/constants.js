@@ -1,17 +1,16 @@
 const icons = require("./icons");
-const style = require("./style");
-const path = require("path");
+const { style, elementId, origin } = require("../shared");
 
 module.exports = {
   author: "Nameer Rizvi",
-  applicationId: "react-application",
-  categories: ["social", "personalization", "books"],
+  categories: ["personalization"],
+  charset: "utf-8",
   description:
     "Single-page-application boilerplate. Express server serving a React client via Webpack bundler.",
   dir: "ltr",
   display: "standalone",
+  elementId,
   favicon: icons[2],
-  HTMLTemplate: path.resolve(__dirname, "html/template.html"),
   icons,
   keywords: [
     "javascript",
@@ -40,6 +39,6 @@ module.exports = {
     username: "@username",
   },
   type: "website",
-  url: "https://github.com/nameer-rizvi/sb",
+  url: origin,
   viewport: "width=device-width, initial-scale=1, shrink-to-fit=no",
 };

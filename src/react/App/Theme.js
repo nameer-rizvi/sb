@@ -1,7 +1,7 @@
-import _public from "../../public";
+import { style, elementId } from "../../shared";
 import { createGlobalStyle } from "styled-components";
 
-const { backgroundColor, color, fontFamily } = _public.props.style;
+const { backgroundColor, color, fontFamily } = style;
 
 export const ThemeConfig = {
   font: [fontFamily],
@@ -9,9 +9,9 @@ export const ThemeConfig = {
 };
 
 export const ThemeGlobalStyle = createGlobalStyle`
-  ${_public.props.style.base}
+  ${style.base}
 
-  #react-application {
+  #${elementId.react} {
     display: flex;
     flex-direction: column;
     flex-grow: 1;

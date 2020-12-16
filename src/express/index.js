@@ -1,6 +1,6 @@
 require("dotenv").config();
 const express = require("express");
-const { port, endpoint } = require("../shared");
+const { port, resource } = require("../shared");
 const { logger } = require("simpul");
 const middlewares = require("./middlewares");
 
@@ -11,7 +11,7 @@ server.listen(port.server, () =>
 );
 
 server.use(middlewares.application);
-server.use(endpoint, middlewares.api);
+server.use(resource.api, middlewares.api);
 server.use(middlewares.singlePageApplication);
 
 // http://expressjs.com/

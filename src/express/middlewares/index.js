@@ -1,12 +1,9 @@
-const cors = require("./cors");
-const expressJSON = require("./expressJSON");
-const helmet = require("./helmet");
-const historyApiFallback = require("./historyApiFallback");
-const routes = require("../routes");
-const singlePageApplication = require("./singlePageApplication");
+exports.application = [
+  require("./cors"),
+  require("./helmet"),
+  require("./historyApiFallback"),
+];
 
-module.exports = {
-  application: [cors, helmet, historyApiFallback],
-  api: [expressJSON, routes],
-  singlePageApplication,
-};
+exports.api = [require("./expressJSON"), require("../routes")];
+
+exports.singlePageApplication = require("./singlePageApplication");

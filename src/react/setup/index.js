@@ -1,4 +1,3 @@
-import "./polyfill";
+import "./applyPolyfills";
+import "./serviceWorker";
 export * from "./rootElement";
-export * from "./api";
-export * as serviceWorker from "./serviceWorker";

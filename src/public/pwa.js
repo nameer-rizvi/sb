@@ -8,7 +8,7 @@ const {
   name,
   orientation,
   style,
-} = require("./props");
+} = require("./constants");
 
 module.exports = {
   background_color: style.backgroundColor,

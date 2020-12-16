@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html
-	lang="<%= htmlWebpackPlugin.options.lang %>"
-	dir="<%= htmlWebpackPlugin.options.dir %>"
+  lang="<%= htmlWebpackPlugin.options.lang %>"
+  dir="<%= htmlWebpackPlugin.options.dir %>"
 >
-	<head>
-		<meta charset="utf-8" />
-		<title><%= htmlWebpackPlugin.options.title %></title>
-	</head>
-	<body>
-		<div id="<%= htmlWebpackPlugin.options.applicationId %>" />
-	</body>
+  <head>
+    <meta charset="<%= htmlWebpackPlugin.options.charset %>" />
+    <title><%= htmlWebpackPlugin.options.title %></title>
+  </head>
+  <body>
+    <%= htmlWebpackPlugin.options.splashDiv %>
+    <div id="<%= htmlWebpackPlugin.options.reactElementId %>" />
+  </body>
 </html>

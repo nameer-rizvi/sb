@@ -24,3 +24,5 @@ module.exports = (env, argv) => {
     {}
   );
 };
+
+// https://webpack.js.org/configuration/

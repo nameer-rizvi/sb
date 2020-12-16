@@ -14,6 +14,7 @@ module.exports = ({ isEnvProduction }) => ({
           plugins: [
             "@babel/plugin-proposal-class-properties",
             "@babel/plugin-transform-react-jsx-source",
+            "@babel/plugin-transform-runtime",
           ],
         },
       },

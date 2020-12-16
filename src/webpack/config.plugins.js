@@ -1,7 +1,7 @@
 const { ProvidePlugin, HotModuleReplacementPlugin } = require("webpack");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const _public = require("../public");
+const { html: HTML, pwa: PWA } = require("../public");
 const MiniCSSExtractPlugin = require("mini-css-extract-plugin");
 const { GenerateSW } = require("workbox-webpack-plugin");
 const { WebpackManifestPlugin } = require("webpack-manifest-plugin");
@@ -11,10 +11,8 @@ const { path, settings } = require("../shared");
 
 module.exports = ({ isEnvProduction }) => [
   new ProvidePlugin({ process: "process/browser" }),
-  new CleanWebpackPlugin({
-    cleanStaleWebpackAssets: Boolean(isEnvProduction),
-  }),
-  new HtmlWebpackPlugin({ minify: isEnvProduction, ..._public.html }),
+  new CleanWebpackPlugin({ cleanStaleWebpackAssets: isEnvProduction }),
+  new HtmlWebpackPlugin({ minify: isEnvProduction, ...HTML }),
   ...(isEnvProduction
     ? [
         new MiniCSSExtractPlugin({
@@ -23,7 +21,7 @@ module.exports = ({ isEnvProduction }) => [
         }),
         new GenerateSW({ exclude: [/\.(?:png|jpg|jpeg|svg)$/] }),
         new WebpackManifestPlugin({ fileName: "asset-manifest.json" }),
-        new WebpackPwaManifest({ filename: "manifest.json", ..._public.pwa }),
+        new WebpackPwaManifest({ filename: "manifest.json", ...PWA }),
       ]
     : [
         new HotModuleReplacementPlugin(),
@@ -45,11 +43,11 @@ module.exports = ({ isEnvProduction }) => [
 // If using moment.js, add to plugins:
 // new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
 //
+// https://www.npmjs.com/package/clean-webpack-plugin
+// https://www.npmjs.com/package/html-webpack-plugin
 // https://www.npmjs.com/package/mini-css-extract-plugin
 // https://developers.google.com/web/tools/workbox/modules/workbox-webpack-plugin
 // https://developers.google.com/web/tools/workbox/guides/get-started
 // https://www.npmjs.com/package/webpack-manifest-plugin
 // https://www.npmjs.com/package/webpack-pwa-manifest
 // https://www.npmjs.com/package/eslint-webpack-plugin
-// https://www.npmjs.com/package/clean-webpack-plugin
-// https://www.npmjs.com/package/html-webpack-plugin

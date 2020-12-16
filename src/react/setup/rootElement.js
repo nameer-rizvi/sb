@@ -1,3 +1,7 @@
-import _public from "../../public";
+import { elementId } from "../../shared";
 
-export const rootElement = document.getElementById(_public.props.applicationId);
+const splashElement = document.getElementById(elementId.splash);
+
+splashElement && splashElement.remove();
+
+export const rootElement = document.getElementById(elementId.react);

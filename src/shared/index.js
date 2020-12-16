@@ -1,5 +1,6 @@
-const path = require("./path");
-const server = require("./server");
-const settings = require("./settings");
-
-module.exports = { path, ...server, settings };
+module.exports = {
+  path: require("./path"),
+  settings: require("./settings"),
+  style: require("./style"),
+  ...require("./system"),
+};

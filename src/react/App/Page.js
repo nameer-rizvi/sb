@@ -1,8 +1,12 @@
 import React, { useEffect, Fragment } from "react";
-import { api } from "../setup";
 import { logger } from "simpul";
-import _public from "../../public";
-import { isEnvProduction } from "../../shared";
+import { isEnvProduction, port, resource } from "../../shared";
+
+const { origin } = window.location;
+
+const api = origin.includes(":" + port.client)
+  ? origin.replace(port.client, port.server) + resource.api
+  : origin + resource.api;
 
 const GitHub = (
   <svg
@@ -32,7 +36,11 @@ function Page() {
   }, []);
 
   const link = (
-    <a href={_public.props.url} target="_blank" rel="noopener noreferrer">
+    <a
+      href="https://github.com/nameer-rizvi/sb"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
       {GitHub}
     </a>
   );

@@ -28,7 +28,7 @@ export default App;
 // To render component on specific routes,
 // add component props: exact path={"/"}
 //
-// https://reactrouter.com/
-// https://www.npmjs.com/package/react-router
+// https://www.npmjs.com/package/react-redux
 // https://www.npmjs.com/package/connected-react-router
 // https://www.npmjs.com/package/styled-components
+// https://www.npmjs.com/package/react-router-dom

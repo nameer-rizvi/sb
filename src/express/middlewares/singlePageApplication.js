@@ -1,5 +1,4 @@
-const { isEnvProduction, path, origin } = require("../../shared");
-const publicProps = require("../../public").props;
+const { style, isEnvProduction, path, origin } = require("../../shared");
 const fs = require("fs");
 const express = require("express");
 
@@ -7,10 +6,10 @@ const template = `
 <!DOCTYPE html>
 <html>
   <head>
-    <title>[server]</title>
+    <title>[sb/server]</title>
   </head>
   <style>
-    ${publicProps.style.base}
+    ${style.base}
     body {
       max-width: 760px;
       justify-content: center;
@@ -19,6 +18,10 @@ const template = `
     p {
       line-height: 23px;
     }
+    a {
+      width: 100%;
+      text-align: left;
+    }
   </style>
   <body>
     <h1>
@@ -26,8 +29,7 @@ const template = `
       is using the historyApiFallback module.
     </h1>
     <h2>
-      This is a package required for developing an spa (single-page
-      application).
+      This is a package required for developing a single-page application.
     </h2>
     <h3>
       For more information, please see the module's
@@ -44,8 +46,8 @@ const template = `
         target="_blank"
         rel="noopener noreferrer"
       >
-        npm page</a
-      >.
+        npm page
+      </a>.
     </h3>
     <p>
       A temporary solution is to remove the historyApiFallback middleware
@@ -57,8 +59,9 @@ const template = `
     </p>
     <br />
     <br />
-    <a href="${origin}" target="_blank" rel="noopener noreferrer"
-      >Click here to open the react application on the client port.</a
+    <a href="${origin}" target="_blank" rel="noopener noreferrer">
+      Click here to open the react application on the client port.
+    </a
     >
   </body>
 </html>
