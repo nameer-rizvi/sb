@@ -14,19 +14,19 @@ const {
   viewport,
 } = require("../../shared");
 
-const icons = require("../icons");
+const favicon = require("../icons")[2];
 
 module.exports = {
   charset,
   dir,
-  favicon: icons[2].src,
+  favicon: favicon.src,
   lang,
   meta: {
     author,
     description,
     keywords,
     "og:description": description,
-    "og:image": icons[2].destination,
+    "og:image": favicon.destination,
     "od:site_name": name.full,
     "og:title": name.full,
     "og:type": type,
