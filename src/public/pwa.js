@@ -3,12 +3,11 @@ const {
   description,
   dir,
   display,
-  icons,
   lang,
   name,
   orientation,
   style,
-} = require("./constants");
+} = require("../shared");
 
 module.exports = {
   background_color: style.backgroundColor,
@@ -16,7 +15,7 @@ module.exports = {
   description,
   dir,
   display,
-  icons,
+  icons: require("./icons"),
   lang,
   name: name.full,
   orientation,

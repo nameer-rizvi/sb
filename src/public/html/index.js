@@ -4,7 +4,6 @@ const {
   description,
   dir,
   elementId,
-  favicon,
   keywords,
   lang,
   name,
@@ -13,21 +12,21 @@ const {
   twitter,
   url,
   viewport,
-} = require("../constants");
+} = require("../../shared");
 
-const path = require("path");
+const icons = require("../icons");
 
 module.exports = {
   charset,
   dir,
-  favicon: favicon.src,
+  favicon: icons[2].src,
   lang,
   meta: {
     author,
     description,
     keywords,
     "og:description": description,
-    "og:image": favicon.destination,
+    "og:image": icons[2].destination,
     "od:site_name": name.full,
     "og:title": name.full,
     "og:type": type,
@@ -42,7 +41,7 @@ module.exports = {
     style,
     title: name.full,
   }),
-  template: path.resolve(__dirname, "template.html"),
+  template: require("path").resolve(__dirname, "template.html"),
   title: name.full,
 };
 
