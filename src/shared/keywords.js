@@ -1,0 +1,16 @@
+module.exports = [
+  "javascript",
+  "node",
+  "nodejs",
+  "express",
+  "expressjs",
+  "react",
+  "reactjs",
+  "webpack",
+  "webpack-middleware",
+  "boilerplate",
+  "boilerplate-template",
+  "boilerplate-application",
+  "single-page-application",
+  "spa",
+].join(", ");

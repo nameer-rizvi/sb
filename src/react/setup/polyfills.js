@@ -22,7 +22,7 @@ if (isEnvProduction) {
 
   function LogPolyfills(appliedPolyfills) {
     const polyfills = appliedPolyfills.join(", ");
-    logger(`🔨 Following polyfills have been applied: ${polyfills}.`);
+    logger(`🔨 Following polyfill(s) have been applied: ${polyfills}.`);
   }
 
   ApplyIE9Polyfill()
