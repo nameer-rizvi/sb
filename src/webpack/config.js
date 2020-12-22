@@ -1,7 +1,5 @@
 module.exports = (env, argv) => {
-  const isEnvProduction = Boolean(
-    argv.mode === "production" || process.env.NODE_ENV === "production"
-  );
+  const isEnvProduction = Boolean(argv.mode === "production");
 
   const configs = {
     entry: require("./config.entry"),
