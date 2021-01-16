@@ -20,7 +20,7 @@ module.exports = ({ isEnvProduction }) => ({
       },
     },
     {
-      test: /\.s[ac]ss$/i,
+      test: /\.(sa|sc|c)ss$/,
       use: [
         isEnvProduction ? MiniCSSExtractPlugin.loader : "style-loader",
         "css-loader",
