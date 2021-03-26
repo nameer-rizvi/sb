@@ -1,4 +1,4 @@
-module.exports = [
+const keywords = [
   "javascript",
   "node",
   "nodejs",
@@ -14,3 +14,5 @@ module.exports = [
   "single-page-application",
   "spa",
 ].join(", ");
+
+module.exports = keywords;

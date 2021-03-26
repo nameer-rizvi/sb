@@ -13,8 +13,8 @@ const {
   url,
   viewport,
 } = require("../../shared");
-
 const favicon = require("../icons")[2];
+const makeSplash = require("./splash");
 
 module.exports = {
   charset,
@@ -36,7 +36,7 @@ module.exports = {
     viewport,
   },
   reactElementId: elementId.react,
-  splashDiv: require("./splash")({
+  splashDiv: makeSplash({
     id: elementId.splash,
     style,
     title: name.full,

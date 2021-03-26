@@ -1,4 +1,4 @@
-module.exports = () => ({
+const webpackResolveConfig = () => ({
   fallback: {
     // assert: false,
     // child_process: false,
@@ -13,5 +13,7 @@ module.exports = () => ({
     // zlib: false,
   },
 });
+
+module.exports = webpackResolveConfig;
 
 // https://webpack.js.org/configuration/resolve/

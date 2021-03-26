@@ -1,6 +1,8 @@
 const cors = require("cors");
 const { origin } = require("../../shared");
 
-module.exports = cors({ origin });
+const corsMiddleware = cors({ origin });
+
+module.exports = corsMiddleware;
 
 // https://www.npmjs.com/package/cors

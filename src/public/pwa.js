@@ -9,7 +9,7 @@ const {
   style,
 } = require("../shared");
 
-module.exports = {
+const pwa = {
   background_color: style.backgroundColor,
   categories,
   description,
@@ -22,6 +22,8 @@ module.exports = {
   short_name: name.short,
   theme_color: style.color,
 };
+
+module.exports = pwa;
 
 // MDN's manifest guide:
 // https://developer.mozilla.org/en-US/docs/Web/Manifest

@@ -1,6 +1,6 @@
 const { path } = require("../shared");
 
-module.exports = ({ isEnvProduction }) => ({
+const webpackOutputConfig = ({ isEnvProduction }) => ({
   path: path.dist(),
   // Some plugins are dependent on publicPath for generating paths.
   // If not declared, "auto" is passed.
@@ -15,5 +15,7 @@ module.exports = ({ isEnvProduction }) => ({
     ? "lib/assets/[name].[contenthash:8][ext]"
     : "lib/assets/[name][ext]",
 });
+
+module.exports = webpackOutputConfig;
 
 // https://webpack.js.org/configuration/output/

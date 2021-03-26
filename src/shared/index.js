@@ -1,4 +1,4 @@
-module.exports = {
+const index = {
   author: require("./author"),
   categories: require("./categories"),
   charset: require("./charset"),
@@ -21,3 +21,5 @@ module.exports = {
   type: require("./type"),
   viewport: require("./viewport"),
 };
+
+module.exports = index;

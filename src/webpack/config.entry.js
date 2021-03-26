@@ -1,5 +1,7 @@
 const { path } = require("../shared");
 
-module.exports = () => path.client("index.js");
+const webpackEntryConfig = () => path.client("index.js");
+
+module.exports = webpackEntryConfig;
 
 // https://webpack.js.org/configuration/entry-context/

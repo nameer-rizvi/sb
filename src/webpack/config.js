@@ -1,4 +1,4 @@
-module.exports = (env, argv) => {
+function webpackConfig(env, argv) {
   const isEnvProduction = Boolean(argv.mode === "production");
 
   const configs = {
@@ -21,6 +21,8 @@ module.exports = (env, argv) => {
       }),
     {}
   );
-};
+}
+
+module.exports = webpackConfig;
 
 // https://webpack.js.org/configuration/

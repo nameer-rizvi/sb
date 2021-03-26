@@ -1,6 +1,8 @@
-const _port = process.env.PORT || 5000;
+const nodePort = process.env.PORT || 5000;
 
-module.exports = {
-  server: _port,
-  client: _port + 1,
+const port = {
+  server: nodePort,
+  client: nodePort + 1,
 };
+
+module.exports = port;

@@ -9,12 +9,15 @@ const StyledDiv = styled.div`
   padding: 30px;
   font-family: ${style.fontFamily};
   color: ${style.color};
+
   h1 {
     margin-bottom: 30px;
   }
+
   h2 {
     margin-bottom: 15px;
   }
+
   pre {
     white-space: pre-wrap;
     word-wrap: break-word;

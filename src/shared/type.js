@@ -1,1 +1,3 @@
-module.exports = "website";
+const type = "website";
+
+module.exports = type;

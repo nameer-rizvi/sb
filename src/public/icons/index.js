@@ -2,7 +2,7 @@ const path = require("path");
 
 const pathResolve = (dir) => path.resolve(__dirname, "favicon_io/" + dir);
 
-module.exports = [
+const icons = [
   {
     src: pathResolve("favicon-16x16.png"),
     sizes: "16x16",
@@ -41,5 +41,7 @@ module.exports = [
     destination: path.join("lib", "icons", "ios"),
   },
 ];
+
+module.exports = icons;
 
 // Favicon generator: https://favicon.io/

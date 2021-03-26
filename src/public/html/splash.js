@@ -1,4 +1,4 @@
-module.exports = ({ id, title, style }) => `
+const makeSplash = ({ id, title, style }) => `
   <div id="${id}">
     <style>
       ${style.base}
@@ -20,3 +20,5 @@ module.exports = ({ id, title, style }) => `
     <h2>Please wait...</h2>
   </div>
 `;
+
+module.exports = makeSplash;

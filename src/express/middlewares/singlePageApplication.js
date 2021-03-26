@@ -67,7 +67,9 @@ const template = `
 </html>
 `;
 
-module.exports =
+const singlePageApplicationMiddleware =
   isEnvProduction && fs.existsSync(path.dist("index.html"))
     ? express.static(path.dist())
     : (req, res) => res.status(404).send(template);
+
+module.exports = singlePageApplicationMiddleware;

@@ -1,1 +1,3 @@
-module.exports = "ltr";
+const dir = "ltr";
+
+module.exports = dir;

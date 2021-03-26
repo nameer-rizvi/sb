@@ -1,9 +1,11 @@
-const path = require("path");
+const nodePath = require("path");
 
 const pathResolve = (dir) =>
-  path.resolve(__dirname, dir.filter(Boolean).join("/"));
+  nodePath.resolve(__dirname, dir.filter(Boolean).join("/"));
 
-module.exports = {
+const path = {
   dist: (ext) => pathResolve(["../dist", ext]),
   client: (ext) => pathResolve(["../react", ext]),
 };
+
+module.exports = path;

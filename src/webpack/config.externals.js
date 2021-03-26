@@ -1,5 +1,5 @@
-module.exports = () => ({
-  jsdom: "jsdom",
-});
+const webpackExternalsConfig = () => ({ jsdom: "jsdom" });
+
+module.exports = webpackExternalsConfig;
 
 // https://webpack.js.org/configuration/externals/

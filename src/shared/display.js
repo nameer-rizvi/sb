@@ -1,1 +1,3 @@
-module.exports = "standalone";
+const display = "standalone";
+
+module.exports = display;

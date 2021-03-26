@@ -1,1 +1,3 @@
-module.exports = ["personalization"];
+const categories = ["personalization"];
+
+module.exports = categories;

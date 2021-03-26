@@ -9,7 +9,7 @@ const WebpackPwaManifest = require("webpack-pwa-manifest");
 const ESLintPlugin = require("eslint-webpack-plugin");
 const { path, settings } = require("../shared");
 
-module.exports = ({ isEnvProduction }) => [
+const webpackPluginsConfig = ({ isEnvProduction }) => [
   new ProvidePlugin({ process: "process/browser" }),
   new CleanWebpackPlugin({ cleanStaleWebpackAssets: isEnvProduction }),
   new HtmlWebpackPlugin({ minify: isEnvProduction, ...HTML }),
@@ -37,6 +37,8 @@ module.exports = ({ isEnvProduction }) => [
         }),
       ]),
 ];
+
+module.exports = webpackPluginsConfig;
 
 // https://webpack.js.org/configuration/plugins/
 //

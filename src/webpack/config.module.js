@@ -1,7 +1,7 @@
 const { path } = require("../shared");
 const MiniCSSExtractPlugin = require("mini-css-extract-plugin");
 
-module.exports = ({ isEnvProduction }) => ({
+const webpackModuleConfig = ({ isEnvProduction }) => ({
   rules: [
     {
       test: /\.(js|jsx)$/,
@@ -37,6 +37,8 @@ module.exports = ({ isEnvProduction }) => ({
     },
   ],
 });
+
+module.exports = webpackModuleConfig;
 
 // https://webpack.js.org/configuration/module/
 // https://www.npmjs.com/package/mini-css-extract-plugin

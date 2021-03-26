@@ -1,1 +1,3 @@
-module.exports = "utf-8";
+const charset = "utf-8";
+
+module.exports = charset;

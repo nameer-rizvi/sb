@@ -1,6 +1,6 @@
 const { port, path, settings } = require("../shared");
 
-module.exports = ({ isEnvProduction }) =>
+const webpackDevServerConfig = ({ isEnvProduction }) =>
   !isEnvProduction
     ? {
         port: port.client,
@@ -13,5 +13,7 @@ module.exports = ({ isEnvProduction }) =>
         clientLogLevel: "error",
       }
     : {};
+
+module.exports = webpackDevServerConfig;
 
 // https://webpack.js.org/configuration/dev-server/
