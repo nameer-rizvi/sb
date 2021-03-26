@@ -1,3 +1,3 @@
-const index = { pwa: require("./pwa"), html: require("./html") };
+const publicIndex = { pwa: require("./pwa"), html: require("./html") };
 
-module.exports = index;
+module.exports = publicIndex;

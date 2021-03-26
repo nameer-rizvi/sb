@@ -16,7 +16,7 @@ const {
 const favicon = require("../icons")[2];
 const makeSplash = require("./splash");
 
-module.exports = {
+const html = {
   charset,
   dir,
   favicon: favicon.src,
@@ -44,6 +44,8 @@ module.exports = {
   template: require("path").resolve(__dirname, "template.html"),
   title: name.full,
 };
+
+module.exports = html;
 
 // Html-webpack-plugin:
 // - https://github.com/jantimon/html-webpack-plugin

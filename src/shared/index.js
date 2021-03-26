@@ -1,4 +1,4 @@
-const index = {
+const sharedIndex = {
   author: require("./author"),
   categories: require("./categories"),
   charset: require("./charset"),
@@ -22,4 +22,4 @@ const index = {
   viewport: require("./viewport"),
 };
 
-module.exports = index;
+module.exports = sharedIndex;

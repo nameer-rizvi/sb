@@ -6,9 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint . --ext .js,.jsx; exit 0",
-    "client": "cd src/webpack && webpack serve --mode development --config config.js",
-    "server": "NODE_ENV=development nodemon --watch 'src/express/*' src/express/index.js",
-    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "webpack": "cd src/webpack && webpack serve --mode development --config config.js",
+    "express": "NODE_ENV=development nodemon --watch 'src/express/*' src/express/index.js",
+    "dev": "concurrently \"npm run express\" \"npm run webpack\"",
     "build": "cd src/webpack && webpack --mode production --config config.js",
     "start": "NODE_ENV=production node src/express/index.js",
     "app": "npm install && npm run build && npm run start"
