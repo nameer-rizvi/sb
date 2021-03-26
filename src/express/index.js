@@ -11,7 +11,9 @@ server.listen(port.server, () =>
 );
 
 server.use(middlewares.application);
+
 server.use(resource.api, middlewares.api);
+
 server.use(middlewares.singlePageApplication);
 
 // http://expressjs.com/
