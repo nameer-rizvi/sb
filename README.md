@@ -12,13 +12,13 @@ _Recommended for maintaining code quality._
 
 **Though ESLint is enabled to run on webpack's dev server, it won't catch syntax errors outside of the react app while in dev mode, as such, it is helpful to run lint throughout the app lest there be any unknown errors in /express, /public, /shared, or /webpack.**
 
-`npm run client`
+`npm run webpack`
 
 Run webpack's dev server for hot-reload on changes in /react.
 
 _Recommended for front-end-only development._
 
-`npm run server`
+`npm run express`
 
 Start & watch the express server in development mode.
 
