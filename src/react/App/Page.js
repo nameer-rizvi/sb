@@ -1,5 +1,5 @@
 import React, { useEffect, Fragment } from "react";
-import { logger } from "simpul";
+import { timelog } from "simpul";
 import { isEnvProduction, port, resource } from "../../shared";
 
 const { origin } = window.location;
@@ -12,8 +12,8 @@ function Page() {
   useEffect(() => {
     fetch(api)
       .then((response) => response.json())
-      .then(logger)
-      .catch(logger);
+      .then((response) => timelog(response.welcome))
+      .catch((error) => timelog(error.toString()));
   }, []);
 
   const link = (

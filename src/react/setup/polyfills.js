@@ -1,5 +1,5 @@
 import { isEnvProduction } from "../../shared";
-import { logger } from "simpul";
+import { timelog } from "simpul";
 
 // Polyfill packages are heavy so it is best to import them dynamically.
 
@@ -22,13 +22,13 @@ if (isEnvProduction) {
 
   function LogPolyfills(appliedPolyfills) {
     const polyfills = appliedPolyfills.join(", ");
-    logger(`🔨 Following polyfill(s) have been applied: ${polyfills}.`);
+    timelog(`🔨 Following polyfill(s) have been applied: ${polyfills}.`);
   }
 
   ApplyIE9Polyfill()
     .then(ApplyStablePolyfill)
     .then(LogPolyfills)
-    .catch(logger);
+    .catch(timelog);
 }
 
 // https://www.npmjs.com/package/react-app-polyfill

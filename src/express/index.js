@@ -1,13 +1,13 @@
 require("dotenv").config();
 const express = require("express");
 const { port, resource } = require("../shared");
-const { logger } = require("simpul");
+const { timelog } = require("simpul");
 const middlewares = require("./middlewares");
 
 const server = express();
 
 server.listen(port.server, () =>
-  logger({ s: "Express server listening on port " + port.server + "." })
+  timelog("⚡ Express server listening on port " + port.server + ".")
 );
 
 server.use(middlewares.application);

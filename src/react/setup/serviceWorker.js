@@ -1,7 +1,7 @@
-import { logger } from "simpul";
+import { timelog } from "simpul";
 import { isEnvProduction } from "../../shared";
 
-const logStatus = (status) => logger("👷 Service worker " + status + ".");
+const logStatus = (status) => timelog("👷 Service worker " + status + ".");
 
 const inNavigator = "serviceWorker" in navigator;
 

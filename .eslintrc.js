@@ -1,6 +1,6 @@
 const settings = require("./src/shared").settings.eslint;
 
-module.exports = {
+const eslintrc = {
   env: {
     browser: true,
     node: true,
@@ -9,6 +9,8 @@ module.exports = {
   plugins: ["jsx-a11y"],
   ...settings,
 };
+
+module.exports = eslintrc;
 
 // Create-React-App's ESLint Package:
 // https://www.npmjs.com/package/eslint-config-react-app
