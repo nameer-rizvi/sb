@@ -4,13 +4,12 @@ const webpackDevServerConfig = ({ isEnvLive }) =>
   !isEnvLive
     ? {
         port: port.client,
-        contentBase: path.client(),
         historyApiFallback: settings.historyApiFallback,
-        compress: true,
         hot: true,
         open: true,
-        stats: "minimal",
-        clientLogLevel: "error",
+        static: { directory: path.client() },
+        devMiddleware: { stats: "minimal" },
+        client: { logging: "error", overlay: true, progress: true },
       }
     : {};
 

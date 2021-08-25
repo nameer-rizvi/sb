@@ -2,9 +2,7 @@ const { path } = require("../shared");
 
 const webpackOutputConfig = ({ isEnvLive }) => ({
   path: path.dist(),
-  // Some plugins are dependent on publicPath for generating paths.
-  // If not declared, "auto" is passed.
-  publicPath: "/",
+  publicPath: "/", // Some plugins are dependent on publicPath for generating paths ("auto" is passed as default).
   filename: isEnvLive
     ? "lib/js/[name].[contenthash:8].js"
     : "lib/js/[name].bundle.js",

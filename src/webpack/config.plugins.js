@@ -1,4 +1,4 @@
-const { ProvidePlugin, HotModuleReplacementPlugin } = require("webpack");
+const { ProvidePlugin } = require("webpack");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { html: HTML, pwa: PWA } = require("../public");
@@ -24,7 +24,6 @@ const webpackPluginsConfig = ({ isEnvLive }) => [
         new WebpackPwaManifest({ filename: "manifest.json", ...PWA }),
       ]
     : [
-        new HotModuleReplacementPlugin(),
         new MiniCSSExtractPlugin(),
         new ESLintPlugin({
           eslintPath: require.resolve("eslint"),
