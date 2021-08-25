@@ -1,4 +1,4 @@
-const { style, isEnvProduction, path, origin } = require("../../shared");
+const { style, isEnv, path, origin } = require("../../shared");
 const fs = require("fs");
 const express = require("express");
 
@@ -68,7 +68,7 @@ const template = `
 `;
 
 const singlePageApplicationMiddleware =
-  isEnvProduction && fs.existsSync(path.dist("index.html"))
+  isEnv.live && fs.existsSync(path.dist("index.html"))
     ? express.static(path.dist())
     : (req, res) => res.status(404).send(template);
 

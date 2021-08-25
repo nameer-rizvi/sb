@@ -1,5 +1,5 @@
 function webpackConfig(env, argv) {
-  const isEnvProduction = Boolean(argv.mode === "production");
+  const isEnvLive = argv.mode === "production" || argv.mode === "staging";
 
   const configs = {
     entry: require("./config.entry"),
@@ -15,10 +15,10 @@ function webpackConfig(env, argv) {
   };
 
   return Object.keys(configs).reduce(
-    (reducer, configKey) =>
-      Object.assign(reducer, {
-        [configKey]: configs[configKey]({ isEnvProduction }),
-      }),
+    (reducer, configKey) => ({
+      ...reducer,
+      [configKey]: configs[configKey]({ isEnvLive }),
+    }),
     {}
   );
 }

@@ -1,9 +1,9 @@
-import { isEnvProduction } from "../../shared";
+import { isEnv } from "../../shared";
 import { timelog } from "simpul";
 
 // Polyfill packages are heavy so it is best to import them dynamically.
 
-if (isEnvProduction) {
+if (isEnv.live) {
   const ApplyIE9Polyfill = (prev = []) =>
     new Promise((resolve, reject) =>
       /MSIE|Trident/.test(window.navigator.userAgent)

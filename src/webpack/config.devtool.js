@@ -1,5 +1,5 @@
-const webpackDevtoolConfig = ({ isEnvProduction }) =>
-  isEnvProduction ? "source-map" : "inline-source-map";
+const webpackDevtoolConfig = ({ isEnvLive }) =>
+  isEnvLive ? "source-map" : "inline-source-map";
 
 module.exports = webpackDevtoolConfig;
 

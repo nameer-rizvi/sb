@@ -9,11 +9,11 @@ const WebpackPwaManifest = require("webpack-pwa-manifest");
 const ESLintPlugin = require("eslint-webpack-plugin");
 const { path, settings } = require("../shared");
 
-const webpackPluginsConfig = ({ isEnvProduction }) => [
+const webpackPluginsConfig = ({ isEnvLive }) => [
   new ProvidePlugin({ process: "process/browser" }),
-  new CleanWebpackPlugin({ cleanStaleWebpackAssets: isEnvProduction }),
-  new HtmlWebpackPlugin({ minify: isEnvProduction, ...HTML }),
-  ...(isEnvProduction
+  new CleanWebpackPlugin({ cleanStaleWebpackAssets: isEnvLive }),
+  new HtmlWebpackPlugin({ minify: isEnvLive, ...HTML }),
+  ...(isEnvLive
     ? [
         new MiniCSSExtractPlugin({
           filename: "lib/css/[name].[contenthash:8].css",

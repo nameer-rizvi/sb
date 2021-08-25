@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import { style, isEnvProduction } from "../../shared";
+import { style, isEnv } from "../../shared";
 
 const StyledDiv = styled.div`
   display: flex;
@@ -35,7 +35,7 @@ class ErrorBoundary extends Component {
   render() {
     const { error } = this.state;
     return error ? (
-      isEnvProduction ? (
+      isEnv.live ? (
         <StyledDiv>
           <h1>Oops! Looks like something went wrong...</h1>
           <h2>Whatever it is, we're working on it!</h2>

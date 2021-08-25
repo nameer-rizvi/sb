@@ -1,6 +1,6 @@
-const isEnvProduction = require("./isEnvProduction");
+const isEnv = require("./isEnv");
 const port = require("./port");
 
-const origin = isEnvProduction ? "" : "http://localhost:" + port.client;
+const origin = isEnv.live ? "" : "http://localhost:" + port.client;
 
 module.exports = origin;

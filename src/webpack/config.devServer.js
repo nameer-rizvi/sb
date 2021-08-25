@@ -1,7 +1,7 @@
 const { port, path, settings } = require("../shared");
 
-const webpackDevServerConfig = ({ isEnvProduction }) =>
-  !isEnvProduction
+const webpackDevServerConfig = ({ isEnvLive }) =>
+  !isEnvLive
     ? {
         port: port.client,
         contentBase: path.client(),

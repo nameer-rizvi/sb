@@ -1,6 +1,6 @@
 import React, { useEffect, Fragment } from "react";
 import { timelog } from "simpul";
-import { isEnvProduction, port, resource } from "../../shared";
+import { isEnv, port, resource } from "../../shared";
 
 const { origin } = window.location;
 
@@ -41,7 +41,7 @@ function Page() {
     </a>
   );
 
-  return isEnvProduction ? (
+  return isEnv.live ? (
     <Fragment>
       <h1>Well, would ya look at this?</h1>
       <h2>The app is in production.</h2>

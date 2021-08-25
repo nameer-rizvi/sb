@@ -6,7 +6,7 @@ const shared = {
   dir: require("./dir"),
   display: require("./display"),
   elementId: require("./elementId"),
-  isEnvProduction: require("./isEnvProduction"),
+  isEnv: require("./isEnv"),
   keywords: require("./keywords"),
   lang: require("./lang"),
   name: require("./name"),

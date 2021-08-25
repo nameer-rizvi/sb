@@ -1,10 +1,10 @@
 const CSSMinimizerPlugin = require("css-minimizer-webpack-plugin");
 
-const webpackOptimizationConfig = ({ isEnvProduction }) => ({
-  minimize: isEnvProduction,
+const webpackOptimizationConfig = ({ isEnvLive }) => ({
+  minimize: isEnvLive,
   minimizer: ["...", new CSSMinimizerPlugin()],
-  moduleIds: isEnvProduction ? "size" : "deterministic",
-  chunkIds: isEnvProduction ? "total-size" : "named",
+  moduleIds: isEnvLive ? "size" : "deterministic",
+  chunkIds: isEnvLive ? "total-size" : "named",
   runtimeChunk: "single",
 });
 

@@ -1,5 +1,5 @@
-const webpackModeConfig = ({ isEnvProduction }) =>
-  isEnvProduction ? "production" : "development";
+const webpackModeConfig = ({ isEnvLive }) =>
+  isEnvLive ? "production" : "development";
 
 module.exports = webpackModeConfig;
 

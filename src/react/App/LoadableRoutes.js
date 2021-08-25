@@ -7,9 +7,7 @@ const Loader = () => "Loading...";
 const LoadableRoutes = () =>
   [
     {
-      component: loadable(() => import("./Page.js"), {
-        fallback: <Loader />,
-      }),
+      component: loadable(() => import("./Page.js"), { fallback: <Loader /> }),
     },
   ].map((LoadableRoute, index) => <Route key={index} {...LoadableRoute} />);
 

@@ -1,7 +1,7 @@
 const { path } = require("../shared");
 const MiniCSSExtractPlugin = require("mini-css-extract-plugin");
 
-const webpackModuleConfig = ({ isEnvProduction }) => ({
+const webpackModuleConfig = ({ isEnvLive }) => ({
   rules: [
     {
       test: /\.(js|jsx)$/,
@@ -22,7 +22,7 @@ const webpackModuleConfig = ({ isEnvProduction }) => ({
     {
       test: /\.(sa|sc|c)ss$/,
       use: [
-        isEnvProduction ? MiniCSSExtractPlugin.loader : "style-loader",
+        isEnvLive ? MiniCSSExtractPlugin.loader : "style-loader",
         "css-loader",
         "sass-loader",
       ],
