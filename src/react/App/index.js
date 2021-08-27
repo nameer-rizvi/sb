@@ -1,6 +1,6 @@
 import React from "react";
 import ErrorBoundary from "./ErrorBoundary";
-import { Provider } from "react-redux";
+import { Provider as ReduxProvider } from "react-redux";
 import { ConnectedRouter } from "connected-react-router";
 import { store, history } from "../redux";
 import { ThemeProvider } from "styled-components";
@@ -10,7 +10,7 @@ import LoadableRoutes from "./LoadableRoutes";
 
 const App = () => (
   <ErrorBoundary>
-    <Provider store={store}>
+    <ReduxProvider store={store}>
       <ConnectedRouter history={history}>
         <ThemeProvider theme={ThemeConfig}>
           <ThemeGlobalStyle />
@@ -19,7 +19,7 @@ const App = () => (
           </Switch>
         </ThemeProvider>
       </ConnectedRouter>
-    </Provider>
+    </ReduxProvider>
   </ErrorBoundary>
 );
 

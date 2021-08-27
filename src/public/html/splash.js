@@ -1,4 +1,4 @@
-const makeSplash = ({ id, title, style }) => `
+const makeSplashScreen = ({ id, title, style }) => `
   <div id="${id}">
     <style>
       ${style.base}
@@ -21,4 +21,4 @@ const makeSplash = ({ id, title, style }) => `
   </div>
 `;
 
-module.exports = makeSplash;
+module.exports = makeSplashScreen;

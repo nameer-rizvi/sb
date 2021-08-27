@@ -7,9 +7,17 @@ const webpackDevServerConfig = ({ isEnvLive }) =>
         historyApiFallback: settings.historyApiFallback,
         hot: true,
         open: true,
-        static: { directory: path.client() },
-        devMiddleware: { stats: "minimal" },
-        client: { logging: "error", overlay: true, progress: true },
+        static: {
+          directory: path.client(),
+        },
+        devMiddleware: {
+          stats: "minimal",
+        },
+        client: {
+          logging: "error",
+          overlay: true,
+          progress: true,
+        },
       }
     : {};
 

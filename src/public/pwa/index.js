@@ -1,26 +1,26 @@
 const {
-  categories,
-  description,
-  dir,
-  display,
-  lang,
   name,
+  display,
   orientation,
+  lang,
+  dir,
   style,
-} = require("../shared");
+  description,
+  categories,
+} = require("../../shared");
 
 const pwa = {
-  background_color: style.backgroundColor,
-  categories,
-  description,
-  dir,
-  display,
-  icons: require("./icons"),
-  lang,
   name: name.full,
-  orientation,
   short_name: name.short,
+  display,
+  orientation,
+  lang,
+  dir,
+  background_color: style.backgroundColor,
   theme_color: style.color,
+  description,
+  categories,
+  icons: require("../icons"),
 };
 
 module.exports = pwa;

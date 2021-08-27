@@ -1,48 +1,48 @@
 const {
-  author,
-  charset,
-  description,
-  dir,
-  elementId,
-  keywords,
   lang,
+  dir,
+  charset,
   name,
-  socialMedia,
-  style,
+  viewport,
+  author,
+  description,
+  keywords,
   type,
   url,
-  viewport,
+  style,
+  socialMedia,
+  elementId,
 } = require("../../shared");
 const favicon = require("../icons")[2];
-const makeSplash = require("./splash");
+const makeSplashScreen = require("./splash");
 
 const html = {
-  charset,
-  dir,
-  favicon: favicon.src,
   lang,
+  dir,
+  charset,
+  title: name.full,
+  favicon: favicon.src,
   meta: {
     author,
     description,
     keywords,
-    "og:description": description,
-    "og:image": favicon.destination,
-    "od:site_name": name.full,
-    "og:title": name.full,
+    "theme-color": style.color,
     "og:type": type,
     "og:url": url,
-    "theme-color": style.color,
+    "od:site_name": name.full,
+    "og:title": name.full,
+    "og:description": description,
+    "og:image": favicon.destination,
     "twitter:site": socialMedia.twitter.username,
     viewport,
   },
-  reactElementId: elementId.react,
-  splashDiv: makeSplash({
+  template: require("path").resolve(__dirname, "template.html"),
+  splashDiv: makeSplashScreen({
     id: elementId.splash,
     style,
     title: name.full,
   }),
-  template: require("path").resolve(__dirname, "template.html"),
-  title: name.full,
+  reactElementId: elementId.react,
 };
 
 module.exports = html;
