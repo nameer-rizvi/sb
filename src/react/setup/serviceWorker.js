@@ -1,35 +1,26 @@
 import { timelog } from "simpul";
 import { isEnv } from "../../shared";
 
-const logStatus = (status) => timelog("👷 Service worker " + status + ".");
+const log = (status) =>
+  timelog("👷 Service worker " + status + (!status.endsWith(".") ? "." : ""));
 
-const inNavigator = "serviceWorker" in navigator;
-
-const register = () =>
-  window.location.hostname === "localhost" ||
-  window.location.hostname === "[::1]" ||
-  window.location.hostname.match(
-    /^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/
-  )
-    ? logStatus("not enabled for localhost")
-    : !isEnv.live
-    ? logStatus("only enabled for production")
-    : !inNavigator
-    ? logStatus("not in navigator")
-    : window.addEventListener("load", () => {
-        navigator.serviceWorker
-          .register("/service-worker.js")
-          .then(() => logStatus("registered"))
-          .catch(() => logStatus("registration failed"));
+async function serviceWorker(job) {
+  try {
+    if (!("serviceWorker" in navigator)) {
+      log("not supported");
+    } else if (job === "register") {
+      window.addEventListener("load", async () => {
+        await navigator.serviceWorker.register("/service-worker.js");
+        log("registered");
       });
+    } else if (job === "unregister") {
+      const registrations = await navigator.serviceWorker.getRegistrations();
+      registrations.forEach((registration) => registration.unregister());
+      log("unregistered");
+    } else log("job is undefined");
+  } catch (error) {
+    log(error.toString());
+  }
+}
 
-const unregister = () =>
-  inNavigator &&
-  navigator.serviceWorker.ready.then((registration) => {
-    registration.unregister();
-    logStatus("successfully unregistered");
-  });
-
-const job = { register, unregister };
-
-job.register();
+if (isEnv.live) serviceWorker("register");

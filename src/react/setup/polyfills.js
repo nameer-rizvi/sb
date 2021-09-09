@@ -5,19 +5,19 @@ import { isEnv } from "../../shared";
 
 async function installPolyfills() {
   try {
-    const installs = [];
+    const installedPolyfills = [];
 
-    if (/MSIE|Trident/.test(window.navigator.userAgent)) {
+    if ("userAgent" in navigator && /MSIE|Trident/.test(navigator.userAgent)) {
       await import("react-app-polyfill/ie9");
-      installs.push("react-app-polyfill/ie9");
+      installedPolyfills.push("react-app-polyfill/ie9");
     }
 
     await import("react-app-polyfill/stable");
-    installs.push("react-app-polyfill/stable");
+    installedPolyfills.push("react-app-polyfill/stable");
 
-    if (installs.length) {
-      const logInstalls = installs.join(", ");
-      timelog(`🔨 Following polyfill(s) have been applied: ${logInstalls}.`);
+    if (installedPolyfills.length) {
+      const packageNames = installedPolyfills.join(", ");
+      timelog(`🔨 Following polyfill(s) have been applied: ${packageNames}.`);
     }
   } catch (error) {
     console.error(error);
