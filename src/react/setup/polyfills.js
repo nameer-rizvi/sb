@@ -1,35 +1,30 @@
-import { isEnv } from "../../shared";
 import { timelog } from "simpul";
+import { isEnv } from "../../shared";
 
 // Polyfill packages are heavy so it is best to import them dynamically.
 
-if (isEnv.live) {
-  const ApplyIE9Polyfill = (prev = []) =>
-    new Promise((resolve, reject) =>
-      /MSIE|Trident/.test(window.navigator.userAgent)
-        ? import("react-app-polyfill/ie9")
-            .then(() => resolve([...prev, "react-app-polyfill/ie9"]))
-            .catch(reject)
-        : resolve()
-    );
+async function installPolyfills() {
+  try {
+    const installs = [];
 
-  const ApplyStablePolyfill = (prev = []) =>
-    new Promise((resolve, reject) =>
-      import("react-app-polyfill/stable")
-        .then(() => resolve([...prev, "react-app-polyfill/stable"]))
-        .catch(reject)
-    );
+    if (/MSIE|Trident/.test(window.navigator.userAgent)) {
+      await import("react-app-polyfill/ie9");
+      installs.push("react-app-polyfill/ie9");
+    }
 
-  function LogPolyfills(appliedPolyfills) {
-    const polyfills = appliedPolyfills.join(", ");
-    timelog(`🔨 Following polyfill(s) have been applied: ${polyfills}.`);
+    await import("react-app-polyfill/stable");
+    installs.push("react-app-polyfill/stable");
+
+    if (installs.length) {
+      const logInstalls = installs.join(", ");
+      timelog(`🔨 Following polyfill(s) have been applied: ${logInstalls}.`);
+    }
+  } catch (error) {
+    console.error(error);
   }
-
-  ApplyIE9Polyfill()
-    .then(ApplyStablePolyfill)
-    .then(LogPolyfills)
-    .catch(timelog);
 }
+
+if (isEnv.live) installPolyfills();
 
 // https://www.npmjs.com/package/react-app-polyfill
 // https://github.com/facebook/create-react-app/blob/master/packages/react-app-polyfill/README.md
