@@ -22,7 +22,7 @@ async function serviceWorker(job = "register") {
 
       // Register Service Worker.
 
-      const registration = await serviceWorker.register("/service-worker.js");
+      await serviceWorker.register("/service-worker.js");
 
       // Log successful registration.
 
