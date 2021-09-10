@@ -1,3 +1,3 @@
 import "./polyfills";
-import "./serviceWorker";
+import "./service-worker";
 export * from "./rootElement";

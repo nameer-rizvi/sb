@@ -19,7 +19,11 @@ const webpackPluginsConfig = ({ isEnvLive }) => [
           filename: "lib/css/[name].[contenthash:8].css",
           chunkFilename: "lib/css/[name].[contenthash:8].chunk.css",
         }),
-        new GenerateSW({ exclude: [/\.(?:png|jpg|jpeg|svg)$/] }),
+        new GenerateSW({
+          clientsClaim: true,
+          skipWaiting: true,
+          exclude: [/\.(?:png|jpg|jpeg|svg)$/],
+        }),
         new WebpackManifestPlugin({ fileName: "asset-manifest.json" }),
         new WebpackPwaManifest({ filename: "manifest.json", ...PWA }),
       ]

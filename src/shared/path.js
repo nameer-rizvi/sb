@@ -5,7 +5,9 @@ const pathResolve = (dir) =>
 
 const path = {
   dist: (ext) => pathResolve(["../dist", ext]),
+  express: (ext) => pathResolve(["../express", ext]),
   client: (ext) => pathResolve(["../react", ext]),
+  public: (ext) => pathResolve(["../public", ext]),
 };
 
 module.exports = path;
