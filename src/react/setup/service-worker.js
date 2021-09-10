@@ -24,10 +24,9 @@ async function serviceWorker(job = "register") {
 
       const registration = await serviceWorker.register("/service-worker.js");
 
-      if (registration) {
-        // Log successful registration.
-        log("registered");
-      } else log("failed to register"); // Log failure to register.
+      // Log successful registration.
+
+      log("registered");
     } else if (job === "unregister") {
       // If the Service Worker job is to unregister...
 
