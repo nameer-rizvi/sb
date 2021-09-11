@@ -1,7 +1,8 @@
+// To ensure polyfills get applied first, "./setup" must be the first import.
+import { rootElement } from "./setup";
 import ReactDOM from "react-dom";
 import React from "react";
 import App from "./App";
-import { rootElement } from "./setup";
 import { isEnv } from "../shared";
 
 ReactDOM.render(<App />, rootElement);

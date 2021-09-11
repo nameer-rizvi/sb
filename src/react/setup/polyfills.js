@@ -17,7 +17,7 @@ async function installPolyfills() {
 
     if (installedPolyfills.length) {
       const packageNames = installedPolyfills.join(", ");
-      timelog(`🔨 Following polyfill(s) have been applied: ${packageNames}.`);
+      timelog(`🔨 Following polyfill(s) have been installed: ${packageNames}.`);
     }
   } catch (error) {
     console.error(error);

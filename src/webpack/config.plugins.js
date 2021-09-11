@@ -3,9 +3,9 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { html: HTML, pwa: PWA } = require("../public");
 const MiniCSSExtractPlugin = require("mini-css-extract-plugin");
-const { GenerateSW } = require("workbox-webpack-plugin");
 const { WebpackManifestPlugin } = require("webpack-manifest-plugin");
 const WebpackPwaManifest = require("webpack-pwa-manifest");
+const WorkboxPlugin = require("workbox-webpack-plugin");
 const ESLintPlugin = require("eslint-webpack-plugin");
 const { path, settings } = require("../shared");
 
@@ -19,13 +19,18 @@ const webpackPluginsConfig = ({ isEnvLive }) => [
           filename: "lib/css/[name].[contenthash:8].css",
           chunkFilename: "lib/css/[name].[contenthash:8].chunk.css",
         }),
-        new GenerateSW({
-          clientsClaim: true,
-          skipWaiting: true,
-          exclude: [/\.(?:png|jpg|jpeg|svg)$/],
-        }),
         new WebpackManifestPlugin({ fileName: "asset-manifest.json" }),
         new WebpackPwaManifest({ filename: "manifest.json", ...PWA }),
+        new WorkboxPlugin.InjectManifest({
+          swSrc: path.public("/service-worker/index.js"),
+          swDest: path.dist("service-worker.js"),
+          exclude: [/\.(?:png|jpg|jpeg|svg)$/],
+        }),
+        // new WorkboxPlugin.GenerateSW({
+        //   clientsClaim: true,
+        //   skipWaiting: true,
+        //   exclude: [/\.(?:png|jpg|jpeg|svg)$/],
+        // }),
       ]
     : [
         new MiniCSSExtractPlugin(),

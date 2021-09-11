@@ -50,4 +50,4 @@ async function serviceWorker(job = "register") {
 
 // Service Worker should only be active in live environments.
 
-if (isEnv.live) serviceWorker();
+if (isEnv.live) window.addEventListener("load", () => serviceWorker());
