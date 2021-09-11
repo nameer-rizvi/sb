@@ -34,13 +34,19 @@ async function serviceWorker(job = "register") {
 
       const registrations = await serviceWorker.getRegistrations();
 
-      // Unregister each registration.
+      if (registrations.length) {
+        // If there's any registrations...
 
-      registrations.forEach((registration) => registration.unregister());
+        // Unregister each registration.
 
-      // Log completion of all unregistrations.
+        registrations.forEach(
+          async (registration) => await registration.unregister()
+        );
 
-      log("unregistered");
+        // Log completion of all unregistrations.
+
+        log(`unregistered ${registrations.length} registration(s).`);
+      }
     } else
       log(`job is undefined (options include: "register" || "unregister")`);
   } catch (error) {
