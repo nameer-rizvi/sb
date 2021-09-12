@@ -6,9 +6,13 @@ import { isEnv } from "../../shared";
 const log = (status) =>
   timelog("👷 Service worker " + status + (!status.endsWith(".") ? "." : ""));
 
+// Service worker job.
+
+const job = "register";
+
 // Service Worker is wrapped in an async function for use of try/catch & await.
 
-async function serviceWorker(job = "register") {
+async function serviceWorker() {
   try {
     // Not validating for serviceWorker support (ex. !("serviceWorker" in navigator)),
     // since an error will be thrown regardless, for any other reason that may exist,
@@ -39,9 +43,9 @@ async function serviceWorker(job = "register") {
 
         // Unregister each registration.
 
-        registrations.forEach(
-          async (registration) => await registration.unregister()
-        );
+        for (let i = 0; i < registrations.length; i++) {
+          await registrations[i].unregister();
+        }
 
         // Log completion of all unregistrations.
 
@@ -56,4 +60,4 @@ async function serviceWorker(job = "register") {
 
 // Service Worker should only be active in live environments.
 
-if (isEnv.live) window.addEventListener("load", () => serviceWorker());
+if (isEnv.live) window.addEventListener("load", serviceWorker);
