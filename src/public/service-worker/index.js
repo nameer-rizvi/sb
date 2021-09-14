@@ -19,11 +19,21 @@ precacheAndRoute(self.__WB_MANIFEST); // eslint-disable-line  no-restricted-glob
 // eslint-disable-next-line  no-restricted-globals
 self.addEventListener("push", (event) => {
   try {
-    const data = event.data.json();
+    if (self.Notification && self.Notification.permission === "granted") {
+      // If Notification permission has been granted by the user...
 
-    const options = { lang: "en", vibrate: [500], icon, ...data };
+      // Parse event data for json, and store it as data constant.
 
-    event.waitUntil(self.registration.showNotification(data.title, options)); // eslint-disable-line  no-restricted-globals
+      const data = event.data.json();
+
+      // Initialize options constant with rich settings.
+
+      const options = { lang: "en", vibrate: [500], icon, ...data };
+
+      // Wait until notification has been processed.
+
+      event.waitUntil(self.registration.showNotification(data.title, options)); // eslint-disable-line  no-restricted-globals
+    }
   } catch (error) {
     timelog("👷 Service worker " + error.toString() + ".");
   }
@@ -34,13 +44,56 @@ self.addEventListener("push", (event) => {
 // eslint-disable-next-line  no-restricted-globals
 self.addEventListener("notificationclick", (event) => {
   try {
-    event.notification.close();
+    if (self.Notification && self.Notification.permission === "granted") {
+      // If Notification permission has been granted by the user...
 
-    const link =
-      origin + ((event.notification.data && event.notification.data.url) || "");
+      // Close the notification.
 
-    event.waitUntil(clients.openWindow(link));
+      event.notification.close();
+
+      // Async function to open notification in an active window.
+
+      async function openInActiveWindow() {
+        // Extract pathname from event notification data.
+
+        const pathname =
+          event.notification.data && event.notification.data.pathname;
+
+        // Form target url by appending pathname into the origin.
+
+        const url = origin + (pathname || "");
+
+        // Fetch all client windows.
+
+        const clientWindows = await clients.matchAll({ type: "window" });
+
+        // Loop through client windows to find one that matches application origin.
+
+        for (let i = 0; i < clientWindows.length; i++) {
+          let clientWindow = clientWindows[i];
+          if (clientWindow.url.startsWith(origin) && "focus" in clientWindow) {
+            // If a client window is found, focus on it and navigate it to url.
+            clientWindow.focus();
+            if ("navigate" in clientWindow) clientWindow.navigate(url);
+            return; // End async function here.
+          }
+        }
+
+        // If no matching client window is found, if clients has an openWindow method, use it to navigate to url.
+
+        if (clients.openWindow) clients.openWindow(url);
+      }
+
+      // Wait until notification click event (openInActiveWindow) has processed.
+
+      event.waitUntil(openInActiveWindow());
+    }
   } catch (error) {
     timelog("👷 Service worker " + error.toString() + ".");
   }
 });
+
+// https://developers.google.com/web/tools/workbox/modules/workbox-core
+// https://developers.google.com/web/tools/workbox/modules/workbox-precaching
+// https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerGlobalScope/PushEvent
+// https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerGlobalScope/notificationclick_event

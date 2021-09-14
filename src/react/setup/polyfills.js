@@ -1,11 +1,13 @@
-import { timelog } from "simpul";
 import { isEnv } from "../../shared";
+import { timelog } from "simpul";
 
-// Polyfill packages are heavy so it is best to import them dynamically.
+if (isEnv.live) installPolyfills();
 
 async function installPolyfills() {
   try {
     const installedPolyfills = [];
+
+    // Polyfill packages are heavy so it is best to import them dynamically.
 
     if ("userAgent" in navigator && /MSIE|Trident/.test(navigator.userAgent)) {
       await import("react-app-polyfill/ie9");
@@ -23,8 +25,6 @@ async function installPolyfills() {
     console.error(error);
   }
 }
-
-if (isEnv.live) installPolyfills();
 
 // https://www.npmjs.com/package/react-app-polyfill
 // https://github.com/facebook/create-react-app/blob/master/packages/react-app-polyfill/README.md

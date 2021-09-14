@@ -1,14 +1,18 @@
-import { timelog } from "simpul";
 import { isEnv } from "../../shared";
+import { timelog } from "simpul";
+
+// Service worker job.
+
+const job = "register";
+
+// Service Worker should only be active in live environments.
+
+if (isEnv.live) window.addEventListener("load", serviceWorker);
 
 // Service Worker logger.
 
 const log = (status) =>
   timelog("👷 Service worker " + status + (!status.endsWith(".") ? "." : ""));
-
-// Service worker job.
-
-const job = "register";
 
 // Service Worker is wrapped in an async function for use of try/catch & await.
 
@@ -57,7 +61,3 @@ async function serviceWorker() {
     log(error.toString());
   }
 }
-
-// Service Worker should only be active in live environments.
-
-if (isEnv.live) window.addEventListener("load", serviceWorker);
