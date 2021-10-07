@@ -1,3 +1,8 @@
+// --flow-serviceWorker-0
+
+/* eslint-disable no-restricted-globals */
+/* eslint-disable no-undef */
+
 import { skipWaiting, clientsClaim } from "workbox-core";
 import { precacheAndRoute } from "workbox-precaching";
 import icon from "../icons/favicon_io/favicon-48x48.png";
@@ -12,11 +17,10 @@ clientsClaim();
 
 // Standard precacher/router for webpack bundler injection.
 
-precacheAndRoute(self.__WB_MANIFEST); // eslint-disable-line  no-restricted-globals
+precacheAndRoute(self.__WB_MANIFEST);
 
 // Push event listener.
 
-// eslint-disable-next-line  no-restricted-globals
 self.addEventListener("push", (event) => {
   try {
     if (self.Notification && self.Notification.permission === "granted") {
@@ -32,16 +36,15 @@ self.addEventListener("push", (event) => {
 
       // Wait until notification has been processed.
 
-      event.waitUntil(self.registration.showNotification(data.title, options)); // eslint-disable-line  no-restricted-globals
+      event.waitUntil(self.registration.showNotification(data.title, options));
     }
   } catch (error) {
-    timelog("👷 Service worker " + error.toString() + ".");
+    timelog("👷 Service Worker Push Event: " + error.toString() + ".");
   }
 });
 
 // Notification click event listener.
 
-// eslint-disable-next-line  no-restricted-globals
 self.addEventListener("notificationclick", (event) => {
   try {
     if (self.Notification && self.Notification.permission === "granted") {
@@ -89,7 +92,7 @@ self.addEventListener("notificationclick", (event) => {
       event.waitUntil(openInActiveWindow());
     }
   } catch (error) {
-    timelog("👷 Service worker " + error.toString() + ".");
+    timelog("👷 Service worker Notification Click: " + error.toString() + ".");
   }
 });
 

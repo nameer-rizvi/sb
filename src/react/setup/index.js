@@ -1,3 +1,4 @@
 import "./polyfills";
-import "./service-worker";
+import "./serviceWorkerRegistration";
+import "./axios";
 export * from "./rootElement";

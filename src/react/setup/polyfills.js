@@ -5,20 +5,18 @@ if (isEnv.live) installPolyfills();
 
 async function installPolyfills() {
   try {
-    const installedPolyfills = [];
-
-    // Polyfill packages are heavy so it is best to import them dynamically.
+    const installed = [];
 
     if ("userAgent" in navigator && /MSIE|Trident/.test(navigator.userAgent)) {
       await import("react-app-polyfill/ie9");
-      installedPolyfills.push("react-app-polyfill/ie9");
+      installed.push("react-app-polyfill/ie9");
     }
 
     await import("react-app-polyfill/stable");
-    installedPolyfills.push("react-app-polyfill/stable");
+    installed.push("react-app-polyfill/stable");
 
-    if (installedPolyfills.length) {
-      const packageNames = installedPolyfills.join(", ");
+    if (installed.length) {
+      const packageNames = installed.join(", ");
       timelog(`🔨 Following polyfill(s) have been installed: ${packageNames}.`);
     }
   } catch (error) {

@@ -34,6 +34,9 @@ class ErrorBoundary extends Component {
 
   render() {
     const { error } = this.state;
+
+    if (error && error.name === "ChunkLoadError") window.location.reload();
+
     return error ? (
       isEnv.live ? (
         <StyledDiv>

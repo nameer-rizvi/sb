@@ -1,18 +1,13 @@
 import React, { useEffect, Fragment } from "react";
+import axios from "axios";
 import { timelog } from "simpul";
-import { isEnv, port, resource } from "../../shared";
-
-const { origin } = window.location;
-
-const api = origin.includes(":" + port.client)
-  ? origin.replace(port.client, port.server) + resource.api
-  : origin + resource.api;
+import { isEnv } from "../../shared";
 
 function Page() {
   useEffect(() => {
-    fetch(api)
-      .then((response) => response.json())
-      .then((response) => timelog(response.welcome))
+    axios
+      .get("/")
+      .then((response) => timelog(response.data.welcome))
       .catch((error) => timelog(error.toString()));
   }, []);
 
