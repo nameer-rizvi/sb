@@ -5,8 +5,10 @@ import { isEnv } from "../../shared";
 
 function Page() {
   useEffect(() => {
+    const Authorization =
+      "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJpYXQiOjE2MzM3NDIyOTd9.h9okfhttrutyk70oeDY3ruN7fYW9Vpzs0Wxl1I8jvAM";
     axios
-      .get("/")
+      .get("/initialize", { headers: { Authorization } })
       .then((response) => timelog(response.data.welcome))
       .catch((error) => timelog(error.toString()));
   }, []);

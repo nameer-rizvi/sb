@@ -26,11 +26,6 @@ const webpackPluginsConfig = ({ isEnvLive }) => [
           swDest: path.dist("service-worker.js"),
           exclude: [/\.(?:png|jpg|jpeg|svg)$/],
         }),
-        // new WorkboxPlugin.GenerateSW({
-        //   clientsClaim: true,
-        //   skipWaiting: true,
-        //   exclude: [/\.(?:png|jpg|jpeg|svg)$/],
-        // }),
       ]
     : [
         new MiniCSSExtractPlugin(),
@@ -51,7 +46,7 @@ module.exports = webpackPluginsConfig;
 // https://webpack.js.org/configuration/plugins/
 //
 // If using moment.js, add to plugins:
-// new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+//   new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
 //
 // https://www.npmjs.com/package/clean-webpack-plugin
 // https://www.npmjs.com/package/html-webpack-plugin
@@ -62,5 +57,12 @@ module.exports = webpackPluginsConfig;
 // https://www.npmjs.com/package/webpack-pwa-manifest
 // https://www.npmjs.com/package/eslint-webpack-plugin
 //
+// Out-of-the-box service worker solution:
+//   new WorkboxPlugin.GenerateSW({
+//     clientsClaim: true,
+//     skipWaiting: true,
+//     exclude: [/\.(?:png|jpg|jpeg|svg)$/],
+//   }),
+//
 // On why "csp-html-webpack-plugin" may not be worth including:
-// https://github.com/slackhq/csp-html-webpack-plugin/issues/82
+//   https://github.com/slackhq/csp-html-webpack-plugin/issues/82

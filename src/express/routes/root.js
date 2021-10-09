@@ -1,11 +1,7 @@
-const { isEnv } = require("../../shared");
+const routes = require("../middlewares/routeManager.configs");
 
-function rootRoute(req, res) {
-  const welcome =
-    "📟 This has been fetched from the express server via axios, using the /api endpoint." +
-    (!isEnv.live ? " You can find me at /src/express/routes/root.js." : "");
+// Map of api routes + route config/requirements.
 
-  res.json({ welcome });
-}
+const routeAppRoot = (req, res) => res.json({ routes });
 
-module.exports = rootRoute;
+module.exports = routeAppRoot;
