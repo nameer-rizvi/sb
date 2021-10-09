@@ -13,7 +13,7 @@ async function authenticateMiddleware(req, res, next) {
     // If a bearer token exists, it is verified using "jsonwebtoken"
     // and if any data is returned (which would most likely contain
     // the user id in it), we assign it to the res.locals store.
-    //  * Will throw error if token is corrupted or invalid.
+    //  * Will throw error if token is corrupt or invalid.
 
     if (bearerToken && bearerToken !== "null")
       res.locals.user = await jwt.verify(bearerToken);
