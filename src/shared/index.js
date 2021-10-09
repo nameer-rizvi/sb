@@ -19,6 +19,7 @@ const shared = {
   socialMedia: require("./socialMedia"),
   style: require("./style"),
   type: require("./type"),
+  url: require("./url"),
   viewport: require("./viewport"),
 };
 

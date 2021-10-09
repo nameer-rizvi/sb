@@ -61,3 +61,6 @@ module.exports = webpackPluginsConfig;
 // https://www.npmjs.com/package/webpack-manifest-plugin
 // https://www.npmjs.com/package/webpack-pwa-manifest
 // https://www.npmjs.com/package/eslint-webpack-plugin
+//
+// On why "csp-html-webpack-plugin" may not be worth including:
+// https://github.com/slackhq/csp-html-webpack-plugin/issues/82
