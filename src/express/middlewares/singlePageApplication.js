@@ -1,4 +1,5 @@
-const { style, isEnv, path, origin } = require("../../shared");
+const { style, path, origin } = require("../../shared");
+const { isEnv } = require("simpul");
 const fs = require("fs");
 const express = require("express");
 

@@ -1,14 +1,14 @@
 import React, { useEffect, Fragment } from "react";
 import axios from "axios";
-import { timelog } from "simpul";
-import { isEnv } from "../../shared";
+import { log } from "../../shared";
+import { isEnv } from "simpul";
 
 function Page() {
   useEffect(() => {
     axios
       .get("/initialize")
-      .then((response) => timelog(response.data.welcome))
-      .catch((error) => timelog(error.toString()));
+      .then((response) => log.react(response.data.welcome))
+      .catch((error) => log.react(error.toString()));
   }, []);
 
   const link = (

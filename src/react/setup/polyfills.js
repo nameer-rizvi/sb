@@ -1,5 +1,5 @@
-import { isEnv } from "../../shared";
-import { timelog } from "simpul";
+import { isEnv } from "simpul";
+import { log } from "../../shared";
 
 if (isEnv.live) installPolyfills();
 
@@ -15,10 +15,7 @@ async function installPolyfills() {
     await import("react-app-polyfill/stable");
     installed.push("react-app-polyfill/stable");
 
-    if (installed.length) {
-      const packageNames = installed.join(", ");
-      timelog(`🔨 Following polyfill(s) have been installed: ${packageNames}.`);
-    }
+    if (installed.length) log.polyfill(`installed: ${installed.join(", ")}`);
   } catch (error) {
     console.error(error);
   }

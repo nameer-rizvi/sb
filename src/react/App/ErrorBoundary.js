@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import { style, isEnv } from "../../shared";
+import { style } from "../../shared";
+import axios from "axios";
+import { isEnv } from "simpul";
 
 const StyledDiv = styled.div`
   display: flex;
@@ -35,7 +37,7 @@ class ErrorBoundary extends Component {
   render() {
     const { error } = this.state;
 
-    // if (error) axios.post("/error", error)
+    if (error) axios.post("/error", { data: error });
 
     if (error && error.name === "ChunkLoadError") window.location.reload();
 

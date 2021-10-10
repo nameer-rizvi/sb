@@ -11,3 +11,5 @@ axios.defaults.headers.common["Authorization"] =
 // If using session cookies, uncomment:
 //
 // axios.defaults.withCredentials = true;
+//
+// https://github.com/axios/axios

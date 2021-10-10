@@ -6,7 +6,7 @@
 import { skipWaiting, clientsClaim } from "workbox-core";
 import { precacheAndRoute } from "workbox-precaching";
 import icon from "../icons/favicon_io/favicon-48x48.png";
-import { timelog } from "simpul";
+import log from "../../shared/log";
 import origin from "../../shared/origin";
 
 // Core middlewares.
@@ -39,7 +39,7 @@ self.addEventListener("push", (event) => {
       event.waitUntil(self.registration.showNotification(data.title, options));
     }
   } catch (error) {
-    timelog("👷 Service Worker Push Event: " + error.toString() + ".");
+    log.sw("Push Event: " + error.toString());
   }
 });
 
@@ -92,7 +92,7 @@ self.addEventListener("notificationclick", (event) => {
       event.waitUntil(openInActiveWindow());
     }
   } catch (error) {
-    timelog("👷 Service worker Notification Click: " + error.toString() + ".");
+    log.sw("Notification Click: " + error.toString());
   }
 });
 

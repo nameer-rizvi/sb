@@ -1,7 +1,7 @@
 // --flow-serviceWorker-1
 
-import { isEnv } from "../../shared";
-import { support, timelog } from "simpul";
+import { isEnv, support } from "simpul";
+import { log } from "../../shared";
 
 // Service worker job.
 
@@ -35,7 +35,7 @@ async function serviceWorkerRegistration() {
 
       // Log successful registration.
 
-      logSW("registered");
+      log.sw("registered");
     } else if (job === "unregister") {
       // If the Service Worker job is to unregister...
 
@@ -54,19 +54,13 @@ async function serviceWorkerRegistration() {
 
         // Log completion of all unregistrations.
 
-        logSW(`unregistered ${registrations.length} registration(s).`);
+        log.sw(`unregistered ${registrations.length} registration(s)`);
       }
     } else {
       const error = `job is undefined (options include: "register" || "unregister")`;
       throw new Error(error);
     }
   } catch (error) {
-    logSW("Registration: " + error.toString());
+    log.sw("registration: " + error.toString());
   }
-}
-
-// Service Worker logger.
-
-function logSW(status) {
-  timelog("👷 Service worker " + status + (!status.endsWith(".") ? "." : ""));
 }

@@ -1,6 +1,6 @@
-const utilJWT = {
+const jwt = {
   sign: require("./sign"),
   verify: require("./verify"),
 };
 
-module.exports = utilJWT;
+module.exports = jwt;

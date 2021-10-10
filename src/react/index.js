@@ -3,7 +3,7 @@ import { rootElement } from "./setup";
 import ReactDOM from "react-dom";
 import React from "react";
 import App from "./App";
-import { isEnv } from "../shared";
+import { isEnv } from "simpul";
 
 ReactDOM.render(<App />, rootElement);
 

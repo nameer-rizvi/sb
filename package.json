@@ -100,6 +100,6 @@
     "jsonwebtoken": "^8.5.1",
     "path": "^0.12.7",
     "sanitized": "^1.1.5",
-    "simpul": "^0.5.7"
+    "simpul": "^0.6.2"
   }
 }

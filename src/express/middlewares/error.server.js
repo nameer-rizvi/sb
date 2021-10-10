@@ -1,4 +1,4 @@
-const { timelog } = require("simpul");
+const { log } = require("../../shared");
 
 function serverErrorHandler(err, res, req) {
   // Initialize constants from res locals.
@@ -33,7 +33,7 @@ function serverErrorHandler(err, res, req) {
 
   // Log server error message.
 
-  timelog(`⚠️  ${serverError.message}`);
+  log.warning(serverError.message);
 
   // Split server error stack with delimiter "at ".
 
@@ -50,7 +50,7 @@ function serverErrorHandler(err, res, req) {
     // If trace is from within the "/src" folder and it doesn't start with "Error", log it.
 
     if (trace && trace.includes("/src") && !trace.startsWith("Error")) {
-      timelog(`➡️  ${trace.trim()}`);
+      log.at(trace.trim());
     }
   }
 

@@ -1,8 +1,16 @@
 const packageJSON = require("./package.json");
 
-const makeNPMCommand = (object, save = "") =>
+const ignorePackages = [""];
+
+const makeNPMCommand = (dependencies, save = "") =>
   ["uninstall", "install"]
-    .map((command) => `npm ${command} ` + Object.keys(object).join(" "))
+    .map((command) => {
+      const packages = Object.keys(dependencies)
+        .filter((key) => !ignorePackages.includes(key))
+        .join(" ");
+
+      return `npm ${command} ${packages}`;
+    })
     .join(" && ") +
   " " +
   save;
