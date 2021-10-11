@@ -1,3 +1,3 @@
-const googleTagManagerId = "UA-146505235-1";
+const googleTagManagerId = "";
 
 module.exports = googleTagManagerId;
