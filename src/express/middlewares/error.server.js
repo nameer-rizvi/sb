@@ -22,9 +22,7 @@ function serverErrorHandler(err, res, req) {
     (values.error && values.error.method) || routeConfig.method || req.method;
 
   serverError.message =
-    (values.error &&
-      values.error.message &&
-      values.error.message.split(":")[0].trim()) ||
+    (values.error && values.error.message && values.error.message.trim()) ||
     err.sqlMessage ||
     err.message ||
     err.toString();
@@ -33,7 +31,7 @@ function serverErrorHandler(err, res, req) {
 
   // Log server error message.
 
-  log.warning(serverError.message);
+  log.error(serverError.message);
 
   // Split server error stack with delimiter "at ".
 

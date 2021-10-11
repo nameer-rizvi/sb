@@ -37,9 +37,16 @@ class ErrorBoundary extends Component {
   render() {
     const { error } = this.state;
 
-    if (error) axios.post("/error", { data: error });
+    if (error)
+      axios.post("/error", {
+        error: {
+          pathname: window.location.pathname + window.location.search,
+          message: error.message,
+          stack: error.stack,
+        },
+      });
 
-    if (error && error.name === "ChunkLoadError") window.location.reload();
+    // if (error && error.name === "ChunkLoadError") window.location.reload();
 
     return error ? (
       isEnv.live ? (

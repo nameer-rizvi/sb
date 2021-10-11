@@ -1,0 +1,12 @@
+<script
+  async
+  src="https://www.googletagmanager.com/gtag/js?id=<%= googleTagManagerId %>"
+></script>
+<script>
+  if (!window.dataLayer) window.dataLayer = [];
+  function gtag() {
+    window.dataLayer.push(arguments);
+  }
+  gtag("js", new Date());
+  gtag("config", "<%= googleTagManagerId %>");
+</script>
