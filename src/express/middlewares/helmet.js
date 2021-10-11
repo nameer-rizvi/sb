@@ -18,6 +18,7 @@ const helmetMiddleware =
               "https://www.google-analytics.com",
               "'sha256-tAUxXKIiwBYXBZ8X5w5fuuH8Typ1F2qP/rwMnQfdkvs='",
             ],
+            "img-src": ["'self'", "data:", "https://www.google-analytics.com"],
           },
         },
       })
