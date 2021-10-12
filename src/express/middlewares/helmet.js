@@ -16,7 +16,7 @@ const helmetMiddleware =
               "'self'",
               "https://www.googletagmanager.com",
               "https://www.google-analytics.com",
-              "'sha256-tAUxXKIiwBYXBZ8X5w5fuuH8Typ1F2qP/rwMnQfdkvs='",
+              "'sha256-tAUxXKIiwBYXBZ8X5w5fuuH8Typ1F2qP/rwMnQfdkvs='", // This is id-dependent, if error is logged with a recommended hash, replace this with that...
             ],
             "img-src": ["'self'", "data:", "https://www.google-analytics.com"],
           },
