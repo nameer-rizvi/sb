@@ -12,9 +12,16 @@ const { googleTagManagerId, path, settings } = require("../shared");
 
 const webpackPluginsConfig = ({ isEnvLive }) =>
   [
-    new ProvidePlugin({ process: "process/browser" }),
-    new CleanWebpackPlugin({ cleanStaleWebpackAssets: isEnvLive }),
-    new HTMLWebpackPlugin({ minify: isEnvLive, ...HTML }),
+    new ProvidePlugin({
+      process: "process/browser",
+    }),
+    new CleanWebpackPlugin({
+      cleanStaleWebpackAssets: isEnvLive,
+    }),
+    new HTMLWebpackPlugin({
+      minify: isEnvLive,
+      ...HTML,
+    }),
     ...(isEnvLive
       ? [
           googleTagManagerId &&
@@ -27,8 +34,14 @@ const webpackPluginsConfig = ({ isEnvLive }) =>
             filename: "lib/css/[name].[contenthash:8].css",
             chunkFilename: "lib/css/[name].[contenthash:8].chunk.css",
           }),
-          new WebpackManifestPlugin({ fileName: "asset-manifest.json" }),
-          new WebpackPWAManifest({ filename: "manifest.json", ...PWA }),
+          new WebpackManifestPlugin({
+            fileName: "asset-manifest.json",
+          }),
+          new WebpackPWAManifest({
+            filename: "manifest.json",
+            ios: true,
+            ...PWA,
+          }),
           new WorkboxPlugin.InjectManifest({
             swSrc: path.public("/service-worker/index.js"),
             swDest: path.dist("service-worker.js"),

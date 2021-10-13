@@ -5,7 +5,7 @@
 
 import { skipWaiting, clientsClaim } from "workbox-core";
 import { precacheAndRoute } from "workbox-precaching";
-import icon from "../icons/favicon_io/favicon-48x48.png";
+import icon from "../icons/favicon_io/apple-touch-icon.png";
 import log from "../../shared/log";
 import origin from "../../shared/origin";
 

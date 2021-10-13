@@ -4,16 +4,17 @@ const {
   charset,
   name,
   viewport,
+  style,
   author,
   description,
   keywords,
   type,
+  origin,
   url,
-  style,
   socialMedia,
   elementId,
 } = require("../../shared");
-const favicon = require("../icons")[2];
+const icons = require("../icons");
 const makeSplashScreen = require("./splash");
 
 const html = {
@@ -21,26 +22,29 @@ const html = {
   dir,
   charset,
   title: name.full,
-  favicon: favicon.src,
+  favicon: icons[icons.length - 1].src,
   meta: {
+    viewport,
+    "theme-color": style.color,
     author,
     description,
     keywords,
-    "theme-color": style.color,
     "og:type": type,
-    "og:url": url,
     "od:site_name": name.full,
     "og:title": name.full,
     "og:description": description,
-    "og:image": favicon.destination,
+    "og:image": origin + "/favicon.ico",
+    "og:url": url,
+    "twitter:card": "summary",
+    "twitter:title": name.full,
     "twitter:site": socialMedia.twitter.username,
-    viewport,
+    "twitter:creator": socialMedia.twitter.username,
   },
   template: require("path").resolve(__dirname, "template.html"),
   splashDiv: makeSplashScreen({
     id: elementId.splash,
-    style,
     title: name.full,
+    style,
   }),
   reactElementId: elementId.react,
 };
