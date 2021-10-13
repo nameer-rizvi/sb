@@ -1,5 +1,4 @@
-// To ensure polyfills get applied first, "./setup" must be the first import.
-import { rootElement } from "./setup";
+import { rootElement } from "./setup"; // To ensure polyfills get applied first, "./setup" must be the first import.
 import ReactDOM from "react-dom";
 import React from "react";
 import App from "./App";
