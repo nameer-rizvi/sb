@@ -1,3 +1,5 @@
-const url = "https://github.com/nameer-rizvi/sb";
+const url = {
+  github: "https://github.com/nameer-rizvi/sb",
+};
 
 module.exports = url;

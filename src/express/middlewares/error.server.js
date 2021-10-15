@@ -47,9 +47,13 @@ function serverErrorHandler(err, res, req) {
 
     // If trace is from within the "/src" folder and it doesn't start with "Error", log it.
 
-    if (trace && trace.includes("/src") && !trace.startsWith("Error")) {
-      log.at(trace.trim());
-    }
+    const isLocalTrace =
+      trace &&
+      !trace.startsWith("Error") &&
+      !trace.includes("node_modules") &&
+      (trace.includes("/src") || trace.includes("/lib"));
+
+    if (isLocalTrace) log.at(trace.trim());
   }
 
   res.sendStatus(500); // Send client an ambiguous 500 response.

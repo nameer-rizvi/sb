@@ -1,6 +1,6 @@
 import React, { useEffect, Fragment } from "react";
 import axios from "axios";
-import { log } from "../../shared";
+import { log, url } from "../../shared";
 import { isEnv } from "simpul";
 
 function Page() {
@@ -12,11 +12,7 @@ function Page() {
   }, []);
 
   const link = (
-    <a
-      href="https://github.com/nameer-rizvi/sb"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
+    <a href={url.github} target="_blank" rel="noopener noreferrer">
       <svg
         viewBox="0 0 24 24"
         height="48"

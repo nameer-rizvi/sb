@@ -1,7 +1,6 @@
 const cors = require("cors");
-const { origin } = require("../../shared");
 
-const corsMiddleware = cors({ origin });
+const corsMiddleware = cors();
 
 module.exports = corsMiddleware;
 

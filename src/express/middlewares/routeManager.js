@@ -1,6 +1,5 @@
 const configs = require("./routeManager.configs");
 const { log } = require("../../shared");
-const { isEnv } = require("simpul");
 
 function routeManagerMiddleware(req, res, next) {
   // Create the route constant by splitting the request url using
@@ -19,10 +18,6 @@ function routeManagerMiddleware(req, res, next) {
     }
   }
 
-  // Create a readable route label for logging.
-
-  const routeLabel = ["Route", req.method, route].join(" ");
-
   // If a matching route config exists for the request...
 
   if (routeConfig) {
@@ -32,16 +27,16 @@ function routeManagerMiddleware(req, res, next) {
 
     // Log request.
 
-    log.route(`${req.method} ${req.url}`);
+    log.route(`${req.method} ${route}`);
 
     // Log user agent.
 
-    if (isEnv.live) log.user(`[${req.ip}] ${req.headers["user-agent"]}`);
+    log.user(`[${req.ip}] ${req.headers["user-agent"]}`);
 
     // Go to next middleware
 
     next();
-  } else next(new Error(`${routeLabel}: missing config.`));
+  } else next(new Error(`Missing config for: ${req.method} ${route}.`));
 }
 
 module.exports = routeManagerMiddleware;
