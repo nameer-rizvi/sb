@@ -1,62 +1,83 @@
 const { log } = require("../../shared");
+const { flatten } = require("simpul");
+const Bowser = require("bowser");
 
-function serverErrorHandler(err, res, req) {
-  // Initialize constants from res locals.
+async function serverErrorHandler(err, res, req) {
+  try {
+    // Initialize constants from res locals.
 
-  const { values = {}, routeConfig = {} } = res.locals;
+    const { values = {}, routeConfig = {}, user = {} } = res.locals;
 
-  // Initialize store to consolidate server error properties.
-  // This can be useful if there's a database to store errors.
+    // Generate server error object with relevant properties.
 
-  const serverError = {};
+    const serverError = {};
 
-  serverError.source =
-    routeConfig.route && routeConfig.route.includes("/app/error")
-      ? "client"
-      : "server";
+    serverError.source =
+      routeConfig.route && routeConfig.route.includes("/error")
+        ? "client"
+        : "server";
 
-  serverError.pathname =
-    (values.error && values.error.pathname) || routeConfig.route || req.url;
+    serverError.method =
+      (values.error && "GET") || routeConfig.method || req.method;
 
-  serverError.method =
-    (values.error && values.error.method) || routeConfig.method || req.method;
+    serverError.route =
+      (values.error && values.error.pathname) || routeConfig.route || req.url;
 
-  serverError.message =
-    (values.error && values.error.message && values.error.message.trim()) ||
-    err.sqlMessage ||
-    err.message ||
-    err.toString();
+    serverError.message =
+      (values.error &&
+        values.error.message &&
+        values.error.message.split(":\n")[0].trim()) ||
+      err.sqlMessage ||
+      err.message ||
+      err.toString();
 
-  serverError.stack = (values.error && values.error.stack) || err.stack;
+    serverError.stack = (values.error && values.error.stack) || err.stack;
 
-  // Log server error message.
+    serverError.user_id =
+      (req.session && (req.session.id || req.session.user_id)) ||
+      (user && (user.id || user.user_id));
 
-  log.error(serverError.message);
+    // Log server error message.
 
-  // Split server error stack with delimiter "at ".
+    log.error(serverError.message);
 
-  const serverErrorStackSplits =
-    serverError.stack && serverError.stack.split(" at ");
+    // Parse flat user agent using bowser.
 
-  // Loop through split server error stack.
+    const userAgent = flatten(Bowser.parse(req.headers["user-agent"] || " "));
 
-  for (let i = 0; i < serverErrorStackSplits.length; i++) {
-    // Let trace be a split server error stack item.
+    // Assign user agent to server error.
 
-    let trace = serverErrorStackSplits[i];
+    Object.assign(serverError, userAgent);
 
-    // If trace is from within the "/src" folder and it doesn't start with "Error", log it.
+    // Split server error stack with delimiter " at ".
 
-    const isLocalTrace =
-      trace &&
-      !trace.startsWith("Error") &&
-      !trace.includes("node_modules") &&
-      (trace.includes("/src") || trace.includes("/lib"));
+    const serverErrorStackSplits =
+      serverError.stack && serverError.stack.split(" at ");
 
-    if (isLocalTrace) log.at(trace.trim());
+    // Loop through split server error stack.
+
+    for (let i = 0; i < serverErrorStackSplits.length; i++) {
+      // Let trace be a split server error stack item.
+
+      let trace = serverErrorStackSplits[i];
+
+      // Determine if trace is local to project
+
+      let isLocalTrace =
+        trace &&
+        !trace.startsWith("Error") &&
+        !trace.includes("node_modules") &&
+        (trace.includes("/lib") || trace.includes("/src"));
+
+      if (isLocalTrace) log.at(trace.trim()); // Log trace if it is local.
+    }
+
+    // This is where you can save the server error in the databas...
+  } catch (error) {
+    log.error(error); // Log any middleware errors as error logs.
+  } finally {
+    res.sendStatus(500); // Send client an ambiguous 500 response.
   }
-
-  res.sendStatus(500); // Send client an ambiguous 500 response.
 }
 
 module.exports = serverErrorHandler;

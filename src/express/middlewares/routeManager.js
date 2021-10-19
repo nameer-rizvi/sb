@@ -1,5 +1,5 @@
+const { resource, log } = require("../../shared");
 const configs = require("./routeManager.configs");
-const { log } = require("../../shared");
 
 function routeManagerMiddleware(req, res, next) {
   // Create the route constant by splitting the request url using
@@ -36,7 +36,7 @@ function routeManagerMiddleware(req, res, next) {
     // Go to next middleware
 
     next();
-  } else next(new Error(`Missing config for: ${req.method} ${route}.`));
+  } else next(new Error(`Missing config for: ${route} [${req.method}].`));
 }
 
 module.exports = routeManagerMiddleware;

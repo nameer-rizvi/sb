@@ -23,10 +23,6 @@ const routeManagerMiddlewareConfigs = [
     authenticate: true,
     requiredValues: ["error"],
   },
-  {
-    route: "/health",
-    method: "GET",
-  },
 ];
 
 module.exports = routeManagerMiddlewareConfigs;

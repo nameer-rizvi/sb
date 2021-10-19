@@ -12,16 +12,9 @@ const { googleTagManagerId, path, settings } = require("../shared");
 
 const webpackPluginsConfig = ({ isEnvLive }) =>
   [
-    new ProvidePlugin({
-      process: "process/browser",
-    }),
-    new CleanWebpackPlugin({
-      cleanStaleWebpackAssets: isEnvLive,
-    }),
-    new HTMLWebpackPlugin({
-      minify: isEnvLive,
-      ...HTML,
-    }),
+    new ProvidePlugin({ process: "process/browser" }),
+    new CleanWebpackPlugin({ cleanStaleWebpackAssets: isEnvLive }),
+    new HTMLWebpackPlugin({ minify: isEnvLive, ...HTML }),
     ...(isEnvLive
       ? [
           googleTagManagerId &&

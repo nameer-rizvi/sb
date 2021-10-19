@@ -8,7 +8,7 @@ function Page() {
     axios
       .get("/initialize")
       .then((response) => log.react(response.data.welcome))
-      .catch((error) => log.react(error.toString()));
+      .catch((error) => log.react(error));
   }, []);
 
   const link = (
@@ -52,6 +52,7 @@ function Page() {
           👏👏👏👏👏
         </span>
       </h1>
+      {asd}
       <h2>now, let&apos;s make this thing :)</h2>
       <h3>p.s. im at /src/react/App/Page.js</h3>
       {link}

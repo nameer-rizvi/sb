@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import { style } from "../../shared";
-import axios from "axios";
 import { isEnv } from "simpul";
 
 const StyledDiv = styled.div`
@@ -38,15 +37,13 @@ class ErrorBoundary extends Component {
     const { error } = this.state;
 
     if (error)
-      axios.post("/error", {
+      require("axios").post("/error", {
         error: {
           pathname: window.location.pathname + window.location.search,
           message: error.message,
           stack: error.stack,
         },
       });
-
-    // if (error && error.name === "ChunkLoadError") window.location.reload();
 
     return error ? (
       isEnv.live ? (
