@@ -52,7 +52,6 @@ function Page() {
           👏👏👏👏👏
         </span>
       </h1>
-      {asd}
       <h2>now, let&apos;s make this thing :)</h2>
       <h3>p.s. im at /src/react/App/Page.js</h3>
       {link}
