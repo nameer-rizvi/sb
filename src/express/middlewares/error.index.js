@@ -7,6 +7,8 @@ const serverErrorHandler = require("./error.server");
 // Express's next() middleware as strings. Any Error instances get handled by
 // the server error handler. Otherwise, an ambiguous 500 status code is sent.
 //   * Must be the last middleware in an express application.
+//   * "::" is the delimiter used to separate the response code and the
+//     error message for client-facing errors.
 
 function errorHandlerMiddleware(error, req, res, next) {
   const errorString = error && error.toString();

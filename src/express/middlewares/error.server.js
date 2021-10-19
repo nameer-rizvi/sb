@@ -1,8 +1,8 @@
 const { log } = require("../../shared");
-const { flatten } = require("simpul");
+const { flatten, isString } = require("simpul");
 const Bowser = require("bowser");
 
-async function serverErrorHandler(err, res, req) {
+function serverErrorHandler(err, res, req) {
   try {
     // Initialize constants from res locals.
 
@@ -51,8 +51,9 @@ async function serverErrorHandler(err, res, req) {
 
     // Split server error stack with delimiter " at ".
 
-    const serverErrorStackSplits =
-      serverError.stack && serverError.stack.split(" at ");
+    const serverErrorStackSplits = isString(serverError.stack)
+      ? serverError.stack.split(" at ")
+      : [];
 
     // Loop through split server error stack.
 

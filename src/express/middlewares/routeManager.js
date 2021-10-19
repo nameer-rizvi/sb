@@ -1,9 +1,8 @@
-const { resource, log } = require("../../shared");
+const { log } = require("../../shared");
 const configs = require("./routeManager.configs");
 
 function routeManagerMiddleware(req, res, next) {
-  // Create the route constant by splitting the request url using
-  // the query delimiter and removing the api resource from it.
+  // Create the route constant by splitting the request url using the query delimiter.
 
   const route = req.url.split("?")[0];
 
