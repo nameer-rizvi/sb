@@ -37,6 +37,8 @@ function serverErrorHandler(err, res, req) {
       (req.session && (req.session.id || req.session.user_id)) ||
       (user && (user.id || user.user_id));
 
+    serverError.ip = req.ip || "";
+
     // Log server error message.
 
     log.error(serverError.message);
@@ -73,7 +75,9 @@ function serverErrorHandler(err, res, req) {
       if (isLocalTrace) log.at(trace.trim()); // Log trace if it is local.
     }
 
-    // This is where you can save the server error in the databas...
+    // This is where you can save the server error in the database...
+
+    // console.log(serverError);
   } catch (error) {
     log.error(error); // Log any middleware errors as error logs.
   } finally {

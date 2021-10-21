@@ -1,3 +1,5 @@
+// starterKit-flag [https://favicon.io/]
+
 const path = require("path");
 
 const pathResolve = (dir) => path.resolve(__dirname, "./favicon_io/" + dir);
@@ -37,5 +39,3 @@ const icons = [
 ];
 
 module.exports = icons;
-
-// Favicon generator: https://favicon.io/

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import { style } from "../../shared";
 import { isEnv } from "simpul";
+import axios from "axios";
 
 const StyledDiv = styled.div`
   display: flex;
@@ -37,7 +38,7 @@ class ErrorBoundary extends Component {
     const { error } = this.state;
 
     if (error)
-      require("axios").post("/error", {
+      axios.post("/error", {
         error: {
           pathname: window.location.pathname + window.location.search,
           message: error.message,

@@ -1,36 +1,35 @@
+// starterKit-flag [TODO: Review authentication strategy]
+
 const { jwt } = require("../util");
 
 async function authenticateMiddleware(req, res, next) {
   try {
-    // Initialize authorization header with default string type.
+    // If route requires authenticating a bearer token...
 
-    const { authorization = "" } = req.headers;
+    if (res.locals.routeConfig.authenticate === "bearerToken") {
+      // Initialize authorization header with default string type.
 
-    // Parse "Bearer" token from authorization header.
+      const { authorization = "" } = req.headers;
 
-    const bearerToken = authorization.split("Bearer ")[1];
+      // Parse "Bearer" token from authorization header.
 
-    // If a bearer token exists, it is verified using "jsonwebtoken"
-    // and if any data is returned (which would most likely contain
-    // the user id in it), we assign it to the res locals store.
-    //  * Will throw error if token is corrupt or invalid.
+      const bearerToken = authorization.split("Bearer ")[1];
 
-    if (bearerToken && bearerToken !== "null")
-      res.locals.user = await jwt.verify(bearerToken);
+      // If a bearer token exists, it is verified using "jsonwebtoken"
+      // and if any data is returned (which would most likely contain
+      // the user id in it), we assign it to the res locals store.
+      //  * Will throw error if token is corrupt or invalid.
 
-    // Request is authenticated if a route requires authentication
-    // and a user exists, or if the route doesn't require authentication.
+      if (bearerToken && bearerToken !== "null")
+        res.locals.user = await jwt.verify(bearerToken);
 
-    const isAuthenticated =
-      (res.locals.routeConfig.authenticate && res.locals.user) ||
-      !res.locals.routeConfig.authenticate;
+      // If an error isn't thrown by the verification and a user exists,
+      // go to next middleware, otherwise send client a 401 status code.
 
-    // If request is authenticated, go to next middleware,
-    // otherwise respond with a 401 "Unauthorized" status code.
-
-    if (isAuthenticated) {
-      next();
-    } else res.sendStatus(401);
+      if (res.locals.user) {
+        next();
+      } else res.sendStatus(401);
+    } else next();
   } catch (error) {
     next(error);
   }

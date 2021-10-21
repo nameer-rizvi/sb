@@ -3,7 +3,9 @@ import axios from "axios";
 import { log, url } from "../../shared";
 import { isEnv } from "simpul";
 
-function Page() {
+function Page(props) {
+  console.log(props);
+
   useEffect(() => {
     axios
       .get("/initialize")

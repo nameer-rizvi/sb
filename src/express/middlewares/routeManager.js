@@ -1,5 +1,6 @@
 const { log } = require("../../shared");
 const configs = require("./routeManager.configs");
+const { base64 } = require("simpul");
 
 function routeManagerMiddleware(req, res, next) {
   // Create the route constant by splitting the request url using the query delimiter.
@@ -20,22 +21,26 @@ function routeManagerMiddleware(req, res, next) {
   // If a matching route config exists for the request...
 
   if (routeConfig) {
-    // Store route config in res.locals.
+    // Store route config in res locals.
 
     res.locals.routeConfig = routeConfig;
 
-    // Log request.
+    // Store request ip as base64 encoded string in route config.
 
-    log.route(`${req.method} ${route}`);
+    res.locals.routeConfig.ip = base64.encode(req.ip.replaceAll(/\D/g, ""));
 
-    // Log user agent.
+    // Log request route.
 
-    log.user(`[${req.ip}] ${req.headers["user-agent"]}`);
+    log.route(req.method.toLowerCase() + " " + route);
+
+    // Log request user.
+
+    log.user(`Request by ${routeConfig.ip}`);
 
     // Go to next middleware
 
     next();
-  } else next(new Error(`Missing config for: ${route} [${req.method}].`));
+  } else next(new Error(`Missing route config for: ${route} [${req.method}].`));
 }
 
 module.exports = routeManagerMiddleware;

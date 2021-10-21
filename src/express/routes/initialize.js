@@ -1,3 +1,5 @@
+// starterKit-flag [TODO: Api routes]
+
 // Send config to initialize client applicaiton.
 
 function routeAppInitialize(req, res) {

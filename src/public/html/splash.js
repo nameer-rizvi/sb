@@ -1,3 +1,5 @@
+// starterKit-flag
+
 const makeSplashScreen = ({ id, title, style }) => `
   <div id="${id}">
     <style>

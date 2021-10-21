@@ -9,9 +9,7 @@ const webpackOutputConfig = ({ isEnvLive }) => ({
   chunkFilename: isEnvLive
     ? "lib/js/[name].[contenthash:8].chunk.js"
     : "lib/js/[name].chunk.js",
-  assetModuleFilename: isEnvLive
-    ? "lib/assets/[name].[contenthash:8][ext]"
-    : "lib/assets/[name][ext]",
+  assetModuleFilename: "lib/assets/[name][ext]",
 });
 
 module.exports = webpackOutputConfig;

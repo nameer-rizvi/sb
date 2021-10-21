@@ -1,11 +1,4 @@
-// Sample Config:
-//
-// {
-//   route: "/",
-//   method: "GET",
-//   authenticate: true,
-//   requiredValues: ["id"],
-// }
+// starterKit-flag [TODO: Set api route configs here]
 
 const routeManagerMiddlewareConfigs = [
   {
@@ -15,12 +8,12 @@ const routeManagerMiddlewareConfigs = [
   {
     route: "/initialize",
     method: "GET",
-    authenticate: true,
+    authenticate: "bearerToken",
   },
   {
     route: "/error",
     method: "POST",
-    authenticate: true,
+    authenticate: "bearerToken",
     requiredValues: ["error"],
   },
 ];

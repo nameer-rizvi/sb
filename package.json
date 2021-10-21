@@ -102,7 +102,7 @@
     "jsonwebtoken": "^8.5.1",
     "path": "^0.12.7",
     "sanitized": "^1.1.5",
-    "simpul": "^0.6.9",
-    "simpul-validate": "^0.0.2"
+    "simpul": "^0.7.0",
+    "simpul-validate": "^0.0.3"
   }
 }

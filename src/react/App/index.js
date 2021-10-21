@@ -1,3 +1,5 @@
+// starterKit-flag [TODO: Basically everything in this folder... Let's get busy!]
+
 import React from "react";
 import ErrorBoundary from "./ErrorBoundary";
 import { Provider as ReduxProvider } from "react-redux";

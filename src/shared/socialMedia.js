@@ -1,5 +1,11 @@
+// starterKit-flag
+
 const socialMedia = {
-  twitter: { username: "@username" },
+  twitter: {
+    username: "username",
+    handle: "@username",
+    card: "summary",
+  },
 };
 
 module.exports = socialMedia;

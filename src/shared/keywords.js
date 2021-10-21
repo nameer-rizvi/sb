@@ -1,3 +1,5 @@
+// starterKit-flag
+
 const keywords = [
   "javascript",
   "node",

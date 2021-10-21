@@ -1,3 +1,5 @@
+// starterKit-flag
+
 const style = {
   backgroundColor: "#eee",
   color: "#000",
