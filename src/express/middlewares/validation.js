@@ -2,21 +2,13 @@ const util = require("../util");
 
 function validationMiddleware(req, res, next) {
   try {
-    // Create values object to store request values and required values.
-
-    const values = {
-      payload: { ...req.body, ...req.query, ...req.params },
-      required: res.locals.routeConfig.requiredValues,
-    };
-
     // Validate request values and check if required values exist.
-    // If successful, sanitized values are returned and stored as a constant.
+    // If successful, sanitized values are returned and assigned to res locals.
 
-    const sanitizedValues = util.validate(values.payload, values.required);
-
-    // Assign sanitized values to res.locals.
-
-    res.locals.values = sanitizedValues;
+    res.locals.values = validate(
+      { ...req.body, ...req.query, ...req.params },
+      res.locals.routeConfig.requiredValues
+    );
 
     // Go to next middleware.
 
