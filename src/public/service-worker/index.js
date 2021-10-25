@@ -72,8 +72,7 @@ self.addEventListener("notificationclick", (event) => {
 
         // Loop through client windows to find one that matches application origin.
 
-        for (let i = 0; i < clientWindows.length; i++) {
-          let clientWindow = clientWindows[i];
+        for (let clientWindow of clientWindows) {
           if (clientWindow.url.startsWith(origin) && "focus" in clientWindow) {
             // If a client window is found, focus on it and navigate it to url.
             clientWindow.focus();

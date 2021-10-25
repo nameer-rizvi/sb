@@ -11,9 +11,9 @@ function routeManagerMiddleware(req, res, next) {
 
   let routeConfig;
 
-  for (let i = 0; i < configs.length; i++) {
-    if (configs[i].route === route && configs[i].method === req.method) {
-      routeConfig = configs[i];
+  for (let config of configs) {
+    if (config.route === route && config.method === req.method) {
+      routeConfig = config;
       break;
     }
   }

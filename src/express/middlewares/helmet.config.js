@@ -25,6 +25,7 @@ if (isEnv.live && googleTagManagerId) {
     "'self'",
     "data:",
     "https://www.google-analytics.com",
+    "https://www.googletagmanager.com",
   ];
 
   helmetMiddlewareConfig = {

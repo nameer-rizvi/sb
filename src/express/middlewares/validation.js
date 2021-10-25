@@ -1,4 +1,4 @@
-const util = require("../util");
+const { validate } = require("../util");
 
 function validationMiddleware(req, res, next) {
   try {

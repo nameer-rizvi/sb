@@ -48,9 +48,7 @@ async function serviceWorkerRegistration() {
 
         // Unregister each registration.
 
-        for (let i = 0; i < registrations.length; i++) {
-          await registrations[i].unregister();
-        }
+        for (let registration of registrations) await registration.unregister();
 
         // Log completion of all unregistrations.
 

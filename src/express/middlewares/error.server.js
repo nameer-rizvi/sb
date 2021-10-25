@@ -59,11 +59,7 @@ function serverErrorHandler(err, res, req) {
 
     // Loop through split server error stack.
 
-    for (let i = 0; i < serverErrorStackSplits.length; i++) {
-      // Let trace be a split server error stack item.
-
-      let trace = serverErrorStackSplits[i];
-
+    for (let trace of serverErrorStackSplits) {
       // Determine if trace is local to project
 
       let isLocalTrace =
