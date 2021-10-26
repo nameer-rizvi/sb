@@ -18,16 +18,17 @@ function routeManagerMiddleware(req, res, next) {
     }
   }
 
-  // If a matching route config exists for the request...
-
   if (routeConfig) {
-    // Store route config in res locals.
+    // If a matching route config exists for the request...
 
-    res.locals.routeConfig = routeConfig;
+    // Store route config in res locals.
 
     // Store request ip as base64 encoded string in route config.
 
-    res.locals.routeConfig.ip = base64.encode(req.ip.replaceAll(/\D/g, ""));
+    res.locals.routeConfig = {
+      ...routeConfig,
+      ip: base64.encode(req.ip.replaceAll(/\D/g, "")),
+    };
 
     // Log request route.
 
@@ -35,7 +36,7 @@ function routeManagerMiddleware(req, res, next) {
 
     // Log request user.
 
-    log.user(`Request by ${routeConfig.ip}`);
+    log.user(`Request by ${res.locals.routeConfig.ip}`);
 
     // Go to next middleware
 
