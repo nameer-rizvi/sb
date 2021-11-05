@@ -1,4 +1,4 @@
-// starterKit-flag [set JWT_SECRET in a ".env" file]
+// starterKit-flag [set JWT_SECRET in a ".env" file located in the projects root folder]
 
 const jsonwebtoken = require("jsonwebtoken");
 const { JWT_SECRET = "secret123" } = process.env;

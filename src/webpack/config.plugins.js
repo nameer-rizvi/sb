@@ -17,6 +17,7 @@ const webpackPluginsConfig = ({ isEnvLive }) =>
     new HTMLWebpackPlugin({ minify: isEnvLive, ...HTML }),
     ...(isEnvLive
       ? [
+          // --flow-googleTagManager-2
           googleTagManagerId &&
             new HTMLWebpackPartialsPlugin({
               path: path.public("html/gtag.html"),

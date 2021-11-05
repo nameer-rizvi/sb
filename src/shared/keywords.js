@@ -1,4 +1,4 @@
-// starterKit-flag
+// starterKit-flag [add appropriate application keywords]
 
 const keywords = [
   "javascript",

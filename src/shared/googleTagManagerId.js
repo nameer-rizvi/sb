@@ -1,4 +1,4 @@
-// starterKit-flag
+// --flow-googleTagManager-0
 
 const googleTagManagerId = "";
 

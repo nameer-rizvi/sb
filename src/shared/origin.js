@@ -1,5 +1,3 @@
-// starterKit-flag
-
 const { isEnv } = require("simpul");
 const url = require("./url");
 const port = require("./port");

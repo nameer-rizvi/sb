@@ -1,3 +1,5 @@
+// starterKit-flag [basically everything in this folder... Let's get busy!]
+
 const express = require("express");
 const router = express.Router();
 

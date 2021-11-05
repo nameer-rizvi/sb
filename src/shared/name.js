@@ -1,4 +1,4 @@
-// starterKit-flag
+// starterKit-flag [add application names]
 
 const name = {
   full: "[app name]",

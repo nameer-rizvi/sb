@@ -1,4 +1,4 @@
-// starterKit-flag
+// starterKit-flag [add application's domain/url, change github link]
 
 const url = {
   domain: "",

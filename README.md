@@ -2,9 +2,11 @@
 
 Single-page-application boilerplate. [Express server](https://expressjs.com/) serving a [React client](https://reactjs.org/) via [Webpack bundler](https://webpack.js.org/).
 
-## Start Kit
+## Getting Started
 
-Ctrl/Cmd + F the /src folder for "// starterKit-flag" to go make initial configuration settings changes for your project.
+As opinionated as the boilerplate code is, a trail of comments have been left to help make initial configuration settings changes easier so that there isn't a need to go through every single file before getting started.
+
+Do "Ctrl/Cmd + F" on the "/src" folder for: `// starterKit-flag`
 
 ## NPM Scripts
 
