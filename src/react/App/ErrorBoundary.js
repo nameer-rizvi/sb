@@ -1,30 +1,7 @@
 import React, { Component } from "react";
-import styled from "styled-components";
-import { style } from "../../shared";
+import ErrorBoundaryStyled from "./ErrorBoundaryStyled";
 import { isEnv } from "simpul";
 import axios from "axios";
-
-const StyledDiv = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin: auto;
-  padding: 30px;
-  font-family: ${style.fontFamily};
-  color: ${style.color};
-
-  h1 {
-    margin-bottom: 30px;
-  }
-
-  h2 {
-    margin-bottom: 15px;
-  }
-
-  pre {
-    white-space: pre-wrap;
-    word-wrap: break-word;
-  }
-`;
 
 class ErrorBoundary extends Component {
   constructor(props) {
@@ -48,16 +25,16 @@ class ErrorBoundary extends Component {
 
     return error ? (
       isEnv.live ? (
-        <StyledDiv>
+        <ErrorBoundaryStyled>
           <h1>Oops! Looks like something went wrong...</h1>
           <h2>Whatever it is, we're working on it!</h2>
-        </StyledDiv>
+        </ErrorBoundaryStyled>
       ) : (
-        <StyledDiv>
+        <ErrorBoundaryStyled>
           <h1>React Error</h1>
           <h2>{error.message}</h2>
           <pre>{error.stack}</pre>
-        </StyledDiv>
+        </ErrorBoundaryStyled>
       )
     ) : (
       this.props.children

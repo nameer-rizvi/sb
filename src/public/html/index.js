@@ -10,7 +10,6 @@ const {
   keywords,
   type,
   origin,
-  url,
   socialMedia,
   elementId,
 } = require("../../shared");

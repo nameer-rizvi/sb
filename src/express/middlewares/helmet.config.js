@@ -18,7 +18,7 @@ if (isEnv.live && googleTagManagerId) {
     "'self'",
     "https://www.googletagmanager.com",
     "https://www.google-analytics.com",
-    "'sha256-tAUxXKIiwBYXBZ8X5w5fuuH8Typ1F2qP/rwMnQfdkvs='",
+    "'sha256-...'", // This will be unique to your application, copy-paste suggested value from console error.
   ];
 
   contentSecurtyPolicy["img-src"] = [

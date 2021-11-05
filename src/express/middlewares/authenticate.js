@@ -1,4 +1,4 @@
-// starterKit-flag [TODO: Review authentication strategy]
+// starterKit-flag [review authentication strategy]
 
 const { jwt } = require("../util");
 

@@ -17,7 +17,7 @@ async function installPolyfills() {
 
     if (installed.length) log.polyfill(`installed: ${installed.join(", ")}`);
   } catch (error) {
-    console.error(error);
+    log.polyfill(error);
   }
 }
 

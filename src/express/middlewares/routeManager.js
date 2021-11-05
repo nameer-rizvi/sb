@@ -11,12 +11,11 @@ function routeManagerMiddleware(req, res, next) {
 
   let routeConfig;
 
-  for (let config of configs) {
+  for (let config of configs)
     if (config.route === route && config.method === req.method) {
       routeConfig = config;
       break;
     }
-  }
 
   if (routeConfig) {
     // If a matching route config exists for the request...

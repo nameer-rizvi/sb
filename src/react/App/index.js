@@ -1,4 +1,4 @@
-// starterKit-flag [TODO: Basically everything in this folder... Let's get busy!]
+// starterKit-flag [basically everything in this folder... Let's get busy!]
 
 import React from "react";
 import ErrorBoundary from "./ErrorBoundary";

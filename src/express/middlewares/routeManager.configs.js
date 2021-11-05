@@ -1,4 +1,4 @@
-// starterKit-flag [TODO: Set api route configs here]
+// starterKit-flag [set api route configs here]
 
 const routeManagerMiddlewareConfigs = [
   {

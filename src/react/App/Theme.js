@@ -1,11 +1,9 @@
 import { style, elementId } from "../../shared";
 import { createGlobalStyle } from "styled-components";
 
-const { backgroundColor, color, fontFamily } = style;
-
 export const ThemeConfig = {
-  font: [fontFamily],
-  color: [backgroundColor, color],
+  font: [style.fontFamily],
+  color: [style.backgroundColor, style.color],
 };
 
 export const ThemeGlobalStyle = createGlobalStyle`

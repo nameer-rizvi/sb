@@ -1,5 +1,7 @@
 const { isNumber } = require("simpul");
 
+// Example client error: next("400::Username must be at least 30 characters.")
+
 function clientErrorHandler(err, res) {
   const errSplit = err.split("::");
 

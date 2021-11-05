@@ -1,11 +1,11 @@
 // starterKit-flag
 
 const { isEnv } = require("simpul");
-// const url = require("./url");
+const url = require("./url");
 const port = require("./port");
 
-const origin = isEnv.live
-  ? "http://localhost:" + port.node // Normally this will be the domain/url.
-  : "http://localhost:" + port.client;
+// If testing a production build on localhost, replace url with: "http://localhost:" + port.node
+
+const origin = isEnv.live ? url.domain : "http://localhost:" + port.client;
 
 module.exports = origin;

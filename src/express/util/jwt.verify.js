@@ -1,4 +1,4 @@
-// starterKit-flag [TODO: JWT_SECRET default value should be removed and defined in a ".env" file.]
+// starterKit-flag [set JWT_SECRET in a ".env" file]
 
 const jsonwebtoken = require("jsonwebtoken");
 const { JWT_SECRET = "secret123" } = process.env;

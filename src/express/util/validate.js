@@ -1,4 +1,4 @@
-// starterKit-flag [TODO: Define data dictionary for back-end use.]
+// starterKit-flag [define data dictionary constant]
 
 const simpul_validate = require("simpul-validate");
 
