@@ -1,3 +1,4 @@
+const sanitized = require("sanitized");
 const { validate } = require("../util");
 
 function validationMiddleware(req, res, next) {

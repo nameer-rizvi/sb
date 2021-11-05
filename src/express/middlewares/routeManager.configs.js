@@ -13,6 +13,7 @@ const routeManagerMiddlewareConfigs = [
     route: "/initialize",
     method: "GET",
     authenticate: "bearerToken",
+    // ignoreValidation: true,
   },
   {
     route: "/error",
