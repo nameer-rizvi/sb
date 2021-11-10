@@ -6,8 +6,7 @@ import { isEnv } from "simpul";
 
 ReactDOM.render(<App />, rootElement);
 
-// This won't work in a folder like "/setup", have to call it here...
-if (!isEnv.live && module.hot) module.hot.accept();
+if (!isEnv.live && module.hot) module.hot.accept(); // Won't work in "/setup" so must be called here.
 
 // https://www.npmjs.com/package/react-dom
 // https://www.npmjs.com/package/react

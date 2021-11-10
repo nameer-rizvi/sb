@@ -7,6 +7,7 @@ const {
   name,
   description,
   categories,
+  shortcuts,
 } = require("../../shared");
 
 const pwa = {
@@ -20,6 +21,7 @@ const pwa = {
   short_name: name.short,
   description,
   categories,
+  shortcuts,
   icons: require("../icons"),
 };
 
@@ -36,7 +38,7 @@ module.exports = pwa;
 //
 //
 // Google's manifest criteria:
-// https://developers.google.com/web/fundamentals/app-install-banners
+// https://web.dev/customize-install/
 //
 // Webpack pwa manifest repo:
 // https://github.com/arthurbergmz/webpack-pwa-manifest

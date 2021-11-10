@@ -1,4 +1,4 @@
-// starterKit-flag [add application social media config or remove]
+// --starterkit-flag [add application social media config or remove]
 
 const socialMedia = {
   twitter: {

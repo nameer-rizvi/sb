@@ -1,4 +1,4 @@
-// starterKit-flag [remove default header authorization sample]
+// --starterkit-flag [remove default header authorization sample]
 
 import axios from "axios";
 import { port, resource } from "../../shared";

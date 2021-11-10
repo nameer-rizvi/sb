@@ -11,7 +11,9 @@
     "dev": "concurrently \"npm run express\" \"npm run webpack\"",
     "build": "cd src/webpack && webpack --mode production --config config.js",
     "start": "NODE_ENV=production node src/express/index.js",
-    "app": "npm install && npm run build && npm run start"
+    "app": "npm install && npm run build && npm run start",
+    "pm2-start": "npm run build && pm2 start ecosystem.config.js && pm2 logs production",
+    "pm2-restart": "npm run build && pm2 restart ecosystem.config.js --update-env && pm2 logs production"
   },
   "repository": {
     "type": "git",

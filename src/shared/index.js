@@ -17,6 +17,7 @@ const shared = {
   port: require("./port"),
   resource: require("./resource"),
   settings: require("./settings"),
+  shortcuts: require("./shortcuts"),
   socialMedia: require("./socialMedia"),
   style: require("./style"),
   type: require("./type"),

@@ -1,4 +1,4 @@
-// starterKit-flag [https://favicon.io/]
+// --starterkit-flag [https://favicon.io/]
 
 const path = require("path");
 
