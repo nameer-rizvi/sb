@@ -22,8 +22,8 @@ function validationMiddleware(req, res, next) {
     next();
   } catch (error) {
     if (error.toString().includes("Missing data dictionary config")) {
-      next(error); // If error is for missing config, handle it with next middleware.
-    } else next("400::" + error); // Send client a 400 response code with the validation error.
+      next(error); // If error is for missing config, handle it with next server error middleware.
+    } else next("400::" + error); // Send client a 400 ("Bad Request") status with the validation error.
   }
 }
 

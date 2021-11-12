@@ -3,7 +3,7 @@
 const jsonwebtoken = require("jsonwebtoken");
 const { JWT_SECRET = "secret123" } = process.env;
 
-async function jwtSign(data, expiresIn = "15m") {
+async function jwtSign(data, expiresIn = "5m") {
   // Generate token using jsonwebtoken.
   //   * Because of expiresIn, data must be an object.
 

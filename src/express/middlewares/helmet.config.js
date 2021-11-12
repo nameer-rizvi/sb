@@ -4,7 +4,7 @@ const { googleTagManagerId } = require("../../shared");
 // --flow-googleTagManager-4
 //
 // If application is in a live environment and a Google Tag Manager Id exists...
-// return appropriate Content Security Policy for helmet middleware to use.
+//   Return appropriate Content Security Policy for helmet middleware to use.
 
 let contentSecurtyPolicy, helmetMiddlewareConfig;
 

@@ -1,10 +1,10 @@
 // Send config to initialize client applicaiton.
 
-function routeAppInitialize(req, res) {
-  const welcome =
-    "This was fetched from the '/initialize' endpoint @ /express/routes/initialize.js.";
-
-  res.json({ ...res.locals.user, welcome });
-}
+const routeAppInitialize = (req, res) =>
+  res.json({
+    ...res.locals.user,
+    welcome:
+      "This was fetched from the '/initialize' endpoint @ /express/routes/initialize.js.",
+  });
 
 module.exports = routeAppInitialize;

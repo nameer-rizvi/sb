@@ -17,7 +17,8 @@ async function jwtVerify(token, validateKey) {
 
   if (validateKey ? data && data[validateKey] : data) return data;
 
-  // Invalidate verification. * All tokens should contain data *
+  // Invalidate verification.
+  //  * All tokens should contain data.
 
   throw new Error("No data.");
 }

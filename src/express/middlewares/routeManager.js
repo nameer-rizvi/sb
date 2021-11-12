@@ -49,7 +49,7 @@ function routeManagerMiddleware(req, res, next) {
   } else {
     // Else...
 
-    // Send client a 404 status code.
+    // Send client a 404 ("Not Found") status.
 
     res.sendStatus(404);
   }

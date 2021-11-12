@@ -9,7 +9,10 @@ const serverErrorHandler = require("./error.server");
 //   * Must be the last middleware in an express application.
 //   * "::" is the delimiter used to separate the response code and the
 //     error message for client-facing errors.
+//   * Disabling eslint for no-unused-vars (re: "next"), because even though
+//     "next" is not used, it's required to access the error param.
 
+// eslint-disable-next-line
 function errorHandlerMiddleware(error, req, res, next) {
   // Parse error string from error.
 
@@ -36,7 +39,7 @@ function errorHandlerMiddleware(error, req, res, next) {
   } else {
     // Otherwise...
 
-    // Send client an ambiguous 500 status code.
+    // Send client a 500 ("Internal Server Error") status.
 
     res.sendStatus(500);
   }

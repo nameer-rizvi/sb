@@ -1,10 +1,15 @@
 const historyApiFallback = require("connect-history-api-fallback");
-const settings = require("../../shared").settings.historyApiFallback;
+const historyApiFallbackSettings = require("../../shared").settings
+  .historyApiFallback;
 
-const historyApiFallbackMiddleware = historyApiFallback({
-  htmlAcceptHeaders: ["text/html", "application/xhtml+xml"],
-  ...settings,
-});
+const historyApiFallbackOption = {
+  htmlAcceptHeaders: ["text/html", "text/xml", "application/xhtml+xml"],
+  ...historyApiFallbackSettings,
+};
+
+const historyApiFallbackMiddleware = historyApiFallback(
+  historyApiFallbackOption
+);
 
 module.exports = historyApiFallbackMiddleware;
 

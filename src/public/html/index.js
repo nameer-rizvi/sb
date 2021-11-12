@@ -38,6 +38,7 @@ const html = {
     "twitter:title": name.full,
     "twitter:site": socialMedia.twitter.handle,
     "twitter:creator": socialMedia.twitter.handle,
+    robots: "index, follow",
   },
   template: require("path").resolve(__dirname, "template.html"),
   splashDiv: makeSplashScreen({

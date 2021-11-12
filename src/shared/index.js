@@ -15,6 +15,7 @@ const shared = {
   origin: require("./origin"),
   path: require("./path"),
   port: require("./port"),
+  reactRoutes: require("./reactRoutes"),
   resource: require("./resource"),
   settings: require("./settings"),
   shortcuts: require("./shortcuts"),

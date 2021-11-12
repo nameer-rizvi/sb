@@ -77,7 +77,7 @@ function serverErrorHandler(err, res, req) {
   } catch (error) {
     log.error(error); // Log any middleware errors as error logs.
   } finally {
-    res.sendStatus(500); // Send client an ambiguous 500 response.
+    res.sendStatus(500); // Send client a 500 ("Internal Server Error") status.
   }
 }
 
