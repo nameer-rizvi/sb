@@ -4,23 +4,42 @@ const serverErrorHandler = require("./error.server");
 
 // Since errors can sometimes contain sensitive information, only certain
 // errors get exposed to the client. This is done by passing errors through
-// Express's next() middleware as strings (see error.client.js for example).
-// Any Error instances get handled by the server error handler. Otherwise,
-// an ambiguous 500 status code is sent.
+// Express's next() middleware as strings. Any Error instances get handled by
+// the server error handler. Otherwise, an ambiguous 500 status code is sent.
 //   * Must be the last middleware in an express application.
 //   * "::" is the delimiter used to separate the response code and the
 //     error message for client-facing errors.
 
 function errorHandlerMiddleware(error, req, res, next) {
+  // Parse error string from error.
+
   const errorString = error && error.toString();
 
   if (errorString && errorString.includes("::")) {
+    // If error string exists and it includes the client error delimiter...
+
+    // Clean error string, and handle it using the client error handler.
+
     clientErrorHandler(errorString.replace("Error:", "").trim(), res);
   } else if (error && isString(error)) {
+    // Else if error exists & it's a string...
+
+    // Handle it using the client error handler.
+
     clientErrorHandler(error, res);
   } else if (error) {
+    // Else if an error exists...
+
+    // Handle it using the server error handler.
+
     serverErrorHandler(error, res, req);
-  } else res.sendStatus(500);
+  } else {
+    // Otherwise...
+
+    // Send client an ambiguous 500 status code.
+
+    res.sendStatus(500);
+  }
 }
 
 module.exports = errorHandlerMiddleware;

@@ -1,4 +1,4 @@
-// --starterkit-flag [add appropriate application categories]
+// --starterKit-flag [add appropriate application categories]
 
 const categories = ["personalization"];
 

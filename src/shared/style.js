@@ -1,4 +1,4 @@
-// --starterkit-flag [define application style/design]
+// --starterKit-flag [define application style/design]
 
 const style = {
   backgroundColor: "#eee",

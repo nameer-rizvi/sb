@@ -14,5 +14,3 @@ exports.api = [
   require("../routes"),
   require("./error.index"),
 ];
-
-exports.singlePageApplication = require("./singlePageApplication");

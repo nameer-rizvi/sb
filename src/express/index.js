@@ -3,6 +3,7 @@ const express = require("express");
 const { port, log, resource } = require("../shared");
 const { isEnv } = require("simpul");
 const middlewares = require("./middlewares");
+const staticRouter = require("./static");
 
 // Initialize Express server.
 
@@ -26,9 +27,9 @@ server.use(middlewares.application);
 
 server.use(resource.api, middlewares.api);
 
-// If a request passes the api resource, return the react application.
+// If a request passes the api resource, use static router.
 
-server.use(middlewares.singlePageApplication);
+server.use(staticRouter);
 
 // http://expressjs.com/
 // https://www.npmjs.com/package/express

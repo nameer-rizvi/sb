@@ -1,4 +1,4 @@
-// --starterkit-flag [add application description]
+// --starterKit-flag [add application description]
 
 const description =
   "Single-page-application boilerplate. Express server serving a React client via Webpack bundler.";

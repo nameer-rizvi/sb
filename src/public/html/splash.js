@@ -1,4 +1,4 @@
-// --starterkit-flag [style/design custom splash screen]
+// --starterKit-flag [style/design custom splash screen]
 
 const makeSplashScreen = ({ id, title, style }) => `
   <div id="${id}">

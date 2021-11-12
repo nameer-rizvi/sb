@@ -1,4 +1,4 @@
-// --starterkit-flag [review authentication strategy]
+// --starterKit-flag [review authentication strategy]
 
 const { jwt } = require("../util");
 
