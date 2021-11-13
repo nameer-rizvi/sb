@@ -17,16 +17,20 @@ function robots(req, res) {
       value: "10",
     },
     {
-      section: true,
+      sectionBreak: true,
+    },
+    {
       name: "Sitemap",
       value: origin + resource.sitemap,
     },
     {
-      section: true,
+      sectionBreak: true,
+    },
+    {
       name: "Host",
       value: origin,
     },
-  ].map((rule) => (rule.section ? "\n" : "") + rule.name + ": " + rule.value);
+  ].map((rule) => (rule.sectionBreak ? "\n" : rule.name + ": " + rule.value));
 
   // Log successful txt generation for request by bot crawlers.
 

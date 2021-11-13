@@ -1,4 +1,4 @@
-import { style, elementId } from "../../shared";
+import { style, elementId } from "../../../shared";
 import { createGlobalStyle } from "styled-components";
 
 export const ThemeConfig = {

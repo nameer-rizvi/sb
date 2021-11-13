@@ -1,8 +1,7 @@
 const { log, reactRoutes, resource } = require("../../shared");
 
-// Dynamically generate sitemap using reat route configs.
-//   This is convenient for if there are dynamic routes
-//   that depend on data from a database.
+// Dynamically generate sitemap using react route configs.
+//   This is convenient for if there are dynamic routes that depend on data from a database.
 
 async function sitemap(req, res) {
   try {
@@ -53,7 +52,7 @@ async function sitemap(req, res) {
 
     log.bot(error);
 
-    // Send client a 500 error.
+    // Send client a 500 ("Internal Server Error") status.
 
     res.sendStatus(500);
   }
@@ -63,6 +62,7 @@ module.exports = sitemap;
 
 // https://www.sitemaps.org/
 // https://developers.google.com/search/docs/advanced/sitemaps/overview
+// https://developers.google.com/search/docs/advanced/sitemaps/news-sitemap
 //
 // Sample:
 //

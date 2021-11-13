@@ -1,4 +1,4 @@
-// --starerkit-flag [basically everything in this folder... Let's get busy!]
+// --starterKit-flag [basically everything in this folder... Let's get busy!]
 
 import React from "react";
 import ErrorBoundary from "./ErrorBoundary";
@@ -7,8 +7,8 @@ import { ConnectedRouter } from "connected-react-router";
 import { store, history } from "../redux";
 import { ThemeProvider } from "styled-components";
 import { ThemeConfig, ThemeGlobalStyle } from "./Theme";
-import { Switch } from "react-router-dom";
-import LoadableRoutes from "./LoadableRoutes";
+import { Route } from "react-router-dom";
+import RouterProvider from "./Router";
 
 const App = () => (
   <ErrorBoundary>
@@ -16,9 +16,7 @@ const App = () => (
       <ConnectedRouter history={history}>
         <ThemeProvider theme={ThemeConfig}>
           <ThemeGlobalStyle />
-          <Switch>
-            <LoadableRoutes />
-          </Switch>
+          <Route path="*" component={RouterProvider} />
         </ThemeProvider>
       </ConnectedRouter>
     </ReduxProvider>

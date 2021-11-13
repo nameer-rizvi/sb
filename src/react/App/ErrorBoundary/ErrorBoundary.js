@@ -14,7 +14,7 @@ class ErrorBoundary extends Component {
   render() {
     const { error } = this.state;
 
-    if (error)
+    if (error && isEnv.live)
       axios.post("/error", {
         error: {
           pathname: window.location.pathname + window.location.search,
