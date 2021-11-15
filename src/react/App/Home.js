@@ -1,14 +1,14 @@
 import React, { useEffect, Fragment } from "react";
 import axios from "axios";
-import { log, url } from "../../shared";
+import { url } from "../../shared";
 import { isEnv } from "simpul";
 
 function Home() {
   useEffect(() => {
     axios
       .get("/initialize")
-      .then(log.react)
-      .catch(log.react);
+      .then(console.log)
+      .catch(console.error);
   }, []);
 
   const GithubLink = (

@@ -7,19 +7,30 @@ import { ConnectedRouter } from "connected-react-router";
 import { store, history } from "../redux";
 import { ThemeProvider } from "styled-components";
 import { ThemeConfig, ThemeGlobalStyle } from "./Theme";
-import { BrowserRouter } from "react-router-dom";
-import RouterProvider from "./Router";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { reactRoutes } from "../../shared";
+import RouteProvider from "./Route";
 
 const App = () => (
   <ErrorBoundary>
     <ReduxProvider store={store}>
       <ConnectedRouter history={history}>
-        <BrowserRouter>
-          <ThemeProvider theme={ThemeConfig}>
-            <ThemeGlobalStyle />
-            <RouterProvider />
-          </ThemeProvider>
-        </BrowserRouter>
+        <ThemeProvider theme={ThemeConfig}>
+          <ThemeGlobalStyle />
+          <BrowserRouter>
+            <Routes>
+              {reactRoutes.map((reactRoute) =>
+                reactRoute.name ? (
+                  <Route
+                    key={reactRoute.name}
+                    path={reactRoute.path}
+                    element={<RouteProvider {...reactRoute} />}
+                  />
+                ) : null
+              )}
+            </Routes>
+          </BrowserRouter>
+        </ThemeProvider>
       </ConnectedRouter>
     </ReduxProvider>
   </ErrorBoundary>

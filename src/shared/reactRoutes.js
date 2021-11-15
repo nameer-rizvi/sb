@@ -16,20 +16,14 @@ const reactRoutes = [
       changefreq: "yearly",
       priority: 1,
     }),
-    document: () => ({
-      title: "Home Page",
-      description: "This is your application's home page.",
-    }),
-    // structuredData: () => ({}),
   },
   {
     name: "Post",
-    path: "/post/:id/:username",
+    path: "/post/:id",
     document: ({ id }) => ({
-      title: "Post " + id,
+      title: "Post: #" + id,
       description: "Page for post #" + id + ".",
     }),
-    // structuredData: () => ({}),
   },
   {
     name: "NotFound",

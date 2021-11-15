@@ -1,17 +1,10 @@
 const historyApiFallback = require("connect-history-api-fallback");
-const { resource, settings } = require("../../shared");
+const historyApiFallbackConfig = require("./historyApiFallback.config");
 
-const historyApiFallbackOption = {
-  htmlAcceptHeaders: ["text/html", "application/xhtml+xml"],
-  rewrites: ["robots", "sitemap"].map((rewrite) => ({
-    from: rewrite,
-    to: resource[rewrite],
-  })),
-  ...settings.historyApiFallback,
-};
+// historyApiFallback allows the react client use of the browser history in conjunction with request urls.
 
 const historyApiFallbackMiddleware = historyApiFallback(
-  historyApiFallbackOption
+  historyApiFallbackConfig
 );
 
 module.exports = historyApiFallbackMiddleware;
