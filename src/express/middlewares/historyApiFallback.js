@@ -1,10 +1,13 @@
 const historyApiFallback = require("connect-history-api-fallback");
-const historyApiFallbackSettings = require("../../shared").settings
-  .historyApiFallback;
+const { resource, settings } = require("../../shared");
 
 const historyApiFallbackOption = {
-  htmlAcceptHeaders: ["text/html", "text/xml", "application/xhtml+xml"],
-  ...historyApiFallbackSettings,
+  htmlAcceptHeaders: ["text/html", "application/xhtml+xml"],
+  rewrites: ["robots", "sitemap"].map((rewrite) => ({
+    from: rewrite,
+    to: resource[rewrite],
+  })),
+  ...settings.historyApiFallback,
 };
 
 const historyApiFallbackMiddleware = historyApiFallback(

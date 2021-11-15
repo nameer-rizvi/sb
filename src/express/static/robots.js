@@ -30,7 +30,7 @@ function robots(req, res) {
       name: "Host",
       value: origin,
     },
-  ].map((rule) => (rule.sectionBreak ? "\n" : rule.name + ": " + rule.value));
+  ].map((rule) => (rule.sectionBreak ? "" : rule.name + ": " + rule.value));
 
   // Log successful txt generation for request by bot crawlers.
 

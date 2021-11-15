@@ -7,17 +7,19 @@ import { ConnectedRouter } from "connected-react-router";
 import { store, history } from "../redux";
 import { ThemeProvider } from "styled-components";
 import { ThemeConfig, ThemeGlobalStyle } from "./Theme";
-import { Route } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import RouterProvider from "./Router";
 
 const App = () => (
   <ErrorBoundary>
     <ReduxProvider store={store}>
       <ConnectedRouter history={history}>
-        <ThemeProvider theme={ThemeConfig}>
-          <ThemeGlobalStyle />
-          <Route path="*" component={RouterProvider} />
-        </ThemeProvider>
+        <BrowserRouter>
+          <ThemeProvider theme={ThemeConfig}>
+            <ThemeGlobalStyle />
+            <RouterProvider />
+          </ThemeProvider>
+        </BrowserRouter>
       </ConnectedRouter>
     </ReduxProvider>
   </ErrorBoundary>

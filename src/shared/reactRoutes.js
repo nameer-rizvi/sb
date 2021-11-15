@@ -9,31 +9,35 @@ const makeXMLDate = (date) => dateformat(date, "Y-M-D");
 const reactRoutes = [
   {
     name: "Home",
-    pathname: "/",
-    redirectFroms: ["/redirect-to-home"],
+    path: "/",
     xml: () => ({
       loc: "/",
       lastmod: makeXMLDate(),
       changefreq: "yearly",
       priority: 1,
     }),
-  },
-  {
-    name: "Redirect Sample",
-    pathname: "/redirect-from-here",
-    redirectTo: "/",
-  },
-  {
-    name: "Content",
-    pathname: "/content/:content_name",
     document: () => ({
-      title: "",
-      description: "",
+      title: "Home Page",
+      description: "This is your application's home page.",
     }),
-    structuredData: () => ({}),
+    // structuredData: () => ({}),
+  },
+  {
+    name: "Post",
+    path: "/post/:id/:username",
+    document: ({ id }) => ({
+      title: "Post " + id,
+      description: "Page for post #" + id + ".",
+    }),
+    // structuredData: () => ({}),
   },
   {
     name: "NotFound",
+    path: "*",
+    document: () => ({
+      title: "Not Found",
+      description: "Page does not exist.",
+    }),
   },
 ];
 
