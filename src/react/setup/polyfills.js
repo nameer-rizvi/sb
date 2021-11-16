@@ -15,7 +15,7 @@ async function installPolyfills() {
     await import("react-app-polyfill/stable");
     installed.push("react-app-polyfill/stable");
 
-    if (installed.length) log.polyfill(`installed: ${installed.join(", ")}`);
+    if (installed.length) log.polyfill(`installed ${installed.join(", ")}`);
   } catch (error) {
     log.polyfill(error);
   }

@@ -9,6 +9,10 @@ function robots(req, res) {
       value: "*",
     },
     {
+      name: "Disallow",
+      value: resource.api,
+    },
+    {
       name: "Allow",
       value: "/",
     },

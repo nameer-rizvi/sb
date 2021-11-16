@@ -1,14 +1,13 @@
-import React, { useEffect } from "react";
-import loadable from "@loadable/component";
+import React, { useEffect, lazy, Suspense } from "react";
 import { useParams } from "react-router-dom";
 import { URLQuery, HTMLDocumentMetaUpdate } from "../utils";
 
-const LoadableComponentFallback = () => "Loading...";
+const SuspenseFallback = () => "Loading...";
 
-const LoadableComponentResolver = {
-  Home: loadable(() => import("./Home")),
-  Post: loadable(() => import("./Post")),
-  NotFound: loadable(() => import("./NotFound")),
+const LazyComponentResolver = {
+  Home: lazy(() => import("./Home")),
+  Post: lazy(() => import("./Post")),
+  NotFound: lazy(() => import("./NotFound")),
 };
 
 function RouteProvider(props) {
@@ -22,17 +21,15 @@ function RouteProvider(props) {
     } else HTMLDocumentMetaUpdate();
   }, [props, params]);
 
-  const LoadableComponent = LoadableComponentResolver[props.name];
+  const LazyComponent = LazyComponentResolver[props.name];
 
-  if (!LoadableComponent)
-    console.warn("<LoadableComponent /> missing for: " + props.name);
+  if (!LazyComponent)
+    console.warn("<LazyComponent /> missing for: " + props.name);
 
-  return LoadableComponent ? (
-    <LoadableComponent
-      fallback={<LoadableComponentFallback />}
-      params={params}
-      {...props}
-    />
+  return LazyComponent ? (
+    <Suspense fallback={<SuspenseFallback />}>
+      <LazyComponent params={params} {...props} />
+    </Suspense>
   ) : null;
 }
 

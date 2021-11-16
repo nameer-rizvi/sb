@@ -1,3 +1,10 @@
+// Production Protocol:
+//   1. Change MAINTENANCE_MODE to "true" in ecosystem.config.js.
+//   2. Run "pm2 restart ecosystem.config.js" from root folder.
+//   3. ...CONDUCT MAINTENANCE...
+//   4. Change MAINTENANCE_MODE to "false" in ecosystem.config.js.
+//   5. Run "pm2 restart ecosystem.config.js" from root folder.
+
 function statusMiddleware(req, res, next) {
   if (req.method === "GET" && req.url === "/health") {
     // If request is for application health...

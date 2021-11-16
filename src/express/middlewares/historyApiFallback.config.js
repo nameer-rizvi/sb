@@ -11,11 +11,12 @@ historyApiFallbackConfig.htmlAcceptHeaders = [
   "application/xhtml+xml",
 ];
 
-// If request is for the robots or sitemap resource, rewrite to route.
+// If request is not for the api resource, add resource to config rewrites.
 
-historyApiFallbackConfig.rewrites = ["robots", "sitemap"].map((rewrite) => ({
-  from: rewrite,
-  to: resource[rewrite],
-}));
+historyApiFallbackConfig.rewrites = Object.keys(resource)
+  .map(
+    (rewrite) => rewrite !== "api" && { from: rewrite, to: resource[rewrite] }
+  )
+  .filter(Boolean);
 
 module.exports = historyApiFallbackConfig;
