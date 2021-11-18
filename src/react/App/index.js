@@ -6,7 +6,7 @@ import { Provider as ReduxProvider } from "react-redux";
 import { store } from "../redux";
 import { ThemeProvider } from "styled-components";
 import { ThemeConfig, ThemeGlobalStyle } from "./Theme";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { reactRoutes } from "../../shared";
 import RouteProvider from "./Route";
 
@@ -17,15 +17,30 @@ const App = () => (
         <ThemeGlobalStyle />
         <BrowserRouter>
           <Routes>
-            {reactRoutes.map((reactRoute) =>
-              reactRoute.name ? (
-                <Route
-                  key={reactRoute.name}
-                  path={reactRoute.path}
-                  element={<RouteProvider {...reactRoute} />}
-                />
-              ) : null
-            )}
+            {reactRoutes.map((reactRoute) => {
+              if (reactRoute.name) {
+                const reactRouteStore = [];
+
+                reactRouteStore.push(
+                  <Route
+                    key={reactRoute.name}
+                    path={reactRoute.path}
+                    element={<RouteProvider {...reactRoute} />}
+                  />
+                );
+
+                if (reactRoute.redirects)
+                  for (let redirect of reactRoute.redirects)
+                    reactRouteStore.push(
+                      <Route
+                        path={redirect}
+                        element={<Navigate replace to={reactRoute.path} />}
+                      />
+                    );
+
+                return reactRouteStore.map((reactRouteItem) => reactRouteItem);
+              } else return null;
+            })}
           </Routes>
         </BrowserRouter>
       </ThemeProvider>

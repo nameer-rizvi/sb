@@ -3,10 +3,7 @@ import { initialState, UPDATE_ROUTE } from "./route.action";
 function routeReducer(state = initialState, action) {
   switch (action.type) {
     case UPDATE_ROUTE:
-      const updateHistory =
-        state.current && state.current.pathname !== action.payload.pathname;
-
-      if (updateHistory) {
+      if (state.current && state.current.pathname !== action.payload.pathname) {
         state.previous = state.current;
         state.history.push(state.current);
       }
