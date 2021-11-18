@@ -11,6 +11,13 @@ function routeReducer(state = initialState, action) {
         state.history.push(state.current);
       }
 
+      action.payload.full =
+        action.payload.pathname + action.payload.search + action.payload.hash;
+
+      action.payload.indexes = action.payload.pathname
+        .split("/")
+        .filter(Boolean);
+
       state.current = action.payload;
 
       return state;
