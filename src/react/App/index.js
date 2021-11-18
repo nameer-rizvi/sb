@@ -3,7 +3,7 @@
 import React from "react";
 import ErrorBoundary from "./ErrorBoundary";
 import { Provider as ReduxProvider } from "react-redux";
-import store from "../redux/store";
+import { store } from "../redux";
 import { ThemeProvider } from "styled-components";
 import { ThemeConfig, ThemeGlobalStyle } from "./Theme";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
