@@ -2,6 +2,6 @@
 
 // --flow-googleTagManager-0
 
-const googleTagManagerId = "";
+const google = { tagManagerId: "" };
 
-module.exports = googleTagManagerId;
+module.exports = google;

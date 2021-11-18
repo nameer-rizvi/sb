@@ -8,7 +8,7 @@ const WebpackPWAManifest = require("webpack-pwa-manifest");
 const WorkboxPlugin = require("workbox-webpack-plugin");
 const ESLintPlugin = require("eslint-webpack-plugin");
 const { html: HTML, pwa: PWA } = require("../public");
-const { googleTagManagerId, path, settings } = require("../shared");
+const { google, path, settings } = require("../shared");
 
 const webpackPluginsConfig = ({ isEnvLive }) =>
   [
@@ -18,11 +18,11 @@ const webpackPluginsConfig = ({ isEnvLive }) =>
     ...(isEnvLive
       ? [
           // --flow-googleTagManager-2
-          googleTagManagerId &&
+          google.tagManagerId &&
             new HTMLWebpackPartialsPlugin({
               path: path.public("html/gtag.html"),
               location: "head",
-              options: { googleTagManagerId },
+              options: { googleTagManagerId: google.tagManagerId },
             }),
           new MiniCSSExtractPlugin({
             filename: "lib/css/[name].[contenthash:8].css",

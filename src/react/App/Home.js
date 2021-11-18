@@ -2,6 +2,7 @@ import React, { useEffect, Fragment } from "react";
 import axios from "axios";
 import { url } from "../../shared";
 import { isEnv } from "simpul";
+import { Link } from "react-router-dom";
 
 function Home() {
   useEffect(() => {
@@ -32,6 +33,8 @@ function Home() {
     </a>
   );
 
+  const randomPostNumber = Math.floor(Math.random() * (10000 - 1 + 1) + 1);
+
   return isEnv.live ? (
     <Fragment>
       <h1>Well, would ya look at this?</h1>
@@ -54,6 +57,9 @@ function Home() {
       </h1>
       <h2>now, let&apos;s make this thing :)</h2>
       <h3>p.s. im at /src/react/App/Page.js</h3>
+      <Link to={"/post/" + randomPostNumber} style={{ marginBottom: 25 }}>
+        Post: #{randomPostNumber}.
+      </Link>
       {GithubLink}
     </Fragment>
   );

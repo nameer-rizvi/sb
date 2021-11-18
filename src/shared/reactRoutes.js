@@ -4,8 +4,6 @@
 
 const { dateformat } = require("simpul");
 
-const makeXMLDate = (date) => dateformat(date, "Y-M-D");
-
 const reactRoutes = [
   {
     name: "Home",
@@ -15,6 +13,10 @@ const reactRoutes = [
       lastmod: makeXMLDate(),
       changefreq: "yearly",
       priority: 1,
+    }),
+    document: () => ({
+      title: "Home",
+      description: "Application home page.",
     }),
   },
   {
@@ -31,8 +33,15 @@ const reactRoutes = [
     document: () => ({
       title: "Not Found",
       description: "Page does not exist.",
+      robots: "noindex",
     }),
   },
 ];
+
+function makeXMLDate(date) {
+  return dateformat(date, "Y-M-D");
+}
+
+// https://developers.google.com/search/docs/advanced/crawling/special-tags
 
 module.exports = reactRoutes;

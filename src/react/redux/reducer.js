@@ -1,10 +1,8 @@
 import { combineReducers } from "redux";
-import { connectRouter } from "connected-react-router";
+import routeReducer from "./route.reducer";
 
-const createRootReducer = (history) =>
-  combineReducers({ router: connectRouter(history) });
+const RootReducer = combineReducers({ route: routeReducer });
 
-export default createRootReducer;
+export default RootReducer;
 
 // https://www.npmjs.com/package/redux
-// https://www.npmjs.com/package/connected-react-router

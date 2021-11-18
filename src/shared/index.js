@@ -6,7 +6,7 @@ const shared = {
   dir: require("./dir"),
   display: require("./display"),
   elementId: require("./elementId"),
-  googleTagManagerId: require("./googleTagManagerId"), // --flow-googleTagManager-1
+  google: require("./google"), // --flow-googleTagManager-1
   keywords: require("./keywords"),
   lang: require("./lang"),
   log: require("./log"),

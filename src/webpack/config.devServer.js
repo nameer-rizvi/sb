@@ -6,7 +6,7 @@ const webpackDevServerConfig = ({ isEnvLive }) =>
         port: port.client,
         historyApiFallback: settings.historyApiFallback,
         hot: true,
-        open: true,
+        // open: true, // To open app in localhost on dev start.
         static: {
           directory: path.client(),
         },

@@ -1,5 +1,5 @@
 const { isEnv } = require("simpul");
-const { googleTagManagerId } = require("../../shared");
+const { google } = require("../../shared");
 
 // --flow-googleTagManager-4
 //
@@ -8,7 +8,7 @@ const { googleTagManagerId } = require("../../shared");
 
 let contentSecurtyPolicy, helmetMiddlewareConfig;
 
-if (isEnv.live && googleTagManagerId) {
+if (isEnv.live && google.tagManagerId) {
   contentSecurtyPolicy = {};
 
   contentSecurtyPolicy["default-src"] = [

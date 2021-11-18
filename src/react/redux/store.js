@@ -1,24 +1,15 @@
-import { createBrowserHistory } from "history";
-import { routerMiddleware } from "connected-react-router";
 import { applyMiddleware, createStore } from "redux";
-import ReduxThunk from "redux-thunk";
-import ReduxPromise from "redux-promise-middleware";
-import createRootReducer from "./reducer";
+import reduxThunk from "redux-thunk";
+import reduxPromise from "redux-promise-middleware";
+import rootReducer from "./reducer";
 import { composeWithDevTools } from "redux-devtools-extension";
 
-export const history = createBrowserHistory();
+const middlewares = applyMiddleware(reduxThunk, reduxPromise);
 
-const RouterHistory = routerMiddleware(history);
+const store = createStore(rootReducer, composeWithDevTools(middlewares));
 
-const middlewares = applyMiddleware(RouterHistory, ReduxThunk, ReduxPromise);
+export default store;
 
-export const store = createStore(
-  createRootReducer(history),
-  composeWithDevTools(middlewares)
-);
-
-// https://www.npmjs.com/package/history
-// https://www.npmjs.com/package/connected-react-router
 // https://www.npmjs.com/package/redux
 // https://www.npmjs.com/package/redux-thunk
 // https://www.npmjs.com/package/redux-promise-middleware
