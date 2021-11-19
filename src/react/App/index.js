@@ -39,7 +39,7 @@ const App = () => (
 
               if (reactRoute.redirects)
                 for (let reactRouteRedirect of reactRoute.redirects) {
-                  const navigateTo = reactRoute.paths
+                  let navigateTo = reactRoute.paths
                     ? reactRoute.paths[0]
                     : reactRoute.path;
                   reactRouteStore.push(
