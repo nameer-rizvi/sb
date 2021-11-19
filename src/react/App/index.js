@@ -38,13 +38,17 @@ const App = () => (
                   );
 
               if (reactRoute.redirects)
-                for (let reactRouteRedirect of reactRoute.redirects)
+                for (let reactRouteRedirect of reactRoute.redirects) {
+                  const navigateTo = reactRoute.paths
+                    ? reactRoute.paths[0]
+                    : reactRoute.path;
                   reactRouteStore.push(
                     <Route
                       path={reactRouteRedirect}
-                      element={<Navigate replace to={reactRoute.path} />}
+                      element={<Navigate replace to={navigateTo} />}
                     />
                   );
+                }
 
               return reactRouteStore.map((reactRouteItem) => reactRouteItem);
             })}
