@@ -18,28 +18,35 @@ const App = () => (
         <BrowserRouter>
           <Routes>
             {reactRoutes.map((reactRoute) => {
-              if (reactRoute.name) {
-                const reactRouteStore = [];
+              const reactRouteStore = [];
 
+              if (reactRoute.path)
                 reactRouteStore.push(
                   <Route
-                    key={reactRoute.name}
                     path={reactRoute.path}
-                    element={<RouteProvider {...reactRoute} />}
+                    element={<RouteComponent {...reactRoute} />}
                   />
                 );
 
-                if (reactRoute.redirects)
-                  for (let redirect of reactRoute.redirects)
-                    reactRouteStore.push(
-                      <Route
-                        path={redirect}
-                        element={<Navigate replace to={reactRoute.path} />}
-                      />
-                    );
+              if (reactRoute.paths)
+                for (let reactRoutePath of reactRoute.paths)
+                  reactRouteStore.push(
+                    <Route
+                      path={reactRoutePath}
+                      element={<RouteComponent {...reactRoute} />}
+                    />
+                  );
 
-                return reactRouteStore.map((reactRouteItem) => reactRouteItem);
-              } else return null;
+              if (reactRoute.redirects)
+                for (let reactRouteRedirect of reactRoute.redirects)
+                  reactRouteStore.push(
+                    <Route
+                      path={reactRouteRedirect}
+                      element={<Navigate replace to={reactRoute.path} />}
+                    />
+                  );
+
+              return reactRouteStore.map((reactRouteItem) => reactRouteItem);
             })}
           </Routes>
         </BrowserRouter>

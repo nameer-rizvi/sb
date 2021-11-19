@@ -1,4 +1,4 @@
-const { log, reactRoutes, resource } = require("../../shared");
+const { log, reactRoutes, origin, resource } = require("../../shared");
 
 // Dynamically generate sitemap using react route configs.
 //   This is convenient for if there are dynamic routes that depend on data from a database.
@@ -27,7 +27,11 @@ async function sitemap(req, res) {
         // Loop through route xml config, and push data into xml elements store.
 
         for (const [XMLURLKey, XMLURLValue] of Object.entries(reactRoute.xml()))
-          XMLElements.push(`<${XMLURLKey}>${XMLURLValue}</${XMLURLKey}>`);
+          XMLElements.push(
+            `<${XMLURLKey}>${
+              XMLURLKey === "loc" ? origin + XMLURLValue : XMLURLValue
+            }</${XMLURLKey}>`
+          );
 
         // Push closing tag for route url to xml elements store.
 
