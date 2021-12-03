@@ -1,4 +1,4 @@
-export const initialState = { history: [] };
+export const routeInitialState = { history: [] };
 
 export const UPDATE_ROUTE = "UPDATE_ROUTE";
 

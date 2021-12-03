@@ -1,62 +1,25 @@
 // --starterKit-flag [basically everything in this folder... Let's get busy!]
 
 import React from "react";
-import ErrorBoundary from "./ErrorBoundary";
+import ErrorBoundaryProvider from "./ErrorBoundary";
 import { Provider as ReduxProvider } from "react-redux";
 import { store } from "../redux";
+import { BrowserRouter } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 import { ThemeConfig, ThemeGlobalStyle } from "./Theme";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { reactRoutes } from "../../shared";
-import RouteProvider from "./Route";
+import RouteProvider from "./RouteProvider";
 
 const App = () => (
-  <ErrorBoundary>
+  <ErrorBoundaryProvider>
     <ReduxProvider store={store}>
-      <ThemeProvider theme={ThemeConfig}>
-        <ThemeGlobalStyle />
-        <BrowserRouter>
-          <Routes>
-            {reactRoutes.map((reactRoute) => {
-              const reactRouteStore = [];
-
-              if (reactRoute.path)
-                reactRouteStore.push(
-                  <Route
-                    path={reactRoute.path}
-                    element={<RouteComponent {...reactRoute} />}
-                  />
-                );
-
-              if (reactRoute.paths)
-                for (let reactRoutePath of reactRoute.paths)
-                  reactRouteStore.push(
-                    <Route
-                      path={reactRoutePath}
-                      element={<RouteComponent {...reactRoute} />}
-                    />
-                  );
-
-              if (reactRoute.redirects)
-                for (let reactRouteRedirect of reactRoute.redirects) {
-                  let navigateTo = reactRoute.paths
-                    ? reactRoute.paths[0]
-                    : reactRoute.path;
-                  reactRouteStore.push(
-                    <Route
-                      path={reactRouteRedirect}
-                      element={<Navigate replace to={navigateTo} />}
-                    />
-                  );
-                }
-
-              return reactRouteStore.map((reactRouteItem) => reactRouteItem);
-            })}
-          </Routes>
-        </BrowserRouter>
-      </ThemeProvider>
+      <BrowserRouter>
+        <ThemeProvider theme={ThemeConfig}>
+          <ThemeGlobalStyle />
+          <RouteProvider />
+        </ThemeProvider>
+      </BrowserRouter>
     </ReduxProvider>
-  </ErrorBoundary>
+  </ErrorBoundaryProvider>
 );
 
 export default App;

@@ -11,11 +11,17 @@ const server = express();
 
 // Listen for requests on server port.
 
-server.listen(port.server, () =>
-  log.express(`server listening on port ${port.server}`)
-);
+server.listen(port.server, () => {
+  // Log listener.
 
-// Set "trust proxy" in live environments.
+  log.express(`server listening on port ${port.server}`, { flag: "minimal" });
+
+  // Log environment.
+
+  log.environment(`in ${process.env.NODE_ENV}.`, { flag: "minimal" });
+});
+
+// Set "trust proxy" in live environments for secure sessions.
 
 server.set("trust proxy", isEnv.live);
 

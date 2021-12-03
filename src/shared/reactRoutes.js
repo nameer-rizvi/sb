@@ -11,8 +11,6 @@ const reactRoutes = [
     xml: () => ({
       loc: "/",
       lastmod: makeXMLDate(),
-      changefreq: "yearly",
-      priority: 1,
     }),
     document: () => ({
       title: "Home",
@@ -28,11 +26,12 @@ const reactRoutes = [
     }),
   },
   {
-    name: "NotFound",
-    path: "*",
+    name: "404",
+    path: "/404",
+    redirects: ["*"],
     document: () => ({
       title: "Not Found",
-      description: "Page does not exist.",
+      description: "This page does not exist or is not available.",
       robots: "noindex",
     }),
   },

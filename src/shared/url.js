@@ -1,8 +1,9 @@
 const port = require("./port");
 
-// --starterKit-flag [add application's domain/url, change github link]
+// --starterKit-flag [add application's domain, update github link]
 
 const url = {
+  appleTouchIcon: "/lib/assets/apple-touch-icon.png",
   domain: "",
   github: "https://github.com/nameer-rizvi/sb",
   localhost: {

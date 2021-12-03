@@ -35,7 +35,7 @@ async function serviceWorkerRegistration() {
 
       // Log successful registration.
 
-      log.sw("registered");
+      log.sw("registered", { flag: "minimal" });
     } else if (job === "unregister") {
       // If the Service Worker job is to unregister...
 
@@ -52,13 +52,15 @@ async function serviceWorkerRegistration() {
 
         // Log completion of all unregistrations.
 
-        log.sw(`unregistered ${registrations.length} registration(s)`);
+        log.sw(`unregistered ${registrations.length} registration(s).`, {
+          flag: "minimal",
+        });
       }
     } else {
       const error = `job is undefined (options include: "register" || "unregister")`;
       throw new Error(error);
     }
   } catch (error) {
-    log.sw("registration: " + error.toString());
+    log.sw("Registration: " + error.toString(), { flag: "minimal" });
   }
 }

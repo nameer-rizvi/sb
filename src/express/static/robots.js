@@ -1,5 +1,7 @@
 const { origin, resource, log } = require("../../shared");
 
+// We disallow crawling through the website to make use of the sitemap.
+
 function robots(req, res) {
   // Initialize rules store.
 
@@ -9,12 +11,8 @@ function robots(req, res) {
       value: "*",
     },
     {
-      name: "Allow",
+      name: "Disallow",
       value: "/",
-    },
-    {
-      name: "Crawl-delay",
-      value: "10",
     },
     {
       sectionBreak: true,

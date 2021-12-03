@@ -56,7 +56,7 @@ async function sitemap(req, res) {
   } catch (error) {
     // Log any error;
 
-    log.bot(error);
+    log.bot(error, { flag: "minimal" });
 
     // Send client a 500 ("Internal Server Error") status.
 

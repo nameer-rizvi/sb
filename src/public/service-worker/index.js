@@ -39,7 +39,7 @@ self.addEventListener("push", (event) => {
       event.waitUntil(self.registration.showNotification(data.title, options));
     }
   } catch (error) {
-    log.sw("Push Event: " + error.toString());
+    log.sw("Push Event: " + error.toString(), { flag: "minimal" });
   }
 });
 
@@ -99,7 +99,7 @@ self.addEventListener("notificationclick", (event) => {
       event.waitUntil(openInActiveWindow());
     }
   } catch (error) {
-    log.sw("Notification Click: " + error.toString());
+    log.sw("Notification Click: " + error.toString(), { flag: "minimal" });
   }
 });
 

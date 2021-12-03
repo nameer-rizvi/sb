@@ -1,6 +1,7 @@
-import { initialState, UPDATE_ROUTE } from "./route.action";
+import { routeInitialState, UPDATE_ROUTE } from "./route.action";
+import { gtag } from "../utils";
 
-function routeReducer(state = initialState, action) {
+function routeReducer(state = routeInitialState, action) {
   switch (action.type) {
     case UPDATE_ROUTE:
       if (state.current && state.current.pathname !== action.payload.pathname) {
@@ -16,6 +17,8 @@ function routeReducer(state = initialState, action) {
         .filter(Boolean);
 
       state.current = action.payload;
+
+      gtag.pageView(action.payload.full);
 
       return state;
     default:

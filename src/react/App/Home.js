@@ -1,16 +1,17 @@
 import React, { useEffect, Fragment } from "react";
-import axios from "axios";
+import { useRequest } from "../hooks";
 import { url } from "../../shared";
 import { isEnv } from "simpul";
 import { Link } from "react-router-dom";
 
 function Home() {
+  const request = useRequest();
+
   useEffect(() => {
-    axios
-      .get("/initialize")
-      .then(console.log)
-      .catch(console.error);
-  }, []);
+    request.send.get("/initialize");
+  }, []); // eslint-disable-line
+
+  if (request.data) console.log(request.data);
 
   const GithubLink = (
     <a href={url.github} target="_blank" rel="noopener noreferrer">

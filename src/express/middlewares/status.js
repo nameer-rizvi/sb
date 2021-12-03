@@ -18,6 +18,12 @@ function statusMiddleware(req, res, next) {
     // Send client a 503 ("Service Unavailable") status.
 
     res.sendStatus(503);
+  } else if (req.method === "GET" && req.url === "/status") {
+    // If request is for application status...
+
+    // Send client a 200 ("OK") status.
+
+    res.sendStatus(200);
   } else {
     // Else...
 

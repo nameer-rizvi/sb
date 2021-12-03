@@ -26,7 +26,7 @@ function routeManagerMiddleware(req, res, next) {
 
     res.locals.routeConfig = {
       ...routeConfig,
-      ip: base64.encode(req.ip.replaceAll(/\D/g, "")),
+      ip: base64.encode(req.ip.replace(/\D/g, "")),
     };
 
     // Log request route.

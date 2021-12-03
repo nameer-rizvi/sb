@@ -41,7 +41,7 @@ function serverErrorHandler(err, res, req) {
 
     // Log server error message.
 
-    log.error(serverError.message);
+    log.error(serverError.message, { flag: "minimal" });
 
     // Parse flat user agent using bowser.
 
@@ -68,14 +68,14 @@ function serverErrorHandler(err, res, req) {
         !trace.includes("node_modules") &&
         (trace.includes("/lib") || trace.includes("/src"));
 
-      if (isLocalTrace) log.at(trace.trim()); // Log trace if it is local.
+      if (isLocalTrace) log.at(trace.trim(), { flag: "minimal" }); // Log trace if it is local.
     }
 
     // This is where you can save the server error in the database...
 
     // console.log(serverError);
   } catch (error) {
-    log.error(error); // Log any middleware errors as error logs.
+    log.error(error, { flag: "minimal" }); // Log any middleware errors as error logs.
   } finally {
     res.sendStatus(500); // Send client a 500 ("Internal Server Error") status.
   }

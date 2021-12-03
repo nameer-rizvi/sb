@@ -4,7 +4,7 @@ import { style } from "../../shared";
 // Since <ErrorBoundary /> is called outside <ThemeProvider />,
 //   it must manually import the style from the shared folder.
 
-const ErrorBoundaryStyled = styled.div`
+const ErrorBoundaryComponentStyled = styled.div`
   display: flex;
   flex-direction: column;
   margin: auto;
@@ -26,4 +26,4 @@ const ErrorBoundaryStyled = styled.div`
   }
 `;
 
-export default ErrorBoundaryStyled;
+export default ErrorBoundaryComponentStyled;
