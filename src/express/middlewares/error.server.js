@@ -18,7 +18,9 @@ function serverErrorHandler(err, res, req) {
         : "server";
 
     serverError.method =
-      (values.error && "GET") || routeConfig.method || req.method;
+      (serverError.source === "client" && "GET") ||
+      routeConfig.method ||
+      req.method;
 
     serverError.route =
       (values.error && values.error.pathname) || routeConfig.route || req.url;

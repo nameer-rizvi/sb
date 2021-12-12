@@ -1,37 +1,52 @@
 // --starterKit-flag [review authentication strategy]
 
-const { jwt } = require("../util");
+const { jwt, log } = require("../util");
 
 async function authenticateMiddleware(req, res, next) {
   try {
     if (res.locals.routeConfig.authenticate === "bearerToken") {
       // If route requires authenticating a bearer token...
 
-      // Initialize authorization header with default string type.
-
-      const { authorization = "" } = req.headers;
-
       // Parse "Bearer" token from authorization header.
 
-      const bearerToken = authorization.split("Bearer ")[1];
+      const bearerToken = parseBearerToken(req);
 
-      // If a bearer token exists, it is verified using "jsonwebtoken"
-      // and if any data is found, validate if it contains a user_id,
-      // before we assign it to the res locals store.
-      //  * Will throw error if token is corrupt or invalid.
+      // Verify & fetch token data using "jsonwebtoken".
 
-      if (bearerToken && bearerToken !== "null")
-        res.locals.user = await jwt.verify(bearerToken, "user_id");
+      res.locals.token = await jwt.verify(bearerToken);
 
-      // If an error isn't thrown by the verification and a user exists,
-      // go to next middleware, otherwise send client a 401 ("Unauthorized") status.
+      // If an error isn't thrown by the verification go to next middleware.
 
-      if (res.locals.user) {
-        next();
-      } else res.sendStatus(401);
+      next();
     } else next();
   } catch (error) {
-    next(error);
+    // Log any failed authentication errors as non-critical logs.
+
+    log.password("Authenticate Middleware: " + error.toString());
+
+    // Send client a 401 ("Unauthorized") status.
+
+    res.sendStatus(401);
+  }
+}
+
+function parseBearerToken(req) {
+  // Initialize authorization header with default string type.
+
+  const { authorization = "" } = req.headers;
+
+  // Parse "Bearer" token from authorization header.
+
+  const bearerToken = authorization.split("Bearer ")[1];
+
+  if (!bearerToken || bearerToken === "null") {
+    // Throw error if bearer token doesn't exist or is null.
+
+    throw new Error("Request authorization header is invalid.");
+  } else {
+    // Else, return bearer token.
+
+    return bearerToken;
   }
 }
 

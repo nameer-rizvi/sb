@@ -21,8 +21,8 @@ export function useRequest(props = {}) {
     };
   }, [props.ignoreCleanup, cancelSource]);
 
-  const assignSetters = (props2) => ({
-    ...props2,
+  const assignSetters = (option) => ({
+    ...option,
     setPending,
     setData,
     setError,
@@ -31,10 +31,11 @@ export function useRequest(props = {}) {
   });
 
   const send = {
-    post: (props1, props2) => request.post(props1, assignSetters(props2)),
-    get: (props1, props2) => request.get(props1, assignSetters(props2)),
-    put: (props1, props2) => request.put(props1, assignSetters(props2)),
-    delete: (props1, props2) => request.delete(props1, assignSetters(props2)),
+    post: async (url, option) => await request.post(url, assignSetters(option)),
+    get: async (url, option) => await request.get(url, assignSetters(option)),
+    put: async (url, option) => await request.put(url, assignSetters(option)),
+    delete: async (url, option) =>
+      await request.delete(url, assignSetters(option)),
   };
 
   return {

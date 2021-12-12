@@ -7,7 +7,7 @@ function validationMiddleware(req, res, next) {
 
     const values = {
       payload: { ...req.body, ...req.query, ...req.params },
-      required: res.locals.routeConfig.requiredValues,
+      required: res.locals.routeConfig.requiredParams,
     };
 
     // If route ignores validations, then set res locals to sanitized values payload.

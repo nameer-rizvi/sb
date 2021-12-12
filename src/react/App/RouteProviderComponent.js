@@ -1,6 +1,6 @@
 import React, { lazy, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useParams, Navigate } from "react-router-dom";
 import {
   URLQuery,
   HTMLDocumentMetaUpdate,
@@ -59,9 +59,18 @@ function RouteProviderComponent(routeProps) {
     HTMLStructuredDataUpdate(structuredDataUpdate);
   }, [routeProps, params, location]);
 
+  // Scroll to top of page on pathname change.
+
+  useEffect(() => {
+    if (!routeProps.ignoreScrollToTop)
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [routeProps.ignoreScrollToTop, location.pathname]);
+
   // Resolve lazy component.
 
   const RouteLazyComponent = RouteProviderComponentResolver[routeProps.name];
+
+  // Render route.
 
   return RouteLazyComponent ? (
     <main id={elementId.main}>
@@ -71,7 +80,7 @@ function RouteProviderComponent(routeProps) {
       />
     </main>
   ) : (
-    "Missing RouteLazyComponent for: " + routeProps.name
+    <Navigate replace to="/404" />
   );
 }
 

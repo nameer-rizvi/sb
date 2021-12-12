@@ -1,19 +1,11 @@
-// On Axios vs. Fetch:
-//   Research concludes that Axios is the better choice for the following reasons:
-//     - Built-in XSRF protection.
-//     - Request cancelation API.
-//     - Interceptors.
-//     - Wider browser support.
-
-import { isString, isObject, isEnv } from "simpul";
 import axios from "axios";
 import sanitized from "sanitized";
 
-function processRequest(method, props1, props2) {
-  const url = (isString(props1) && props1) || (isObject(props1) && props1.url);
-
+async function processRequest(method, url, option = {}) {
   const {
     ignore,
+    authenticate = true,
+    ignoreErrorLog,
     unmounted,
     cancelSource: activeCancelSource,
     setCancelSource,
@@ -24,64 +16,75 @@ function processRequest(method, props1, props2) {
     onSuccess,
     onFail,
     onFinish,
+    headers = {},
     ...config
-  } = [props1, props2].reduce(
-    (reducer, props) => (isObject(props) ? { ...reducer, ...props } : reducer),
-    {}
-  );
+  } = option;
 
   if (!url) {
-    if (!isEnv.live) console.warn("Missing 'url' for request.");
+    console.warn("Missing 'url' for request.");
   } else if (ignore === true) {
-    if (!isEnv.live) console.warn(`Ignoring request to ${url}.`);
+    console.warn(`Ignoring request to ${url}.`);
+  } else if (authenticate && !axios.defaults.headers.common.Authorization) {
+    const warning =
+      "Failed to authenticate request. Authorization header missing.";
+    console.warn(warning);
   } else {
-    const handle = {
-      start: () => {
-        if (!unmounted) {
-          if (onStart) onStart();
-          if (setPending) setPending(true);
-          if (setError) setError();
-          if (activeCancelSource && activeCancelSource.cancel)
-            activeCancelSource.cancel();
-          const newCancelSource = axios.CancelToken.source();
-          if (setCancelSource) setCancelSource(newCancelSource);
-          return { cancelToken: newCancelSource.token };
-        }
-      },
-      success: (response) => {
-        if (!unmounted) {
-          if (setData) setData(response.data);
-          if (onSuccess) onSuccess(response.data);
-        }
-      },
-      fail: (error) => {
-        if (!unmounted && !axios.isCancel(error)) {
-          if (setError) setError(error);
-          if (onFail) onFail(error);
-        }
-      },
-      finish: () => {
-        if (!unmounted) {
-          if (setPending) setPending();
-          if (onFinish) onFinish();
-        }
-      },
-    };
+    try {
+      // -- ON REQUEST START --
 
-    if (config.params) delete config.params.reloaded;
+      let cancelToken;
 
-    const { cancelToken } = handle.start();
+      if (!unmounted) {
+        if (onStart) onStart();
+        if (setPending) setPending(true);
+        if (setError) setError();
+        if (activeCancelSource && activeCancelSource.cancel)
+          activeCancelSource.cancel();
+        const newCancelSource = axios.CancelToken.source();
+        if (setCancelSource) setCancelSource(newCancelSource);
+        cancelToken = newCancelSource.token;
+      }
 
-    axios({ method, url, cancelToken, ...sanitized(config) })
-      .then(handle.success)
-      .catch(handle.fail)
-      .finally(handle.finish);
+      // -- SEND REQUEST --
+
+      const response = await axios({
+        method,
+        url,
+        headers,
+        cancelToken,
+        ...sanitized(config),
+      });
+
+      // -- ON REQUEST RESPONSE --
+
+      if (!unmounted) {
+        if (setData) setData(response.data);
+        if (onSuccess) onSuccess(response.data);
+      }
+
+      return response.data;
+    } catch (error) {
+      // -- ON REQUEST ERROR --
+      if (!unmounted && !axios.isCancel(error)) {
+        if (setError) setError(error);
+        if (onFail) onFail(error);
+        if (!ignoreErrorLog) console.log(error.toString());
+      }
+
+      return error;
+    } finally {
+      // -- ON REQUEST FINISH --
+      if (!unmounted) {
+        if (setPending) setPending();
+        if (onFinish) onFinish();
+      }
+    }
   }
 }
 
 export const request = {
-  post: (props1, props2) => processRequest("POST", props1, props2),
-  get: (props1, props2) => processRequest("GET", props1, props2),
-  put: (props1, props2) => processRequest("PUT", props1, props2),
-  delete: (props1, props2) => processRequest("DELETE", props1, props2),
+  post: async (url, option) => await processRequest("POST", url, option),
+  get: async (url, option) => await processRequest("GET", url, option),
+  put: async (url, option) => await processRequest("PUT", url, option),
+  delete: async (url, option) => await processRequest("DELETE", url, option),
 };

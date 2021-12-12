@@ -1,17 +1,28 @@
-import React, { useEffect, Fragment } from "react";
+import React, { useEffect } from "react";
 import { useRequest } from "../hooks";
+import { Link } from "react-router-dom";
 import { url } from "../../shared";
 import { isEnv } from "simpul";
-import { Link } from "react-router-dom";
 
 function Home() {
   const request = useRequest();
 
   useEffect(() => {
     request.send.get("/initialize");
-  }, []); // eslint-disable-line
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (request.data) console.log(request.data);
+
+  const randomPostNumber = Math.floor(Math.random() * (10000 - 1 + 1) + 1);
+
+  const PostLink = (
+    <Link
+      to={"/post/" + randomPostNumber}
+      style={{ display: "block", margin: "25px 0" }}
+    >
+      Post: #{randomPostNumber}.
+    </Link>
+  );
 
   const GithubLink = (
     <a href={url.github} target="_blank" rel="noopener noreferrer">
@@ -34,10 +45,8 @@ function Home() {
     </a>
   );
 
-  const randomPostNumber = Math.floor(Math.random() * (10000 - 1 + 1) + 1);
-
   return isEnv.live ? (
-    <Fragment>
+    <div id="home-page">
       <h1>Well, would ya look at this?</h1>
       <h2>The app is in production.</h2>
       <h3>
@@ -46,10 +55,11 @@ function Home() {
           🎁
         </span>
       </h3>
+      {PostLink}
       {GithubLink}
-    </Fragment>
+    </div>
   ) : (
-    <Fragment>
+    <div id="home-page">
       <h1>hey, you got it running - nice!!</h1>
       <h1>
         <span role="img" aria-label="Congratulatory claps">
@@ -58,11 +68,9 @@ function Home() {
       </h1>
       <h2>now, let&apos;s make this thing :)</h2>
       <h3>p.s. im at /src/react/App/Page.js</h3>
-      <Link to={"/post/" + randomPostNumber} style={{ marginBottom: 25 }}>
-        Post: #{randomPostNumber}.
-      </Link>
+      {PostLink}
       {GithubLink}
-    </Fragment>
+    </div>
   );
 }
 
