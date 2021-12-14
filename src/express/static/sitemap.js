@@ -1,9 +1,10 @@
-const { log, reactRoutes, origin, resource } = require("../../shared");
+const { reactRoutes, origin, log, resource } = require("../../shared");
 
 // Dynamically generate sitemap using react route configs.
 //   This is convenient for if there are dynamic routes that depend on data from a database.
 
-// NOTE: 45,000 urls || 50MB maximum for each sitemap. Indexing two levels deep gives a maximum of 2,025,000,000.
+// NOTE: 45,000 urls || 50MB maximum for each sitemap.
+//       Indexing two levels deep gives a maximum of 2,025,000,000.
 
 async function sitemap(req, res) {
   try {
@@ -42,7 +43,7 @@ async function sitemap(req, res) {
 
     XMLElements.push("</urlset>");
 
-    // Log successful xml generation for request by bot crawlers.
+    // Log successful xml generation for request by bot crawler.
 
     log.bot("Crawled " + resource.sitemap);
 
@@ -50,7 +51,7 @@ async function sitemap(req, res) {
 
     res.set("Content-Type", "text/xml");
 
-    // Send joined xml elements store.
+    // Send client a 200 ("OK") status with the joined xml elements store.
 
     res.send(XMLElements.join("\n"));
   } catch (error) {

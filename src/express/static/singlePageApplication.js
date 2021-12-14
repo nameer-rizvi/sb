@@ -4,13 +4,15 @@ const { path } = require("../../shared");
 const express = require("express");
 const template = require("./singlePageApplication.placeholderTemplate");
 
-// If the application is in production,
-// Serve the index.html in the /dist folder,
-// Otherwise send the 404 placeholder template.
+// Set middleware to send client a 404 ("Not Found") status with the placeholder template.
 
-const singlePageApplicationMiddleware =
-  isEnv.live && fs.existsSync(path.dist("index.html"))
-    ? express.static(path.dist())
-    : (req, res) => res.status(404).send(template);
+let singlePageApplicationMiddleware = (req, res) =>
+  res.status(404).send(template);
+
+// If application is in a live environment and the index.html exists in the /dist folder...
+//   Set middleware to serve the /dist folder.
+
+if (isEnv.live && fs.existsSync(path.dist("index.html")))
+  singlePageApplicationMiddleware = express.static(path.dist());
 
 module.exports = singlePageApplicationMiddleware;

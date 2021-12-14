@@ -21,7 +21,16 @@ if (isEnv.live && google.tagManagerId) {
     "'self'",
     "https://www.googletagmanager.com",
     "https://www.google-analytics.com",
-    "'sha256-...'", // This will be unique to your application, copy-paste suggested value from console error.
+    // ***
+    // ***
+    //
+    // This will be unique to your application.
+    // Run app ("npm run app") and copy-paste suggested value from console error.
+    //
+    "'sha256-...'",
+    //
+    // ***
+    // ***
   ];
 
   contentSecurtyPolicy["img-src"] = [

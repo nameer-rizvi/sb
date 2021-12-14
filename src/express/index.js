@@ -21,7 +21,7 @@ server.listen(port.server, () => {
   log.environment(`in ${process.env.NODE_ENV}.`, { flag: "minimal" });
 });
 
-// Set "trust proxy" in live environments for secure sessions.
+// Set "trust proxy" in live environments.
 
 server.set("trust proxy", isEnv.live);
 
@@ -33,7 +33,7 @@ server.use(middlewares.application);
 
 server.use(resource.api, middlewares.api);
 
-// If a request passes the api resource, use static router.
+// If a request passes the api resource, use the static router.
 
 server.use(staticRouter);
 

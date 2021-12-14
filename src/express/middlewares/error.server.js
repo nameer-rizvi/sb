@@ -62,7 +62,7 @@ function serverErrorHandler(err, res, req) {
     // Loop through split server error stack.
 
     for (let trace of serverErrorStackSplits) {
-      // Determine if trace is local to project
+      // Determine if trace is local to project.
 
       let isLocalTrace =
         trace &&
@@ -70,7 +70,9 @@ function serverErrorHandler(err, res, req) {
         !trace.includes("node_modules") &&
         (trace.includes("/lib") || trace.includes("/src"));
 
-      if (isLocalTrace) log.at(trace.trim(), { flag: "minimal" }); // Log trace if it is local.
+      // If trace is local, log it.
+
+      if (isLocalTrace) log.at(trace.trim(), { flag: "minimal" });
     }
 
     // This is where you can save the server error in the database...

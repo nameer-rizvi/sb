@@ -6,7 +6,7 @@ const HTMLStructuredDataDefaults = [
   {
     "@type": "Organization",
     url: url.domain,
-    logo: url.doman + url.appleTouchIcon,
+    logo: url.domain + url.appleTouchIcon,
   },
 ];
 

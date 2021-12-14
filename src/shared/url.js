@@ -4,7 +4,7 @@ const port = require("./port");
 
 const url = {
   appleTouchIcon: "/lib/assets/apple-touch-icon.png",
-  domain: "",
+  domain: "https://www.sb.com",
   github: "https://github.com/nameer-rizvi/sb",
   localhost: {
     client: "http://localhost:" + port.client,

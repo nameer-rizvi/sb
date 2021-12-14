@@ -1,5 +1,7 @@
 import { support } from "simpul";
 
+// --flow-googleTagManager-5
+
 function gtagPageView(page_path) {
   if (support.window("gtag")) {
     window.gtag("set", "page_path", page_path);

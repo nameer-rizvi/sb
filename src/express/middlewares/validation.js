@@ -3,7 +3,7 @@ const { validate } = require("../util");
 
 function validationMiddleware(req, res, next) {
   try {
-    // Initialize values config with payload and required keys for route.
+    // Initialize values config with payload and required params for route.
 
     const values = {
       payload: { ...req.body, ...req.query, ...req.params },

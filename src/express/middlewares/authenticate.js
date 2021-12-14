@@ -18,7 +18,13 @@ async function authenticateMiddleware(req, res, next) {
       // If an error isn't thrown by the verification go to next middleware.
 
       next();
-    } else next();
+    } else {
+      // If authentication is not required by route...
+
+      // Go to next middleware.
+
+      next();
+    }
   } catch (error) {
     // Log any failed authentication errors as non-critical logs.
 

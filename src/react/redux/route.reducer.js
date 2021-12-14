@@ -18,7 +18,7 @@ function routeReducer(state = routeInitialState, action) {
 
       state.current = action.payload;
 
-      gtag.pageView(action.payload.full);
+      gtag.pageView(action.payload.full); // --flow-googleTagManager-6
 
       return state;
     default:
