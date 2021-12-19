@@ -79,9 +79,13 @@ function serverErrorHandler(err, res, req) {
 
     // console.log(serverError);
   } catch (error) {
-    log.error(error, { flag: "minimal" }); // Log any middleware errors as error logs.
+    // Log any middleware errors as error logs.
+
+    log.error(error, { flag: "minimal" });
   } finally {
-    res.sendStatus(500); // Send client a 500 ("Internal Server Error") status.
+    // Send client a 500 ("Internal Server Error") status.
+
+    res.sendStatus(500);
   }
 }
 

@@ -1,5 +1,3 @@
-// Pass the react error to error handler using Express's next middleware.
-
 function routeAppError(req, res, next) {
   if (res.locals.values.error.message) {
     // If there's an error message in res locals values...

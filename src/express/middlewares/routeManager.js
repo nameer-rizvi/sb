@@ -29,7 +29,7 @@ function routeManagerMiddleware(req, res, next) {
       ip: base64.encode(req.ip.replace(/\D/g, "")),
     };
 
-    // Log request route.
+    // Log route request.
 
     log.route(req.method.toLowerCase() + " " + route);
 
@@ -43,7 +43,7 @@ function routeManagerMiddleware(req, res, next) {
   } else if (!isEnv.live) {
     // Else if environment is not live...
 
-    // Send error to next middleware.
+    // Handle it with next server error middleware.
 
     next(new Error(`Missing route config for: ${route} [${req.method}].`));
   } else {

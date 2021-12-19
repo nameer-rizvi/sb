@@ -4,16 +4,15 @@ import { Link } from "react-router-dom";
 import { url } from "../../shared";
 import { isEnv } from "simpul";
 
+let randomPostNumber;
+
 function Home() {
   const request = useRequest();
 
   useEffect(() => {
-    request.send.get("/initialize");
+    request.send.get("/initialize", { onSuccess: console.log });
+    randomPostNumber = Math.floor(Math.random() * (10000 - 1 + 1) + 1);
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-  if (request.data) console.log(request.data);
-
-  const randomPostNumber = Math.floor(Math.random() * (10000 - 1 + 1) + 1);
 
   const PostLink = (
     <Link

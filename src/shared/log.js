@@ -1,7 +1,6 @@
 const { isEnv, log: generateLogger } = require("simpul");
 
-// Can add/overwrite methods by changing "undefined" to
-//   "[ { key: "fail", emoji: "🚨" }, ...]"
+// Can add/overwrite methods by changing "undefined" to "[ { key: "fail", emoji: "🚨" }, ...]"
 
 const logEnvConfig = isEnv.production
   ? {

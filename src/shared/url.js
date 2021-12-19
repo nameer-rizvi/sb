@@ -1,6 +1,6 @@
-const port = require("./port");
-
 // --starterKit-flag [add application's domain, update github link]
+
+const port = require("./port");
 
 const url = {
   appleTouchIcon: "/lib/assets/apple-touch-icon.png",

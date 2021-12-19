@@ -76,7 +76,9 @@ function RouteProviderComponent(routeProps) {
     <main id={elementId.main}>
       <Suspense
         Component={RouteLazyComponent}
-        {...{ ...routeProps, location, params }}
+        location={location}
+        params={params}
+        {...routeProps}
       />
     </main>
   ) : (

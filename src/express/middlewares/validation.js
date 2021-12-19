@@ -11,7 +11,7 @@ function validationMiddleware(req, res, next) {
     };
 
     // If route ignores validations, then set res locals to sanitized values payload.
-    // Otherwise, validate the values payload/required, and throw error if anything is invalid.
+    //  Otherwise, validate the values payload/required.
 
     res.locals.values = res.locals.routeConfig.ignoreValidation
       ? sanitized(values.payload)
@@ -22,8 +22,18 @@ function validationMiddleware(req, res, next) {
     next();
   } catch (error) {
     if (error.toString().includes("Missing data dictionary config")) {
-      next(error); // If error is for missing config, handle it with next server error middleware.
-    } else next("400::" + error); // Send client a 400 ("Bad Request") status with the validation error.
+      // If error is for a missing data dictionary config...
+
+      // Handle it with next server error middleware.
+
+      next(error);
+    } else {
+      // Else...
+
+      // Send client a 400 ("Bad Request") status with the validation error.
+
+      next("400::" + error);
+    }
   }
 }
 

@@ -5,7 +5,6 @@ async function processRequest(method, url, option = {}) {
   const {
     ignore,
     authenticate = true,
-    ignoreErrorLog,
     unmounted,
     cancelSource: activeCancelSource,
     setCancelSource,
@@ -17,6 +16,7 @@ async function processRequest(method, url, option = {}) {
     onFail,
     onFinish,
     headers = {},
+    ignoreErrorLog,
     ...config
   } = option;
 

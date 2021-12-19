@@ -2,7 +2,7 @@
 
 // The route manager restricts access to only those api routes that are defined
 // in the configs store here. It can be shaped any way you like, so long as there's
-// a "route" and a "method" value included, and it can be used in any proceeding middleware.
+// a "route" and a "method" value included, and it can be accessed in any proceeding middleware.
 
 const routeManagerMiddlewareConfigs = [
   {

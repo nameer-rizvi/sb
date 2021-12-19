@@ -48,7 +48,7 @@ const singlePageApplicationPlaceholderTemplate = `
       </a>.
     </h3>
     <p>
-      A temporary solution is to remove the historyApiFallback middleware
+      A temporary solution is to comment the historyApiFallback middleware
       in /src/express/middlewares/index.js. You should then be able to hit the
       route and see the intended result. It is not recommended, but if done,
       please don't forget to uncomment it again before working on the front-end

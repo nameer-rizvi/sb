@@ -1,7 +1,7 @@
 const { reactRoutes, origin, log, resource } = require("../../shared");
 
 // Dynamically generate sitemap using react route configs.
-//   This is convenient for if there are dynamic routes that depend on data from a database.
+//  This is convenient for if there are dynamic routes that depend on data from a database.
 
 // NOTE: 45,000 urls || 50MB maximum for each sitemap.
 //       Indexing two levels deep gives a maximum of 2,025,000,000.
@@ -55,7 +55,7 @@ async function sitemap(req, res) {
 
     res.send(XMLElements.join("\n"));
   } catch (error) {
-    // Log any error;
+    // Log any error.
 
     log.bot(error, { flag: "minimal" });
 

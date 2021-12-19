@@ -3,7 +3,7 @@ const { google } = require("../../shared");
 const helmet = require("helmet");
 
 // --flow-googleTagManager-4
-//
+
 // If application is in a live environment and a Google Tag Manager Id exists...
 //   Return appropriate Content Security Policy for helmet middleware to use.
 
@@ -22,14 +22,9 @@ if (isEnv.live && google.tagManagerId) {
     "https://www.googletagmanager.com",
     "https://www.google-analytics.com",
     // ***
-    // ***
-    //
     // This will be unique to your application.
-    // Run app ("npm run app") and copy-paste suggested value from console error.
-    //
+    // Run app ("npm run app") and copy-paste suggested sha-256 value from console error.
     "'sha256-...'",
-    //
-    // ***
     // ***
   ];
 

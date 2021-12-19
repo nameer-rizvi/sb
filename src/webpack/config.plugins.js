@@ -60,17 +60,19 @@ module.exports = webpackPluginsConfig;
 
 // https://webpack.js.org/configuration/plugins/
 //
-// If using moment.js, add to plugins:
-//   new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
-//
 // https://www.npmjs.com/package/clean-webpack-plugin
 // https://www.npmjs.com/package/html-webpack-plugin
+// https://www.npmjs.com/package/html-webpack-partials-plugin
 // https://www.npmjs.com/package/mini-css-extract-plugin
-// https://developers.google.com/web/tools/workbox/modules/workbox-webpack-plugin
-// https://developers.google.com/web/tools/workbox/guides/get-started
 // https://www.npmjs.com/package/webpack-manifest-plugin
 // https://www.npmjs.com/package/webpack-pwa-manifest
+// https://www.npmjs.com/package/workbox-webpack-plugin
 // https://www.npmjs.com/package/eslint-webpack-plugin
+// https://developers.google.com/web/tools/workbox/modules/workbox-webpack-plugin
+// https://developers.google.com/web/tools/workbox/guides/get-started
+//
+// If using moment.js, add to plugins:
+//   new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
 //
 // Out-of-the-box service worker solution:
 //   new WorkboxPlugin.GenerateSW({

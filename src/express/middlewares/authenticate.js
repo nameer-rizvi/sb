@@ -19,7 +19,7 @@ async function authenticateMiddleware(req, res, next) {
 
       next();
     } else {
-      // If authentication is not required by route...
+      // Else if authentication is not required by route...
 
       // Go to next middleware.
 

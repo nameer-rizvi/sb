@@ -1,6 +1,6 @@
 const { origin, resource, log } = require("../../shared");
 
-// We disallow crawling through the website to force use of the sitemap.
+// We disallow crawling through the website to enforce use of the sitemap.
 
 function robots(req, res) {
   // Initialize rules store.
