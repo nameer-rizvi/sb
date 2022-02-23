@@ -12,13 +12,10 @@ function serverErrorHandler(err, res, req) {
 
     const serverError = {};
 
-    serverError.source =
-      routeConfig.route && routeConfig.route.includes("/error")
-        ? "client"
-        : "server";
+    serverError.source = routeConfig.route === "/error" ? "client" : "server";
 
     serverError.method =
-      (serverError.source === "client" && "GET") ||
+      (serverError.source === "client" && "APP") ||
       routeConfig.method ||
       req.method;
 
@@ -36,8 +33,9 @@ function serverErrorHandler(err, res, req) {
     serverError.stack = (values.error && values.error.stack) || err.stack;
 
     serverError.user_id =
-      (req.session && (req.session.id || req.session.user_id)) ||
-      (user && (user.id || user.user_id));
+      (req.session &&
+        (req.session.id || req.session.uid || req.session.user_id)) ||
+      (user && (user.id || user.uid || user.user_id));
 
     serverError.ip = req.ip || "";
 

@@ -11,6 +11,8 @@ exports.api = [
   // require("./rateLimit"), // Proxies (i.e. NGINX) normally handle this...
   require("./authenticate"),
   require("./validation"),
+  require("./compression"),
+  require("./apicache").middleware,
   require("../routes"),
   require("./error.index"),
 ];

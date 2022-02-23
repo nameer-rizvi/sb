@@ -1,3 +1,5 @@
+const { CACHE } = require("./apicache");
+
 // --starterKit-flag [set api route configs here]
 
 // The route manager restricts access to only those api routes that are defined
@@ -8,6 +10,7 @@ const routeManagerMiddlewareConfigs = [
   {
     route: "/",
     method: "GET",
+    cache: CACHE.MAX,
   },
   {
     route: "/error",
@@ -20,6 +23,7 @@ const routeManagerMiddlewareConfigs = [
     method: "GET",
     authenticate: "bearerToken",
     // ignoreValidation: true,
+    cache: CACHE.STALE,
   },
 ];
 

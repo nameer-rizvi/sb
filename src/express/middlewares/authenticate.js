@@ -1,6 +1,7 @@
 // --starterKit-flag [review authentication strategy]
 
-const { jwt, log } = require("../util");
+const { jwt } = require("../util");
+const { log } = require("../../shared");
 
 async function authenticateMiddleware(req, res, next) {
   try {
