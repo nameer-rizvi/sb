@@ -51,3 +51,17 @@ Install npm dependencies, build the react app using webpack's production configs
 _Recommended for deploying the application in a production/staging environment._
 
 **If the cloud platform you choose to deploy with doesn't already read the 'build' and/or 'start' scripts, it is recommended you check the platform's documentation in order to learn how to run a "production" script that may go something like "npm i && npm run build && npm run start".**
+
+`npm run pm2-start`
+
+Start 'forever' processes defined in ecosystem.config.js
+
+`npm run pm2-restart`
+
+Restart 'forever' processes defined in ecosystem.config.js
+
+_[Click here to learn how to configure a PM2 ecosystem config.](https://pm2.keymetrics.io/docs/usage/application-declaration/)_
+
+## Useful Packages
+
+- To limit size of pm2 logs: https://github.com/keymetrics/pm2-logrotate
