@@ -1,6 +1,6 @@
 // --starterKit-flag [add appropriate application keywords]
 
-const keywords = [
+const SHARED_CONSTANT_KEYWORDS = [
   "javascript",
   "node",
   "nodejs",
@@ -17,4 +17,6 @@ const keywords = [
   "spa",
 ].join(", ");
 
-module.exports = keywords;
+module.exports = SHARED_CONSTANT_KEYWORDS;
+
+// https://developer.mozilla.org/en-US/docs/Learn/HTML/Introduction_to_HTML/The_head_metadata_in_HTML#active_learning_the_descriptions_use_in_search_engines

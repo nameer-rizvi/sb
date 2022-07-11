@@ -1,4 +1,6 @@
 node_modules
-/src/dist
+src/dist
+ecosystem.config.js
+json.txt
 .DS_Store
 .env

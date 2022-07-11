@@ -7,22 +7,24 @@ const { WebpackManifestPlugin } = require("webpack-manifest-plugin");
 const WebpackPWAManifest = require("webpack-pwa-manifest");
 const WorkboxPlugin = require("workbox-webpack-plugin");
 const ESLintPlugin = require("eslint-webpack-plugin");
-const { html: HTML, pwa: PWA } = require("../public");
-const { google, path, settings } = require("../shared");
+const public = require("../public");
+const shared = require("../shared");
 
 const webpackPluginsConfig = ({ isEnvLive }) =>
   [
     new ProvidePlugin({ process: "process/browser" }),
     new CleanWebpackPlugin({ cleanStaleWebpackAssets: isEnvLive }),
-    new HTMLWebpackPlugin({ minify: isEnvLive, ...HTML }),
+    new HTMLWebpackPlugin({ minify: isEnvLive, ...public.html }),
     ...(isEnvLive
       ? [
           // --flow-googleTagManager-2
-          google.tagManagerId &&
+          shared.CONSTANT.GOOGLE.TAG_MANAGER_ID &&
             new HTMLWebpackPartialsPlugin({
-              path: path.public("html/gtag.html"),
+              path: shared.util.makePath.public("html/gtag.html"),
               location: "head",
-              options: { googleTagManagerId: google.tagManagerId },
+              options: {
+                googleTagManagerId: shared.CONSTANT.GOOGLE.TAG_MANAGER_ID,
+              },
             }),
           new MiniCSSExtractPlugin({
             filename: "lib/css/[name].[contenthash:8].css",
@@ -34,7 +36,7 @@ const webpackPluginsConfig = ({ isEnvLive }) =>
           new WebpackPWAManifest({
             filename: "manifest.json",
             ios: true,
-            ...PWA,
+            ...public.pwa,
           }),
           new WorkboxPlugin.InjectManifest({
             swSrc: path.public("/service-worker/index.js"),
@@ -50,7 +52,7 @@ const webpackPluginsConfig = ({ isEnvLive }) =>
             context: path.client(),
             baseConfig: {
               extends: [require.resolve("eslint-config-react-app/base")],
-              ...settings.eslint,
+              ...share.CONSTANT.SETTING.ESLINT,
             },
           }),
         ]),
@@ -58,28 +60,33 @@ const webpackPluginsConfig = ({ isEnvLive }) =>
 
 module.exports = webpackPluginsConfig;
 
-// https://webpack.js.org/configuration/plugins/
-//
-// https://www.npmjs.com/package/clean-webpack-plugin
-// https://www.npmjs.com/package/html-webpack-plugin
-// https://www.npmjs.com/package/html-webpack-partials-plugin
-// https://www.npmjs.com/package/mini-css-extract-plugin
-// https://www.npmjs.com/package/webpack-manifest-plugin
-// https://www.npmjs.com/package/webpack-pwa-manifest
-// https://www.npmjs.com/package/workbox-webpack-plugin
-// https://www.npmjs.com/package/eslint-webpack-plugin
-// https://developers.google.com/web/tools/workbox/modules/workbox-webpack-plugin
-// https://developers.google.com/web/tools/workbox/guides/get-started
-//
-// If using moment.js, add to plugins:
-//   new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
-//
-// Out-of-the-box service worker solution:
-//   new WorkboxPlugin.GenerateSW({
-//     clientsClaim: true,
-//     skipWaiting: true,
-//     exclude: [/\.(?:png|jpg|jpeg|svg)$/],
-//   }),
-//
-// On why "csp-html-webpack-plugin" may not be worth including:
-//   https://github.com/slackhq/csp-html-webpack-plugin/issues/82
+console.log(module.exports({ isEnvLive: false }));
+
+/*
+
+  https://webpack.js.org/configuration/plugins/
+  https://www.npmjs.com/package/clean-webpack-plugin
+  https://www.npmjs.com/package/html-webpack-plugin
+  https://www.npmjs.com/package/html-webpack-partials-plugin
+  https://www.npmjs.com/package/mini-css-extract-plugin
+  https://www.npmjs.com/package/webpack-manifest-plugin
+  https://www.npmjs.com/package/webpack-pwa-manifest
+  https://www.npmjs.com/package/workbox-webpack-plugin
+  https://www.npmjs.com/package/eslint-webpack-plugin
+  https://developers.google.com/web/tools/workbox/modules/workbox-webpack-plugin
+  https://developers.google.com/web/tools/workbox/guides/get-started
+  
+  If using moment.js, add to plugins:
+    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+
+  Out-of-the-box service worker solution:
+    new WorkboxPlugin.GenerateSW({
+      clientsClaim: true,
+      skipWaiting: true,
+      exclude: [/\.(?:png|jpg|jpeg|svg)$/],
+    }),
+  
+  On why "csp-html-webpack-plugin" may not be worth including:
+    https://github.com/slackhq/csp-html-webpack-plugin/issues/82
+
+*/

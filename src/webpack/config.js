@@ -1,26 +1,20 @@
 function webpackConfig(env, argv) {
   const isEnvLive = argv.mode === "production" || argv.mode === "staging";
 
-  const configs = {
-    devServer: require("./config.devServer"),
-    devtool: require("./config.devtool"),
-    entry: require("./config.entry"),
-    externals: require("./config.externals"),
-    mode: require("./config.mode"),
-    module: require("./config.module"),
-    optimization: require("./config.optimization"),
-    output: require("./config.output"),
-    plugins: require("./config.plugins"),
-    resolve: require("./config.resolve"),
+  const config = {
+    devServer: require("./config.devServer")({ isEnvLive }),
+    devtool: require("./config.devtool")({ isEnvLive }),
+    entry: require("./config.entry")({ isEnvLive }),
+    externals: require("./config.externals")({ isEnvLive }),
+    mode: require("./config.mode")({ isEnvLive }),
+    module: require("./config.module")({ isEnvLive }),
+    optimization: require("./config.optimization")({ isEnvLive }),
+    output: require("./config.output")({ isEnvLive }),
+    plugins: require("./config.plugins")({ isEnvLive }),
+    resolve: require("./config.resolve")({ isEnvLive }),
   };
 
-  return Object.keys(configs).reduce(
-    (reducer, configKey) => ({
-      ...reducer,
-      [configKey]: configs[configKey]({ isEnvLive }),
-    }),
-    {}
-  );
+  return config;
 }
 
 module.exports = webpackConfig;

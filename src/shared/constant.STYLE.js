@@ -1,13 +1,13 @@
-// --starterKit-flag [define application style/design]
+// --starterKit-flag [change application style]
 
-const style = {
-  backgroundColor: "#eee",
-  color: "#000",
-  fontFamily:
+const SHARED_CONSTANT_STYLE = {
+  BACKGROUND_COLOR: "#eee",
+  COLOR: "#000",
+  FONT_FAMILY:
     "-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif",
 };
 
-style.base = `
+SHARED_CONSTANT_STYLE.BASE = `
   * {
     box-sizing: border-box;
   }
@@ -28,9 +28,9 @@ style.base = `
     min-height: 100vh;
     margin: auto;
     align-items: center;
-    color: ${style.color};
-    background-color: ${style.backgroundColor};
-    font-family: ${style.fontFamily};
+    color: ${SHARED_CONSTANT_STYLE.COLOR};
+    background-color: ${SHARED_CONSTANT_STYLE.BACKGROUND_COLOR};
+    font-family: ${SHARED_CONSTANT_STYLE.FONT_FAMILY};
   }
 
   a {
@@ -38,4 +38,6 @@ style.base = `
   }
 `;
 
-module.exports = style;
+module.exports = SHARED_CONSTANT_STYLE;
+
+// https://developer.mozilla.org/en-US/docs/Web/CSS

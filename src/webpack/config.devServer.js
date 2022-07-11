@@ -1,14 +1,14 @@
-const { port, path, settings } = require("../shared");
+const shared = require("../shared");
 
 const webpackDevServerConfig = ({ isEnvLive }) =>
   !isEnvLive
     ? {
-        port: port.client,
-        historyApiFallback: settings.historyApiFallback,
+        port: shared.CONSTANT.PORT.CLIENT,
+        historyApiFallback: shared.CONSTANT.SETTING.HISTORY_API_FALLBACK,
+        // open: true,
         hot: true,
-        // open: true, // To open app in localhost on dev start.
         static: {
-          directory: path.client(),
+          directory: shared.util.makePath.client(),
         },
         devMiddleware: {
           stats: "minimal",

@@ -1,14 +1,18 @@
 # sb
 
-Single-page-application boilerplate. [Express server](https://expressjs.com/) serving a [React client](https://reactjs.org/) via [Webpack bundler](https://webpack.js.org/).
+Single-page application boilerplate. [Express server](https://expressjs.com/) serving a [React client](https://reactjs.org/) via [Webpack bundler](https://webpack.js.org/).
 
-## Getting Started
+## Getting started
 
 As opinionated as the boilerplate code is, a trail of comments have been left to help make initial configuration settings changes easier so that there isn't a need to go through every single file before getting started.
 
 `Ctrl/Cmd + F` on the "/src" folder for: `// --starterKit-flag`
 
-## NPM Scripts
+## NPM scripts
+
+`npm run test`
+
+Placeholder script to run tests.
 
 `npm run lint`
 
@@ -32,7 +36,7 @@ _Recommended for back-end-only development._
 
 `npm run dev`
 
-Concurrently start & watch the express and webpack servers on separate ports.
+Concurrently start & watch the webpack and express servers in development mode.
 
 _Recommended for full-stack development._
 
@@ -46,7 +50,7 @@ Start the express server in production mode.
 
 `npm run app`
 
-Install npm dependencies, build the react app using webpack's production configs and serve the build through express.
+Install npm dependencies, build the react app using webpack's production configs and run the express server in production mode.
 
 _Recommended for deploying the application in a production/staging environment._
 
@@ -62,6 +66,8 @@ Restart 'forever' processes defined in ecosystem.config.js
 
 _[Click here to learn how to configure a PM2 ecosystem config.](https://pm2.keymetrics.io/docs/usage/application-declaration/)_
 
-## Useful Packages
+## PM2 links
 
-- To limit size of pm2 logs: https://github.com/keymetrics/pm2-logrotate
+- [Installation guide.](https://pm2.io/docs/runtime/guide/installation/)
+- [Configuring an ecosystem config.](https://pm2.keymetrics.io/docs/usage/application-declaration/)
+- [Log rotator.](https://github.com/keymetrics/pm2-logrotate)

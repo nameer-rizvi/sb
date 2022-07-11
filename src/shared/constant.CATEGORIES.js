@@ -1,7 +1,7 @@
 // --starterKit-flag [add appropriate application categories]
 
-const categories = ["personalization"];
+const SHARED_CONSTANT_CATEGORIES = ["personalization"];
 
-module.exports = categories;
+module.exports = SHARED_CONSTANT_CATEGORIES;
 
 // https://developer.mozilla.org/en-US/docs/Web/Manifest/categories

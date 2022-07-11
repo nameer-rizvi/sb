@@ -1,6 +1,6 @@
-const { path } = require("../shared");
+const shared = require("../shared");
 
-const webpackEntryConfig = () => path.client("index.js");
+const webpackEntryConfig = () => shared.util.makePath.client("index.js");
 
 module.exports = webpackEntryConfig;
 

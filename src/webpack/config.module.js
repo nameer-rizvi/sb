@@ -1,4 +1,4 @@
-const { path } = require("../shared");
+const shared = require("../shared");
 const MiniCSSExtractPlugin = require("mini-css-extract-plugin");
 
 const webpackModuleConfig = ({ isEnvLive }) => ({
@@ -6,7 +6,7 @@ const webpackModuleConfig = ({ isEnvLive }) => ({
     {
       test: /\.(js|jsx)$/,
       exclude: /node_modules/,
-      include: path.client(),
+      include: shared.util.makePath.client(),
       use: {
         loader: "babel-loader",
         options: {
