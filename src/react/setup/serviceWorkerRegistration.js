@@ -57,8 +57,8 @@ async function serviceWorkerRegistration() {
         });
       }
     } else {
-      //   const error = `job is undefined (options include: "register" || "unregister")`;
-      //   throw new Error(error);
+      const error = `job is undefined (options include: "register" || "unregister")`;
+      throw new Error(error);
     }
   } catch (error) {
     util.log.sw("Registration: " + error.toString(), { flag: "minimal" });

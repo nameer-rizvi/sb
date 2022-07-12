@@ -1,5 +1,5 @@
 import { routeInitialState, UPDATE_ROUTE } from "./route.action";
-import { gtag } from "../utils";
+import { gtag } from "../util";
 
 function routeReducer(state = routeInitialState, action) {
   switch (action.type) {

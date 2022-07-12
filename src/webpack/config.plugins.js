@@ -52,7 +52,7 @@ const webpackPluginsConfig = ({ isEnvLive }) =>
             context: shared.util.makePath.client(),
             baseConfig: {
               extends: [require.resolve("eslint-config-react-app/base")],
-              ...share.CONSTANT.SETTING.ESLINT,
+              ...shared.CONSTANT.SETTING.ESLINT,
             },
           }),
         ]),

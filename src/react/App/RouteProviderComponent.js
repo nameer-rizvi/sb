@@ -5,7 +5,7 @@ import {
   URLQuery,
   HTMLDocumentMetaUpdate,
   HTMLStructuredDataUpdate,
-} from "../utils";
+} from "../util";
 import { updateRoute } from "../redux";
 import { CONSTANT } from "../../shared";
 import Suspense from "./Suspense";

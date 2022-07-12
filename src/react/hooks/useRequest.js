@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { request } from "../utils";
+import { request } from "../util";
 
 export function useRequest(props = {}) {
   const [pending, setPending] = useState(props.initialPending);

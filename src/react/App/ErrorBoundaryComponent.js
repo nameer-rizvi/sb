@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { URLQuery, request } from "../utils";
+import { URLQuery, request } from "../util";
 import { isEnv } from "simpul";
 import ErrorBoundaryComponentStyled from "./ErrorBoundaryComponentStyled";
 
