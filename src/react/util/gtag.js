@@ -11,12 +11,8 @@ function gtagPageView(page_path) {
 
 function gtagClick(element_name, element_title) {
   if (support.window("gtag")) {
-    if (element_name) {
-      element_name = element_name.replace(/[^\w]/g, "_");
-      if (element_name.startsWith("_"))
-        element_name = element_name.substring(1);
-    }
-
+    element_name = element_name?.replace(/[^\w]/g, "_");
+    if (element_name?.startsWith("_")) element_name = element_name.substring(1);
     if (element_name && element_title)
       window.gtag("event", "click", {
         event_category: element_name,

@@ -1,12 +1,12 @@
-import { url } from "../../shared";
+import { CONSTANT } from "../../shared";
 
 // https://developers.google.com/search/docs/advanced/structured-data/search-gallery
 
 const HTMLStructuredDataDefaults = [
   {
     "@type": "Organization",
-    url: url.domain,
-    logo: url.domain + url.appleTouchIcon,
+    url: CONSTANT.URL.DOMAIN,
+    logo: CONSTANT.URL.DOMAIN + CONSTANT.URL.APPLE_TOUCH_ICON,
   },
 ];
 

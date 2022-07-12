@@ -1,5 +1,5 @@
-import { isEnv } from "simpul";
-import { log } from "../../shared";
+import { isEnv, support } from "simpul";
+import { util } from "../../shared";
 
 if (isEnv.live) installPolyfills();
 
@@ -7,17 +7,23 @@ async function installPolyfills() {
   try {
     const installed = [];
 
-    if ("userAgent" in navigator && /MSIE|Trident/.test(navigator.userAgent)) {
+    const isIEUserAgent =
+      support.navigator("userAgent") &&
+      /MSIE|Trident/.test(navigator.userAgent);
+
+    if (isIEUserAgent) {
       await import("react-app-polyfill/ie9");
       installed.push("react-app-polyfill/ie9");
     }
 
     await import("react-app-polyfill/stable");
+
     installed.push("react-app-polyfill/stable");
 
-    if (installed.length) log.polyfill(`installed ${installed.join(", ")}`);
+    if (installed.length)
+      util.log.polyfill(`installed ${installed.join(", ")}`);
   } catch (error) {
-    log.polyfill(error);
+    util.log.polyfill(error);
   }
 }
 

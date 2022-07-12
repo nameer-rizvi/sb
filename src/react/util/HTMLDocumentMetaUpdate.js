@@ -1,8 +1,8 @@
-import { name, description as appDescription } from "../../shared";
+import { CONSTANT } from "../../shared";
 
 const HTMLDocumentMetaInitialState = {
   title: "",
-  description: appDescription,
+  description: CONSTANT.DESCRIPTION,
   canonical: "",
   robots: "",
 };
@@ -11,7 +11,7 @@ export function HTMLDocumentMetaUpdate(update = {}) {
   update = { ...HTMLDocumentMetaInitialState, ...update };
   for (let [metaName, metaValue] of Object.entries(update))
     if (metaName === "title") {
-      let title = [metaValue, name.short].filter(Boolean).join(" - ");
+      let title = [metaValue, CONSTANT.NAME.SHORT].filter(Boolean).join(" - ");
       document.title = title;
       HTMLDocumentMetaUpdateElement("og:title", title);
       HTMLDocumentMetaUpdateElement("twitter:title", title);

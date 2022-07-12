@@ -1,17 +1,17 @@
 // --flow-serviceWorker-1
 
 import { isEnv, support } from "simpul";
-import { log } from "../../shared";
+import { util } from "../../shared";
 
 // Service worker job.
 
 const job = "register";
 
-// Service Worker should only be active in live environments.
+// Service Worker should only be active in a live environment.
 
 if (isEnv.live) window.addEventListener("load", serviceWorkerRegistration);
 
-// Service Worker is wrapped in an async function for use of try/catch & await.
+// Async function to register/deregister service worker, depending on job.
 
 async function serviceWorkerRegistration() {
   try {
@@ -35,7 +35,7 @@ async function serviceWorkerRegistration() {
 
       // Log successful registration.
 
-      log.sw("registered", { flag: "minimal" });
+      util.log.sw("registered", { flag: "minimal" });
     } else if (job === "unregister") {
       // If the Service Worker job is to unregister...
 
@@ -52,15 +52,15 @@ async function serviceWorkerRegistration() {
 
         // Log completion of all unregistrations.
 
-        log.sw(`unregistered ${registrations.length} registration(s).`, {
+        util.log.sw(`unregistered ${registrations.length} registration(s).`, {
           flag: "minimal",
         });
       }
     } else {
-      const error = `job is undefined (options include: "register" || "unregister")`;
-      throw new Error(error);
+      //   const error = `job is undefined (options include: "register" || "unregister")`;
+      //   throw new Error(error);
     }
   } catch (error) {
-    log.sw("Registration: " + error.toString(), { flag: "minimal" });
+    util.log.sw("Registration: " + error.toString(), { flag: "minimal" });
   }
 }

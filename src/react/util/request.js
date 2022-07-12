@@ -1,3 +1,4 @@
+import { isEnv } from "simpul";
 import axios from "axios";
 import sanitized from "sanitized";
 
@@ -5,6 +6,7 @@ async function processRequest(method, url, option = {}) {
   const {
     ignore,
     authenticate = true,
+    ignoreErrorLog,
     unmounted,
     cancelSource: activeCancelSource,
     setCancelSource,
@@ -16,18 +18,20 @@ async function processRequest(method, url, option = {}) {
     onFail,
     onFinish,
     headers = {},
-    ignoreErrorLog,
     ...config
   } = option;
 
   if (!url) {
-    console.warn("Missing 'url' for request.");
+    if (!isEnv.production) console.warn("Missing 'url' for request.");
   } else if (ignore === true) {
-    console.warn(`Ignoring request to ${url}.`);
+    if (!isEnv.production) console.log(`Ignoring request to ${url}.`);
   } else if (authenticate && !axios.defaults.headers.common.Authorization) {
-    const warning =
-      "Failed to authenticate request. Authorization header missing.";
-    console.warn(warning);
+    const authenticationErrorMessages = [
+      `Failed to authenticate request to ${url}.`,
+      "Authorization header is required.",
+      `Set "authenticate" to false to ignore request authentication.`,
+    ];
+    if (!isEnv.production) console.warn(authenticationErrorMessages.join(" "));
   } else {
     try {
       // -- ON REQUEST START --
@@ -38,8 +42,7 @@ async function processRequest(method, url, option = {}) {
         if (onStart) onStart();
         if (setPending) setPending(true);
         if (setError) setError();
-        if (activeCancelSource && activeCancelSource.cancel)
-          activeCancelSource.cancel();
+        if (activeCancelSource?.cancel) activeCancelSource.cancel();
         const newCancelSource = axios.CancelToken.source();
         if (setCancelSource) setCancelSource(newCancelSource);
         cancelToken = newCancelSource.token;
@@ -56,22 +59,17 @@ async function processRequest(method, url, option = {}) {
       });
 
       // -- ON REQUEST RESPONSE --
-
       if (!unmounted) {
         if (setData) setData(response.data);
         if (onSuccess) onSuccess(response.data);
       }
-
-      return response.data;
     } catch (error) {
       // -- ON REQUEST ERROR --
       if (!unmounted && !axios.isCancel(error)) {
         if (setError) setError(error);
         if (onFail) onFail(error);
-        if (!ignoreErrorLog) console.log(error.toString());
+        if (!isEnv.production && ignoreErrorLog !== true) console.error(error);
       }
-
-      return error;
     } finally {
       // -- ON REQUEST FINISH --
       if (!unmounted) {

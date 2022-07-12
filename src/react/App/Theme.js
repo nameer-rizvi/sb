@@ -1,19 +1,19 @@
-import { style, elementId } from "../../shared";
+import { CONSTANT } from "../../shared";
 import { createGlobalStyle } from "styled-components";
 
 export const ThemeConfig = {
-  font: [style.fontFamily],
-  color: [style.backgroundColor, style.color],
+  font: [CONSTANT.STYLE.FONT_FAMILY],
+  color: [CONSTANT.STYLE.BACKGROUND_COLOR, CONSTANT.STYLE.COLOR],
 };
 
 export const ThemeGlobalStyle = createGlobalStyle`
-  ${style.base}
+  ${CONSTANT.STYLE.BASE}
 
   body {
     align-items: center;
   }
 
-  #${elementId.react} {
+  #${CONSTANT.ELEMENT_ID.REACT} {
     position: relative;
     display: flex;
     flex-direction: column;

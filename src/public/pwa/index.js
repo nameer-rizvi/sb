@@ -15,8 +15,6 @@ const pwa = {
   icons: require("../icons"),
 };
 
-console.log(pwa);
-
 module.exports = pwa;
 
 /*

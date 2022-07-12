@@ -9,9 +9,13 @@ const SHARED_CONSTANT_STYLE = {
 
 SHARED_CONSTANT_STYLE.BASE = `
   * {
+    box-sizing: border-box;
+  }
+
+  html,
+  body {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
   }
 
   html {

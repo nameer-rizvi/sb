@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useRequest } from "../hooks";
 import { Link } from "react-router-dom";
-import { url } from "../../shared";
+import { CONSTANT } from "../../shared";
 import { isEnv } from "simpul";
 
 let randomPostNumber;
@@ -24,7 +24,7 @@ function Home() {
   );
 
   const GithubLink = (
-    <a href={url.github} target="_blank" rel="noopener noreferrer">
+    <a href={CONSTANT.URL.GITHUB} target="_blank" rel="noopener noreferrer">
       <svg
         viewBox="0 0 24 24"
         height="48"

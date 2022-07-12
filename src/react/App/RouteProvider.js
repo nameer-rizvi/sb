@@ -1,11 +1,11 @@
 import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
-import { reactRoutes } from "../../shared";
+import { routes } from "../../shared";
 import RouteProviderComponent from "./RouteProviderComponent";
 
 const RouteProvider = () => (
   <Routes>
-    {reactRoutes.map((reactRoute) => {
+    {routes.react.map((reactRoute) => {
       const reactRouteStore = [];
 
       if (reactRoute.path)

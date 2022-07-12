@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { style } from "../../shared";
+import { CONSTANT } from "../../shared";
 
 // Since <ErrorBoundary /> is called outside <ThemeProvider />,
 //  it must manually import the style from the shared folder.
@@ -9,8 +9,8 @@ const ErrorBoundaryComponentStyled = styled.div`
   flex-direction: column;
   margin: auto;
   padding: 30px;
-  font-family: ${style.fontFamily};
-  color: ${style.color};
+  font-family: ${CONSTANT.STYLE.FONT_FAMILY};
+  color: ${CONSTANT.STYLE.COLOR};
 
   h1 {
     margin-bottom: 30px;

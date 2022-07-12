@@ -7,7 +7,7 @@ import {
   HTMLStructuredDataUpdate,
 } from "../utils";
 import { updateRoute } from "../redux";
-import { elementId } from "../../shared";
+import { CONSTANT } from "../../shared";
 import Suspense from "./Suspense";
 
 const RouteProviderComponentResolver = {
@@ -73,7 +73,7 @@ function RouteProviderComponent(routeProps) {
   // Render route.
 
   return RouteLazyComponent ? (
-    <main id={elementId.main}>
+    <main id={CONSTANT.ELEMENT_ID.MAIN}>
       <Suspense
         Component={RouteLazyComponent}
         location={location}

@@ -1,35 +1,32 @@
 import { isStringValid, isNumber, numberLabel } from "simpul";
 
 export function parseError(error, alternateErrorMessage) {
-  const parsedError = { code: undefined, message: "" };
+  const parsedError = { code: error?.response?.status, message: "" };
 
   if (error) {
     const errorStrings = [
-      error.response && error.response.data,
-      error.response && error.response.statusText,
+      error.response?.data,
+      error.response?.statusText,
       error.message,
-      error.toString && error.toString(),
-      error,
+      error.toString(),
     ];
 
     for (let errorString of errorStrings)
       if (isStringValid(errorString) && !errorString.includes("html")) {
-        parsedError.message = errorString.replaceAll("Error:", "").trim();
+        parsedError.message = errorString.replace(/Error:/g, "").trim();
         break;
       }
 
     const useAlternateErrorMessage =
       alternateErrorMessage &&
       (!parsedError.message ||
-        parsedError.message === "Internal Server Error" ||
-        parsedError.message === "Forbidden");
+      parsedError.code === 500 || // "Internal Server Error"
+        parsedError.code === 403); // "Forbidden"
 
     if (useAlternateErrorMessage) parsedError.message = alternateErrorMessage;
 
     const xRateLimitRemaining =
-      error.response &&
-      error.response.headers &&
-      error.response.headers["x-rate-limit-remaining"];
+      error.response?.headers?.["x-rate-limit-remaining"];
 
     const xRateLimitRemainingLabel =
       isNumber(xRateLimitRemaining) &&
@@ -38,8 +35,6 @@ export function parseError(error, alternateErrorMessage) {
 
     if (xRateLimitRemainingLabel)
       parsedError.message += ` (${xRateLimitRemainingLabel} remaining)`;
-
-    parsedError.code = error.response && error.response.status;
   }
 
   return parsedError;
