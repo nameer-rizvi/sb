@@ -5,7 +5,7 @@ const webpackDevServerConfig = ({ isEnvLive }) =>
     ? {
         port: shared.CONSTANT.PORT.CLIENT,
         historyApiFallback: shared.CONSTANT.SETTING.HISTORY_API_FALLBACK,
-        // open: true,
+        open: true,
         hot: true,
         static: {
           directory: shared.util.makePath.client(),

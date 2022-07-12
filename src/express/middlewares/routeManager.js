@@ -1,53 +1,43 @@
 const configs = require("./routeManager.configs");
-const { base64, isEnv } = require("simpul");
-const { log } = require("../../shared");
+const shared = require("../../shared");
 
 function routeManagerMiddleware(req, res, next) {
-  // Create the route constant by splitting the request url using the query delimiter.
-
-  const route = req.url.split("?")[0];
-
-  // Loop through all route configs and use the route constant & request method to find the route config.
+  // Loop through all route configs and use the request path & method to find the route config.
 
   let routeConfig;
 
   for (let config of configs)
-    if (config.route === route && config.method === req.method) {
+    if (config.path === req.path && config.method === req.method) {
       routeConfig = config;
       break;
     }
 
   if (routeConfig) {
-    // If a matching route config exists for the request...
+    // If a route config exists for the request...
 
     // Store route config in res locals.
 
-    // Store request ip as base64 encoded string in route config.
-
-    res.locals.routeConfig = {
-      ...routeConfig,
-      ip: base64.encode(req.ip.replace(/\D/g, "")),
-    };
+    res.locals.routeConfig = routeConfig;
 
     // Log route request.
 
-    log.route(req.method.toLowerCase() + " " + route);
+    shared.util.log.route(req.method.toLowerCase() + " " + req.path);
 
-    // Log request user.
+    // Log request ip.
 
-    log.user(`Request by ${res.locals.routeConfig.ip}`);
+    shared.util.log.user(`Request by ${req.ip}`);
 
     // Go to next middleware
 
     next();
-  } else if (!isEnv.live) {
-    // Else if environment is not live...
-
-    // Handle it with next server error middleware.
-
-    next(new Error(`Missing route config for: ${route} [${req.method}].`));
   } else {
     // Else...
+
+    // Log missing route config.
+
+    const info = `Missing route config for "${req.path}" [${req.method}].`;
+
+    shared.util.log.info("Route Manager Middleware: Error: " + info);
 
     // Send client a 404 ("Not Found") status.
 

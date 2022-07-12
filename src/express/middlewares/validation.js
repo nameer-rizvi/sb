@@ -1,7 +1,6 @@
 const sanitized = require("sanitized");
-const { validate } = require("../util");
-const { log } = require("../../shared");
-const { isEnv } = require("simpul");
+const util = require("../util");
+const shared = require("../../shared");
 
 function validationMiddleware(req, res, next) {
   try {
@@ -15,26 +14,28 @@ function validationMiddleware(req, res, next) {
     // If route ignores validations, then set res locals to sanitized values payload.
     //  Otherwise, validate the values payload/required.
 
-    res.locals.values = res.locals.routeConfig.ignoreValidation
-      ? sanitized(values.payload)
-      : validate(values.payload, values.required);
+    if (res.locals.routeConfig.ignoreValidation) {
+      res.locals.values = sanitized(values.payload);
+    } else res.locals.values = util.validate(values.payload, values.required);
 
     // Go to next middleware.
 
     next();
   } catch (error) {
-    if (error.toString().includes("Missing data dictionary config")) {
-      // If error is for a missing data dictionary config...
+    const isUndefined = error
+      .toString()
+      .match(/Dictionary definition with key\b.*\bdoes not exist/);
 
-      // Handle it with next server error middleware.
+    if (isUndefined) {
+      // If error is for a missing data dictionary config, handle it with next server error middleware.
 
       next(error);
     } else {
       // Else...
 
-      // If environment is not live, log validation error as a warning
+      // Log validation error.
 
-      if (!isEnv.live) log.warning(error.toString().replace("Error:", ""));
+      shared.util.log.info("Validation Middleware: " + error.toString());
 
       // Send client a 400 ("Bad Request") status with the validation error.
 

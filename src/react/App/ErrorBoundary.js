@@ -10,13 +10,9 @@ class ErrorBoundaryProvider extends Component {
   static getDerivedStateFromError = (error) => ({ error });
 
   render() {
-    const { error } = this.state;
-
-    return error ? (
-      <ErrorBoundaryComponent error={error} />
-    ) : (
-      this.props.children
-    );
+    if (this.state.error) {
+      return <ErrorBoundaryComponent error={this.state.error} />;
+    } else return this.props.children;
   }
 }
 

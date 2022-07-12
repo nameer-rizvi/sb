@@ -1,35 +1,33 @@
 // --starterKit-flag [review authentication strategy]
 
-const { jwt } = require("../util");
-const { log } = require("../../shared");
+const util = require("../util");
+const shared = require("../../shared");
 
 async function authenticateMiddleware(req, res, next) {
   try {
-    if (res.locals.routeConfig.authenticate === "bearerToken") {
+    // Destructure required props from route config.
+
+    const { authenticate, ignoreAuthenticationError } = res.locals.routeConfig;
+
+    if (authenticate === "bearerToken") {
       // If route requires authenticating a bearer token...
 
       // Parse "Bearer" token from authorization header.
 
-      const bearerToken = parseBearerToken(req);
+      const bearerToken = parseBearerToken(req, ignoreAuthenticationError);
 
-      // Verify & fetch token data using "jsonwebtoken".
+      // Verify token data using jsonwebtoken and assign it to res locals.
 
-      res.locals.token = await jwt.verify(bearerToken);
-
-      // If an error isn't thrown by the verification go to next middleware.
-
-      next();
-    } else {
-      // Else if authentication is not required by route...
-
-      // Go to next middleware.
-
-      next();
+      res.locals.token = await util.jwt.verify(bearerToken);
     }
-  } catch (error) {
-    // Log any failed authentication errors as non-critical logs.
 
-    log.password("Authenticate Middleware: " + error.toString());
+    // If an error isn't thrown, go to next middleware.
+
+    next();
+  } catch (error) {
+    // Log failed authentication.
+
+    shared.util.log.info("Authenticate Middleware: " + error.toString());
 
     // Send client a 401 ("Unauthorized") status.
 
@@ -37,24 +35,25 @@ async function authenticateMiddleware(req, res, next) {
   }
 }
 
-function parseBearerToken(req) {
+function parseBearerToken(req, ignoreError) {
   // Initialize authorization header with default string type.
 
   const { authorization = "" } = req.headers;
 
   // Parse "Bearer" token from authorization header.
 
-  const bearerToken = authorization.split("Bearer ")[1];
+  let bearerToken = authorization.split("Bearer ")[1];
 
-  if (!bearerToken || bearerToken === "null") {
-    // Throw error if bearer token doesn't exist or is null.
+  // If bearer token is stringified null or undefined, set bearerToken to null.
 
+  if (bearerToken === "null" || bearerToken === "undefined") bearerToken = null;
+
+  // Throw error if bearer token doesn't exist.
+
+  if (!bearerToken && !ignoreError)
     throw new Error("Request authorization header is invalid.");
-  } else {
-    // Else, return bearer token.
 
-    return bearerToken;
-  }
+  return bearerToken;
 }
 
 module.exports = authenticateMiddleware;

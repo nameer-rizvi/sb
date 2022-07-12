@@ -1,8 +1,8 @@
-const { origin, resource, log } = require("../../shared");
+const shared = require("../../shared");
 
 // We disallow crawling through the website to enforce use of the sitemap.
 
-function robots(req, res) {
+function staticRouteRobots(req, res) {
   // Initialize rules store.
 
   const rules = [
@@ -19,20 +19,22 @@ function robots(req, res) {
     },
     {
       name: "Sitemap",
-      value: origin + resource.sitemap,
+      value: shared.CONSTANT.ORIGIN + shared.CONSTANT.RESOURCE.SITEMAP,
     },
     {
       sectionBreak: true,
     },
     {
       name: "Host",
-      value: origin,
+      value: shared.CONSTANT.ORIGIN,
     },
-  ].map((rule) => (rule.sectionBreak ? "" : rule.name + ": " + rule.value));
+  ]
+    .map((rule) => (rule.sectionBreak ? "" : `${rule.name}: ${rule.value}`))
+    .join("\n");
 
   // Log successful txt generation for request by bot crawler.
 
-  log.bot("Crawled " + resource.robots);
+  shared.util.log.bot("Crawled " + shared.CONSTANT.RESOURCE.ROBOTS);
 
   // Set response content type to text/plain.
 
@@ -40,10 +42,10 @@ function robots(req, res) {
 
   // Send client a 200 ("OK") status with the joined robots rules store.
 
-  res.send(rules.join("\n"));
+  res.send(rules);
 }
 
-module.exports = robots;
+module.exports = staticRouteRobots;
 
 // https://www.robotstxt.org/robotstxt.html
 // https://developers.google.com/search/docs/advanced/robots/intro

@@ -1,9 +1,9 @@
 const express = require("express");
 const staticRouter = express.Router();
-const { resource } = require("../../shared");
+const shared = require("../../shared");
 
-staticRouter.get(resource.robots, require("./robots"));
-staticRouter.get(resource.sitemap, require("./sitemap"));
+staticRouter.get(shared.CONSTANT.RESOURCE.ROBOTS, require("./robots"));
+staticRouter.get(shared.CONSTANT.RESOURCE.SITEMAP, require("./sitemap"));
 staticRouter.use(require("./singlePageApplication"));
 
 module.exports = staticRouter;

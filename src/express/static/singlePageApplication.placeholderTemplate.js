@@ -1,4 +1,4 @@
-const { style, origin } = require("../../shared");
+const shared = require("../../shared");
 
 const singlePageApplicationPlaceholderTemplate = `
 <!DOCTYPE html>
@@ -7,7 +7,7 @@ const singlePageApplicationPlaceholderTemplate = `
     <title>[sb/server]</title>
   </head>
   <style>
-    ${style.base}
+    ${shared.CONSTANT.STYLE.BASE}
     body {
       max-width: 760px;
       justify-content: center;
@@ -53,11 +53,13 @@ const singlePageApplicationPlaceholderTemplate = `
       route and see the intended result. It is not recommended, but if done,
       please don't forget to uncomment it again before working on the front-end
       or deploying the app...otherwise there'll most likely be issues with the
-      react-router for client-side-routing.
+      react-router for client-side routing.
     </p>
     <br />
     <br />
-    <a href="${origin}" target="_blank" rel="noopener noreferrer">
+    <a href="${
+      shared.CONSTANT.ORIGIN
+    }" target="_blank" rel="noopener noreferrer">
       Click here to open the react application on the client port.
     </a
     >

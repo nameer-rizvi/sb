@@ -1,4 +1,4 @@
-const { log } = require("../../shared");
+const shared = require("../../shared");
 const { flatten, isString } = require("simpul");
 const Bowser = require("bowser");
 
@@ -6,42 +6,45 @@ function serverErrorHandler(err, res, req) {
   try {
     // Initialize constants from res locals.
 
-    const { values = {}, routeConfig = {}, user = {} } = res.locals;
+    const { routeConfig = {}, values = {} } = res.locals;
 
     // Generate server error object with relevant properties.
 
     const serverError = {};
 
-    serverError.source = routeConfig.route === "/error" ? "client" : "server";
+    serverError.source = routeConfig.path === "/error" ? "client" : "server";
 
     serverError.method =
       (serverError.source === "client" && "APP") ||
       routeConfig.method ||
       req.method;
 
-    serverError.route =
-      (values.error && values.error.pathname) || routeConfig.route || req.url;
+    serverError.path = values.error?.pathname || routeConfig.path || req.path;
 
     serverError.message =
-      (values.error &&
-        values.error.message &&
-        values.error.message.split(":\n")[0].trim()) ||
+      values.error?.message?.split(":")[0].trim() ||
       err.sqlMessage ||
       err.message ||
       err.toString();
 
-    serverError.stack = (values.error && values.error.stack) || err.stack;
+    serverError.stack = values.error?.stack || err.stack;
 
     serverError.user_id =
-      (req.session &&
-        (req.session.id || req.session.uid || req.session.user_id)) ||
-      (user && (user.id || user.uid || user.user_id));
+      req.session?.id ||
+      req.session?.uid ||
+      req.session?.user_id ||
+      res.locals.user?.id ||
+      res.locals.user?.uid ||
+      res.locals.user?.user_id ||
+      res.locals.token?.id ||
+      res.locals.token?.uid ||
+      res.locals.token?.user_id;
 
     serverError.ip = req.ip || "";
 
     // Log server error message.
 
-    log.error(serverError.message, { flag: "minimal" });
+    shared.util.log.error(serverError.message, { flag: "minimal" });
 
     // Parse flat user agent using bowser.
 
@@ -70,16 +73,18 @@ function serverErrorHandler(err, res, req) {
 
       // If trace is local, log it.
 
-      if (isLocalTrace) log.at(trace.trim(), { flag: "minimal" });
+      if (isLocalTrace) shared.util.log.at(trace.trim(), { flag: "minimal" });
     }
 
-    // This is where you can save the server error in the database...
+    // Save server error in the database.
 
-    // console.log(serverError);
+    // database.controller.error.create(serverError);
+
+    console.log(serverError);
   } catch (error) {
     // Log any middleware errors as error logs.
 
-    log.error(error, { flag: "minimal" });
+    shared.util.log.error(error);
   } finally {
     // Send client a 500 ("Internal Server Error") status.
 

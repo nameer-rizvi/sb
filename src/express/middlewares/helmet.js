@@ -1,5 +1,5 @@
 const { isEnv } = require("simpul");
-const { google } = require("../../shared");
+const shared = require("../../shared");
 const helmet = require("helmet");
 
 // --flow-googleTagManager-4
@@ -7,38 +7,41 @@ const helmet = require("helmet");
 // If application is in a live environment and a Google Tag Manager Id exists...
 //   Return appropriate Content Security Policy for helmet middleware to use.
 
-let contentSecurtyPolicy, helmetConfig;
+let contentSecurityPolicy, helmetConfig;
 
-if (isEnv.live && google.tagManagerId) {
-  contentSecurtyPolicy = {};
+if (!isEnv.live && shared.CONSTANT.GOOGLE.TAG_MANAGER.ID) {
+  contentSecurityPolicy = {};
 
-  contentSecurtyPolicy["default-src"] = [
+  contentSecurityPolicy["default-src"] = [
     "'self'",
-    "https://www.google-analytics.com",
+    shared.CONSTANT.GOOGLE.ANALYTICS.URL,
   ];
 
-  contentSecurtyPolicy["script-src"] = [
+  contentSecurityPolicy["script-src"] = [
     "'self'",
-    "https://www.googletagmanager.com",
-    "https://www.google-analytics.com",
+    shared.CONSTANT.GOOGLE.TAG_MANAGER.URL,
+    shared.CONSTANT.GOOGLE.ANALYTICS.URL,
     // ***
+    //
     // This will be unique to your application.
-    // Run app ("npm run app") and copy-paste suggested sha-256 value from console error.
+    //   Run app ("npm run app") and copy-paste suggested sha-256 value from console error.
+    //
     "'sha256-...'",
+    //
     // ***
   ];
 
-  contentSecurtyPolicy["img-src"] = [
+  contentSecurityPolicy["img-src"] = [
     "'self'",
     "data:",
-    "https://www.google-analytics.com",
-    "https://www.googletagmanager.com",
+    shared.CONSTANT.GOOGLE.ANALYTICS.URL,
+    shared.CONSTANT.GOOGLE.TAG_MANAGER.URL,
   ];
 
   helmetConfig = {
     contentSecurityPolicy: {
       useDefaults: true,
-      directives: contentSecurtyPolicy,
+      directives: contentSecurityPolicy,
     },
   };
 }

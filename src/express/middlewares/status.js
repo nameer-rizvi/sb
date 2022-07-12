@@ -1,13 +1,24 @@
-// Protocol for conducting maintenance in a live environment:
-//   1. Change MAINTENANCE_MODE to "true" in ecosystem.config.js.
-//   2. Run "pm2 restart ecosystem.config.js" from root folder.
-//   3. ...CONDUCT MAINTENANCE...
-//   4. Change MAINTENANCE_MODE to "false" in ecosystem.config.js.
-//   5. Run "pm2 restart ecosystem.config.js" from root folder.
+const shared = require("../../shared");
+
+/*
+  
+  Protocol for conducting maintenance in a live pm2 environment:
+
+  1. Set 'MAINTENANCE_MODE=true' in ecosystem.config.js.
+  2. Run "npm run pm2-restart" || "pm2 restart ecosystem.config.js" from root folder.
+  3. [CONDUCT MAINTENANCE]
+  4. Set 'MAINTENANCE_MODE=' in ecosystem.config.js.
+  5. 2. Run "npm run pm2-restart" || "pm2 restart ecosystem.config.js" from root folder.
+
+*/
 
 function statusMiddleware(req, res, next) {
   if (req.method === "GET" && req.url === "/health") {
     // If request is for application health...
+
+    // Log request.
+
+    shared.util.log.info("OK health.");
 
     // Send client a 200 ("OK") status.
 
@@ -19,15 +30,17 @@ function statusMiddleware(req, res, next) {
 
     res.sendStatus(503);
   } else if (req.method === "GET" && req.url === "/status") {
-    // If request is for application status...
+    // Else, if request is for application status...
+
+    // Log request.
+
+    shared.util.log.info("OK status.");
 
     // Send client a 200 ("OK") status.
 
     res.sendStatus(200);
   } else {
-    // Else...
-
-    // Go to next middleware.
+    // Else, go to next middleware.
 
     next();
   }

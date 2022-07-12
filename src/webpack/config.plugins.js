@@ -18,12 +18,12 @@ const webpackPluginsConfig = ({ isEnvLive }) =>
     ...(isEnvLive
       ? [
           // --flow-googleTagManager-2
-          shared.CONSTANT.GOOGLE.TAG_MANAGER_ID &&
+          shared.CONSTANT.GOOGLE.TAG_MANAGER.ID &&
             new HTMLWebpackPartialsPlugin({
               path: shared.util.makePath.public("/html/gtag.html"),
               location: "head",
               options: {
-                googleTagManagerId: shared.CONSTANT.GOOGLE.TAG_MANAGER_ID,
+                googleTagManagerId: shared.CONSTANT.GOOGLE.TAG_MANAGER.ID,
               },
             }),
           new MiniCSSExtractPlugin({

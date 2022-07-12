@@ -5,15 +5,17 @@ const apicache = require("apicache");
 // Max cache time limit: "2,147,483,647 milliseconds" || "35,791 minutes" || "596 hours" || "24 days" || "3.5 weeks"
 
 const CACHE = {
+  MIN: apicache.middleware("30 seconds"),
   STALE: apicache.middleware("5 minutes"),
+  HOUR: apicache.middleware("1 hour"),
   MAX: apicache.middleware("3 weeks"),
 };
 
 // Middleware.
 
-async function apicacheMiddleware(req, res, next) {
+function apicacheMiddleware(req, res, next) {
   if (res.locals.routeConfig.cache) {
-    // If route has a apicache middleware method available call it.
+    // If route has a apicache middleware method available, call it.
 
     res.locals.routeConfig.cache(req, res, next);
   } else {

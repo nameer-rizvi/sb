@@ -1,12 +1,12 @@
-const { reactRoutes, origin, log, resource } = require("../../shared");
+const shared = require("../../shared");
 
 // Dynamically generate sitemap using react route configs.
 //  This is convenient for if there are dynamic routes that depend on data from a database.
 
 // NOTE: 45,000 urls || 50MB maximum for each sitemap.
-//       Indexing two levels deep gives a maximum of 2,025,000,000.
+//       Indexing two levels deep gives a maximum of 2,025,000,000 urls.
 
-async function sitemap(req, res) {
+async function staticRouteSitemap(req, res) {
   try {
     // Initialize store for xml elements with required elements.
 
@@ -17,7 +17,7 @@ async function sitemap(req, res) {
 
     // Loop through react route configs.
 
-    for (let reactRoute of reactRoutes)
+    for (let reactRoute of shared.routes.react)
       if (reactRoute.xml) {
         // If a react route has an xml method...
 
@@ -30,7 +30,9 @@ async function sitemap(req, res) {
         for (const [XMLURLKey, XMLURLValue] of Object.entries(reactRoute.xml()))
           XMLElements.push(
             `<${XMLURLKey}>${
-              XMLURLKey === "loc" ? origin + XMLURLValue : XMLURLValue
+              XMLURLKey === "loc"
+                ? shared.CONSTANT.ORIGIN + XMLURLValue
+                : XMLURLValue
             }</${XMLURLKey}>`
           );
 
@@ -45,7 +47,7 @@ async function sitemap(req, res) {
 
     // Log successful xml generation for request by bot crawler.
 
-    log.bot("Crawled " + resource.sitemap);
+    shared.util.log.bot("Crawled " + shared.CONSTANT.RESOURCE.SITEMAP);
 
     // Set response content type to xml.
 
@@ -57,7 +59,9 @@ async function sitemap(req, res) {
   } catch (error) {
     // Log any error.
 
-    log.bot(error, { flag: "minimal" });
+    shared.util.log.bot("Sitemap.xml: " + error.toString(), {
+      flag: "minimal",
+    });
 
     // Send client a 500 ("Internal Server Error") status.
 
@@ -65,14 +69,9 @@ async function sitemap(req, res) {
   }
 }
 
-module.exports = sitemap;
+module.exports = staticRouteSitemap;
 
-// https://www.sitemaps.org/
-// https://developers.google.com/search/docs/advanced/sitemaps/overview
-// https://developers.google.com/search/docs/advanced/sitemaps/build-sitemap
-// https://developers.google.com/search/docs/advanced/sitemaps/news-sitemap
-//
-// Sample:
+// Sample output:
 //
 // <url>
 //    <loc>http://www.example.com/</loc>
@@ -80,3 +79,8 @@ module.exports = sitemap;
 //    <changefreq>monthly</changefreq>
 //    <priority>0.8</priority>
 // </url>
+//
+// https://www.sitemaps.org/
+// https://developers.google.com/search/docs/advanced/sitemaps/overview
+// https://developers.google.com/search/docs/advanced/sitemaps/build-sitemap
+// https://developers.google.com/search/docs/advanced/sitemaps/news-sitemap

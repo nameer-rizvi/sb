@@ -1,6 +1,6 @@
 require("dotenv").config();
 const express = require("express");
-const { port, log, resource } = require("../shared");
+const shared = require("../shared");
 const { isEnv } = require("simpul");
 const middlewares = require("./middlewares");
 const staticRouter = require("./static");
@@ -11,14 +11,17 @@ const server = express();
 
 // Listen for requests on server port.
 
-server.listen(port.server, () => {
-  // Log listener.
-
-  log.express(`server listening on port ${port.server}`, { flag: "minimal" });
-
+server.listen(shared.CONSTANT.PORT.SERVER, () => {
   // Log environment.
 
-  log.environment(`in ${process.env.NODE_ENV}.`, { flag: "minimal" });
+  shared.util.log.environment2(`in ${isEnv.name}.`, { flag: "minimal" });
+
+  // Log listener.
+
+  shared.util.log.express(
+    `server listening on port ${shared.CONSTANT.PORT.SERVER}`,
+    { flag: "minimal" }
+  );
 });
 
 // Set "trust proxy" in live environments.
@@ -31,11 +34,11 @@ server.use(middlewares.application);
 
 // If a request is made for the api resource, use the api middlewares.
 
-server.use(resource.api, middlewares.api);
+server.use(shared.CONSTANT.RESOURCE.API, middlewares.api);
 
 // If a request passes the api resource, use the static router.
 
 server.use(staticRouter);
 
-// http://expressjs.com/
-// https://www.npmjs.com/package/express
+// // http://expressjs.com/
+// // https://www.npmjs.com/package/express

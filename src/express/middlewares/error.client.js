@@ -20,15 +20,11 @@ function clientErrorHandler(err, res) {
   const message = codeExists ? errSplit[1] : errSplit[0];
 
   if (message) {
-    // If message exists...
-
-    // Send client response code with message.
+    // If message exists, send client the response code and message.
 
     res.status(code).send(message);
   } else {
-    // Otherwise...
-
-    // Send client the response code with standard http protocol message.
+    // Else, send client the response code with standard http protocol message.
 
     res.sendStatus(code);
   }

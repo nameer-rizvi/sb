@@ -1,22 +1,19 @@
 import React, { useEffect } from "react";
 import { URLQuery, request } from "../util";
-import { isEnv } from "simpul";
+import { isBooleanAny, isEnv } from "simpul";
 import ErrorBoundaryComponentStyled from "./ErrorBoundaryComponentStyled";
 
 function ErrorBoundaryComponent({ error }) {
-  const isChunkLoadError = error && error.name === "ChunkLoadError";
-
-  const params = URLQuery.get();
-
   useEffect(() => {
     if (isEnv.live) {
-      if (isChunkLoadError) {
-        if (!params.reloaded) {
+      if (error.name === "ChunkLoadError") {
+        const params = URLQuery.get();
+        if (!isBooleanAny(params.reloaded)) {
           params.reloaded = true;
           window.location =
             window.location.pathname + URLQuery.generate(params);
         }
-      } else if (error)
+      } else {
         request.post("/error", {
           data: {
             error: {
@@ -26,6 +23,7 @@ function ErrorBoundaryComponent({ error }) {
             },
           },
         });
+      }
     }
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 

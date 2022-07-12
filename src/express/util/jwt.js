@@ -24,12 +24,12 @@ exports.verify = async (token, validateKey) => {
 
   // If there's an expected key to validate and there's no data/data-with-key, throw error.
 
-  if (validateKey && (!data || !data[validateKey]))
-    throw new Error(`Corrupt token detected: "${token}"`);
+  if (validateKey && !data?.[validateKey])
+    throw new Error(`Corrupt token detected ("${token}").`);
 
   // If there's an expected key to validate and data has key or if data exists, return data.
 
-  if (validateKey ? data && data[validateKey] : data) return data;
+  if (validateKey ? data[validateKey] : data) return data;
 
   // If data isn't returned, throw error.
 

@@ -1,4 +1,5 @@
 exports.application = [
+  require("./performance"),
   require("./status"),
   require("./cors"),
   require("./helmet"),
@@ -6,7 +7,7 @@ exports.application = [
 ];
 
 exports.api = [
-  require("./expressJSON"),
+  require("./expressParsers"),
   require("./routeManager"),
   // require("./rateLimit"), // Proxies (i.e. NGINX) normally handle this...
   require("./authenticate"),

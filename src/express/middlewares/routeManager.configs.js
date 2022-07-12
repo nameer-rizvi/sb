@@ -1,29 +1,28 @@
-const { CACHE } = require("./apicache");
+const apicacheMiddleware = require("./apicache");
 
 // --starterKit-flag [set api route configs here]
 
 // The route manager restricts access to only those api routes that are defined
 // in the configs store here. It can be shaped any way you like, so long as there's
-// a "route" and a "method" value included, and it can be accessed in any proceeding middleware.
+// a "path" and a "method" value, and it can be accessed by any proceeding middleware.
 
 const routeManagerMiddlewareConfigs = [
   {
-    route: "/",
+    path: "/",
     method: "GET",
-    cache: CACHE.MAX,
+    cache: apicacheMiddleware.CACHE.MAX,
   },
   {
-    route: "/error",
+    path: "/error",
     method: "POST",
-    authenticate: "bearerToken",
     requiredParams: ["error"],
   },
   {
-    route: "/initialize",
+    path: "/initialize",
     method: "GET",
     authenticate: "bearerToken",
     // ignoreValidation: true,
-    cache: CACHE.STALE,
+    cache: apicacheMiddleware.CACHE.STALE,
   },
 ];
 
