@@ -5,7 +5,7 @@ const { dateformat } = require("simpul");
 // We host the react route configs here for use by
 //  the sitemap generator in the express folder.
 
-const reactRoutes = [
+const sharedRoutesReact = [
   {
     name: "Home",
     path: "/",
@@ -38,10 +38,10 @@ const reactRoutes = [
   },
 ];
 
+module.exports = sharedRoutesReact;
+
 function makeXMLDate(date) {
   return dateformat(date, "Y-M-D");
 }
-
-module.exports = reactRoutes;
 
 // https://developers.google.com/search/docs/advanced/crawling/special-tags

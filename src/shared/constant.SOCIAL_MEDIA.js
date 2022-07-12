@@ -1,4 +1,4 @@
-// --starterKit-flag [change twitter or add other social media or remove]
+// --starterKit-flag [change twitter, add other social media, or remove]
 
 const SHARED_CONSTANT_SOCIAL_MEDIA = {
   TWITTER: {

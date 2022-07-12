@@ -23,10 +23,12 @@ const shared = {
     URL: require("./constant.URL"),
     VIEWPORT: require("./constant.VIEWPORT"),
   },
+  routes: {
+    react: require("./routes.react"),
+  },
   util: {
     log: require("./util.log"),
     makePath: require("./util.makePath"),
-    reactRoutes: require("./util.reactRoutes"),
   },
 };
 

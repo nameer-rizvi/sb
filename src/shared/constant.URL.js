@@ -6,10 +6,8 @@ const SHARED_CONSTANT_URL = {
   APPLE_TOUCH_ICON: "/lib/assets/apple-touch-icon.png",
   DOMAIN: "https://www.sb.com",
   GITHUB: "https://github.com/nameer-rizvi/sb",
-  LOCALHOST: {
-    CLIENT: "http://localhost:" + SHARED_CONSTANT_PORT.CLIENT,
-    SERVER: "http://localhost:" + SHARED_CONSTANT_PORT.SERVER,
-  },
+  LOCALHOST_CLIENT: "http://localhost:" + SHARED_CONSTANT_PORT.CLIENT,
+  LOCALHOST_SERVER: "http://localhost:" + SHARED_CONSTANT_PORT.SERVER,
 };
 
 module.exports = SHARED_CONSTANT_URL;

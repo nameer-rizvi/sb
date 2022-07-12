@@ -1,7 +1,7 @@
 const path = require("path");
 
 const pathResolve = (dir) =>
-  path.resolve(__dirname, dir.filter(Boolean).join("/"));
+  path.resolve(__dirname, dir.filter(Boolean).join(""));
 
 const sharedUtilMakePath = {
   client: (ext) => pathResolve(["../react", ext]),

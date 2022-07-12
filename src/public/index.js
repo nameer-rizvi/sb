@@ -1,6 +1,6 @@
 const public = {
-  pwa: require("./pwa"),
   html: require("./html"),
+  pwa: require("./pwa"),
 };
 
 module.exports = public;

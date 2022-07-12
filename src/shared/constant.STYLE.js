@@ -9,17 +9,13 @@ const SHARED_CONSTANT_STYLE = {
 
 SHARED_CONSTANT_STYLE.BASE = `
   * {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
   }
 
   html {
     scroll-behavior: smooth;
-  }
-
-  html,
-  body {
-    padding: 0;
-    margin: 0;
   }
 
   body {
