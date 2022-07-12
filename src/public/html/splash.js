@@ -3,7 +3,7 @@
 const makeSplashScreen = ({ id, title, style }) => `
   <div id="${id}">
     <style>
-      ${style.base}
+      ${style.BASE}
       body {
         align-items: center;
         justify-content: center;

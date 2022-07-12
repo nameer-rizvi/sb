@@ -10,52 +10,53 @@ const ESLintPlugin = require("eslint-webpack-plugin");
 const public = require("../public");
 const shared = require("../shared");
 
-const webpackPluginsConfig = ({ isEnvLive }) => [
-  new ProvidePlugin({ process: "process/browser" }),
-  new CleanWebpackPlugin({ cleanStaleWebpackAssets: isEnvLive }),
-  new HTMLWebpackPlugin({ minify: isEnvLive, ...public.html }),
-  ...(isEnvLive
-    ? [
-        // --flow-googleTagManager-2
-        shared.CONSTANT.GOOGLE.TAG_MANAGER_ID &&
-          new HTMLWebpackPartialsPlugin({
-            path: shared.util.makePath.public("/html/gtag.html"),
-            location: "head",
-            options: {
-              googleTagManagerId: shared.CONSTANT.GOOGLE.TAG_MANAGER_ID,
+const webpackPluginsConfig = ({ isEnvLive }) =>
+  [
+    new ProvidePlugin({ process: "process/browser" }),
+    new CleanWebpackPlugin({ cleanStaleWebpackAssets: isEnvLive }),
+    new HTMLWebpackPlugin({ minify: isEnvLive, ...public.html }),
+    ...(isEnvLive
+      ? [
+          // --flow-googleTagManager-2
+          shared.CONSTANT.GOOGLE.TAG_MANAGER_ID &&
+            new HTMLWebpackPartialsPlugin({
+              path: shared.util.makePath.public("/html/gtag.html"),
+              location: "head",
+              options: {
+                googleTagManagerId: shared.CONSTANT.GOOGLE.TAG_MANAGER_ID,
+              },
+            }),
+          new MiniCSSExtractPlugin({
+            filename: "lib/css/[name].[contenthash:8].css",
+            chunkFilename: "lib/css/[name].[contenthash:8].chunk.css",
+          }),
+          new WebpackManifestPlugin({
+            fileName: "asset-manifest.json",
+          }),
+          new WebpackPWAManifest({
+            filename: "manifest.json",
+            ios: true,
+            ...public.pwa,
+          }),
+          new WorkboxPlugin.InjectManifest({
+            swSrc: shared.util.makePath.public("/service-worker/index.js"),
+            swDest: shared.util.makePath.dist("/service-worker.js"),
+            exclude: [/\.(?:png|jpg|jpeg|svg)$/],
+          }),
+        ]
+      : [
+          new MiniCSSExtractPlugin(),
+          new ESLintPlugin({
+            eslintPath: require.resolve("eslint"),
+            extensions: ["js", "mjs", "jsx", "ts", "tsx"],
+            context: shared.util.makePath.client(),
+            baseConfig: {
+              extends: [require.resolve("eslint-config-react-app/base")],
+              ...share.CONSTANT.SETTING.ESLINT,
             },
           }),
-        new MiniCSSExtractPlugin({
-          filename: "lib/css/[name].[contenthash:8].css",
-          chunkFilename: "lib/css/[name].[contenthash:8].chunk.css",
-        }),
-        new WebpackManifestPlugin({
-          fileName: "asset-manifest.json",
-        }),
-        new WebpackPWAManifest({
-          filename: "manifest.json",
-          ios: true,
-          ...public.pwa,
-        }),
-        new WorkboxPlugin.InjectManifest({
-          swSrc: shared.util.makePath.public("/service-worker/index.js"),
-          swDest: shared.util.makePath.dist("/service-worker.js"),
-          exclude: [/\.(?:png|jpg|jpeg|svg)$/],
-        }),
-      ]
-    : [
-        new MiniCSSExtractPlugin(),
-        new ESLintPlugin({
-          eslintPath: require.resolve("eslint"),
-          extensions: ["js", "mjs", "jsx", "ts", "tsx"],
-          context: shared.util.makePath.client(),
-          baseConfig: {
-            extends: [require.resolve("eslint-config-react-app/base")],
-            ...share.CONSTANT.SETTING.ESLINT,
-          },
-        }),
-      ]),
-];
+        ]),
+  ].filter(Boolean);
 
 module.exports = webpackPluginsConfig;
 
