@@ -17,7 +17,7 @@ const RouteProviderComponentResolver = {
 };
 
 function RouteProviderComponent(routeProps) {
-  // Initialize dispatch.
+  // Use react-redux's dispatch hook.
 
   const dispatch = useDispatch();
 
@@ -37,25 +37,24 @@ function RouteProviderComponent(routeProps) {
 
   Object.assign(params, URLQuery.get());
 
-  // On location or params change, update route reducer.
+  // On location or params change, update dispatch route reducer update.
 
   useEffect(() => {
-    dispatch(updateRoute({ ...location, params }));
+    const routeReducerUpdate = { ...location, params };
+    dispatch(updateRoute(routeReducerUpdate));
   }, [dispatch, location, params]);
 
   // On route props, params, or location change, update html document meta tags.
 
   useEffect(() => {
-    const documentMetaUpdate =
-      routeProps.document && routeProps.document(params, location);
+    const documentMetaUpdate = routeProps.document?.(params, location);
     HTMLDocumentMetaUpdate(documentMetaUpdate);
   }, [routeProps, params, location]);
 
   // On route props, params, location, or component data change, update html structured data.
 
   useEffect(() => {
-    const structuredDataUpdate =
-      routeProps.structuredData && routeProps.structuredData(params, location);
+    const structuredDataUpdate = routeProps.structuredData?.(params, location);
     HTMLStructuredDataUpdate(structuredDataUpdate);
   }, [routeProps, params, location]);
 
@@ -72,18 +71,18 @@ function RouteProviderComponent(routeProps) {
 
   // Render route.
 
-  return RouteLazyComponent ? (
-    <main id={CONSTANT.ELEMENT_ID.MAIN}>
-      <Suspense
-        Component={RouteLazyComponent}
-        location={location}
-        params={params}
-        {...routeProps}
-      />
-    </main>
-  ) : (
-    <Navigate replace to="/404" />
-  );
+  if (RouteLazyComponent) {
+    return (
+      <main id={CONSTANT.ELEMENT_ID.MAIN}>
+        <Suspense
+          Component={RouteLazyComponent}
+          location={location}
+          params={params}
+          {...routeProps}
+        />
+      </main>
+    );
+  } else return <Navigate replace to="/404" />;
 }
 
 export default RouteProviderComponent;

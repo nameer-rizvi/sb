@@ -4,7 +4,7 @@ import { gtag } from "../util";
 function routeReducer(state = routeInitialState, action) {
   switch (action.type) {
     case UPDATE_ROUTE:
-      if (state.current && state.current.pathname !== action.payload.pathname) {
+      if (state.current?.pathname !== action.payload.pathname) {
         state.previous = state.current;
         state.history.push(state.current);
       }

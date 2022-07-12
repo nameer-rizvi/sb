@@ -3,14 +3,16 @@ const { flatten, isString } = require("simpul");
 const Bowser = require("bowser");
 
 function serverErrorHandler(err, res, req) {
+  // Initialize constants from res locals.
+
+  const { routeConfig = {}, values = {} } = res.locals;
+
+  // Initialize server error constant.
+
+  const serverError = {};
+
   try {
-    // Initialize constants from res locals.
-
-    const { routeConfig = {}, values = {} } = res.locals;
-
-    // Generate server error object with relevant properties.
-
-    const serverError = {};
+    // Build server error.
 
     serverError.source = routeConfig.path === "/error" ? "client" : "server";
 
@@ -79,16 +81,20 @@ function serverErrorHandler(err, res, req) {
     // Save server error in the database.
 
     // database.controller.error.create(serverError);
-
-    console.log(serverError);
   } catch (error) {
     // Log any middleware errors as error logs.
 
     shared.util.log.error(error);
   } finally {
-    // Send client a 500 ("Internal Server Error") status.
+    if (serverError.method === "APP") {
+      // If server error is by APP method, send client a 200 ("OK") status.
 
-    res.sendStatus(500);
+      res.sendStatus(200);
+    } else {
+      // Else, send client a 500 ("Internal Server Error")
+
+      res.sendStatus(500);
+    }
   }
 }
 

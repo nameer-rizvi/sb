@@ -7,14 +7,14 @@ const { WebpackManifestPlugin } = require("webpack-manifest-plugin");
 const WebpackPWAManifest = require("webpack-pwa-manifest");
 const WorkboxPlugin = require("workbox-webpack-plugin");
 const ESLintPlugin = require("eslint-webpack-plugin");
-const public = require("../public");
+const publicIndex = require("../public");
 const shared = require("../shared");
 
 const webpackPluginsConfig = ({ isEnvLive }) =>
   [
     new ProvidePlugin({ process: "process/browser" }),
     new CleanWebpackPlugin({ cleanStaleWebpackAssets: isEnvLive }),
-    new HTMLWebpackPlugin({ minify: isEnvLive, ...public.html }),
+    new HTMLWebpackPlugin({ minify: isEnvLive, ...publicIndex.html }),
     ...(isEnvLive
       ? [
           // --flow-googleTagManager-2
@@ -36,7 +36,7 @@ const webpackPluginsConfig = ({ isEnvLive }) =>
           new WebpackPWAManifest({
             filename: "manifest.json",
             ios: true,
-            ...public.pwa,
+            ...publicIndex.pwa,
           }),
           new WorkboxPlugin.InjectManifest({
             swSrc: shared.util.makePath.public("/service-worker/index.js"),

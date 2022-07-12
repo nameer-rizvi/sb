@@ -2,7 +2,7 @@ import { CONSTANT } from "../../shared";
 import { createGlobalStyle } from "styled-components";
 
 export const ThemeConfig = {
-  font: [CONSTANT.STYLE.FONT_FAMILY],
+  font: CONSTANT.STYLE.FONT_FAMILY,
   color: [CONSTANT.STYLE.BACKGROUND_COLOR, CONSTANT.STYLE.COLOR],
 };
 

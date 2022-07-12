@@ -1,10 +1,10 @@
 import { rootElement } from "./setup"; // To ensure polyfills get applied first, "./setup" must be the first import.
-import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 import React from "react";
 import App from "./App";
 import { isEnv } from "simpul";
 
-ReactDOM.render(<App />, rootElement);
+createRoot(rootElement).render(<App />);
 
 if (!isEnv.live) module.hot?.accept(); // Won't work in "/setup" so must be called here.
 
