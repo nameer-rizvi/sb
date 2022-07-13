@@ -32,11 +32,11 @@ server.set("trust proxy", isEnv.live);
 
 server.use(middlewares.application);
 
-// If a request is made for the api resource, use the api middlewares.
+// If a request is made for the api pathname, use the api middlewares.
 
-server.use(shared.CONSTANT.RESOURCE.API, middlewares.api);
+server.use(shared.CONSTANT.PATHNAME.API, middlewares.api);
 
-// If a request passes the api resource, use the static router.
+// If a request passes the api pathname, use the static router.
 
 server.use(staticRouter);
 

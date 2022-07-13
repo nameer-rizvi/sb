@@ -1,7 +1,7 @@
-import { routeInitialState, UPDATE_ROUTE } from "./route.action";
+import { routeReducerInitialState, UPDATE_ROUTE } from "./route.action";
 import { gtag } from "../util";
 
-function routeReducer(state = routeInitialState, action) {
+function routeReducer(state = routeReducerInitialState, action) {
   switch (action.type) {
     case UPDATE_ROUTE:
       if (state.current?.pathname !== action.payload.pathname) {

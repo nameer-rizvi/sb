@@ -47,7 +47,7 @@ async function staticRouteSitemap(req, res) {
 
     // Log successful xml generation for request by bot crawler.
 
-    shared.util.log.bot("Crawled " + shared.CONSTANT.RESOURCE.SITEMAP);
+    shared.util.log.bot("Crawled " + shared.CONSTANT.PATHNAME.SITEMAP);
 
     // Set response content type to xml.
 

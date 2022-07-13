@@ -5,7 +5,6 @@ import sanitized from "sanitized";
 async function processRequest(method, url, option = {}) {
   const {
     ignore,
-    authenticate = true,
     ignoreErrorLog,
     unmounted,
     cancelSource: activeCancelSource,
@@ -25,13 +24,6 @@ async function processRequest(method, url, option = {}) {
     if (!isEnv.production) console.warn("Missing 'url' for request.");
   } else if (ignore === true) {
     if (!isEnv.production) console.log(`Ignoring request to ${url}.`);
-  } else if (authenticate && !axios.defaults.headers.common.Authorization) {
-    const authenticationErrorMessages = [
-      `Failed to authenticate request to ${url}.`,
-      "Authorization header is required.",
-      `Set "authenticate" to false to ignore request authentication.`,
-    ];
-    if (!isEnv.production) console.warn(authenticationErrorMessages.join(" "));
   } else {
     try {
       // -- ON REQUEST START --

@@ -19,7 +19,7 @@ function staticRouteRobots(req, res) {
     },
     {
       name: "Sitemap",
-      value: shared.CONSTANT.ORIGIN + shared.CONSTANT.RESOURCE.SITEMAP,
+      value: shared.CONSTANT.ORIGIN + shared.CONSTANT.PATHNAME.SITEMAP,
     },
     {
       sectionBreak: true,
@@ -34,7 +34,7 @@ function staticRouteRobots(req, res) {
 
   // Log successful txt generation for request by bot crawler.
 
-  shared.util.log.bot("Crawled " + shared.CONSTANT.RESOURCE.ROBOTS);
+  shared.util.log.bot("Crawled " + shared.CONSTANT.PATHNAME.ROBOTS);
 
   // Set response content type to text/plain.
 

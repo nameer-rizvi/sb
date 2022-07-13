@@ -14,13 +14,13 @@ historyApiFallbackConfig.htmlAcceptHeaders = [
   "application/xhtml+xml",
 ];
 
-// If request is not for the api resource, add resource to config rewrites.
+// If request is not for the api pathname, add pathname to config rewrites.
 
-historyApiFallbackConfig.rewrites = Object.keys(shared.CONSTANT.RESOURCE)
+historyApiFallbackConfig.rewrites = Object.keys(shared.CONSTANT.PATHNAME)
   .filter((rewrite) => rewrite !== "API")
   .map((rewrite) => ({
     from: rewrite.toLowerCase(),
-    to: shared.CONSTANT.RESOURCE[rewrite],
+    to: shared.CONSTANT.PATHNAME[rewrite],
   }));
 
 // historyApiFallback allows the react client use of the browser history in conjunction with request urls.

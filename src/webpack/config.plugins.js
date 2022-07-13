@@ -23,6 +23,8 @@ const webpackPluginsConfig = ({ isEnvLive }) =>
               path: shared.util.makePath.public("/html/gtag.html"),
               location: "head",
               options: {
+                googleTagManagerUrlSrc:
+                  shared.CONSTANT.GOOGLE.TAG_MANAGER.URL_SRC,
                 googleTagManagerId: shared.CONSTANT.GOOGLE.TAG_MANAGER.ID,
               },
             }),

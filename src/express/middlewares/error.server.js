@@ -3,13 +3,13 @@ const { flatten, isString } = require("simpul");
 const Bowser = require("bowser");
 
 function serverErrorHandler(err, res, req) {
-  // Initialize constants from res locals.
-
-  const { routeConfig = {}, values = {} } = res.locals;
-
   // Initialize server error constant.
 
   const serverError = {};
+
+  // Initialize constants from res locals.
+
+  const { routeConfig = {}, values = {} } = res.locals;
 
   try {
     // Build server error.

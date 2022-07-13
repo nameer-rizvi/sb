@@ -1,8 +1,8 @@
 import { combineReducers } from "redux";
 import routeReducer from "./route.reducer";
 
-const RootReducer = combineReducers({ route: routeReducer });
+const rootReducer = combineReducers({ route: routeReducer });
 
-export default RootReducer;
+export default rootReducer;
 
 // https://www.npmjs.com/package/redux

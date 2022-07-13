@@ -11,5 +11,5 @@ const webpackOptimizationConfig = ({ isEnvLive }) => ({
 module.exports = webpackOptimizationConfig;
 
 // https://webpack.js.org/configuration/optimization/
-// '...' can be used in optimization.minimizer to access the defaults.
+//  '...' can be used in optimization.minimizer to access the defaults.
 // https://www.npmjs.com/package/css-minimizer-webpack-plugin

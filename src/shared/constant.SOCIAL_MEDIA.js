@@ -2,8 +2,8 @@
 
 const SHARED_CONSTANT_SOCIAL_MEDIA = {
   TWITTER: {
-    USERNAME: "username",
-    HANDLE: "@username",
+    USERNAME: "sb",
+    HANDLE: "@sb",
     CARD: "summary",
   },
 };

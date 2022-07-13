@@ -19,7 +19,7 @@ function Home() {
           </span>
         </h1>
         <h2>now, let&apos;s make this thing :)</h2>
-        <h3>p.s. im at /src/react/App/Page.js</h3>
+        <h3>p.s. im at /src/react/App/Home.js</h3>
         <Link
           to={request.data.url.post}
           style={{ display: "block", margin: "25px 0" }}

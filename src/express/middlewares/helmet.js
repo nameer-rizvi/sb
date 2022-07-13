@@ -21,14 +21,7 @@ if (!isEnv.live && shared.CONSTANT.GOOGLE.TAG_MANAGER.ID) {
     "'self'",
     shared.CONSTANT.GOOGLE.TAG_MANAGER.URL,
     shared.CONSTANT.GOOGLE.ANALYTICS.URL,
-    // ***
-    //
-    // This will be unique to your application.
-    //   Run app ("npm run app") and copy-paste suggested sha-256 value from console error.
-    //
-    "'sha256-...'",
-    //
-    // ***
+    shared.CONSTANT.GOOGLE.TAG_MANAGER.SHA256,
   ];
 
   contentSecurityPolicy["img-src"] = [
