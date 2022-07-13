@@ -1,6 +1,5 @@
 const SHARED_CONSTANT_PATHNAME = {
   API: "/api/v1",
-  FAVICON: "/favicon.ico",
   ROBOTS: "/robots.txt",
   SITEMAP: "/sitemap.xml",
 };
