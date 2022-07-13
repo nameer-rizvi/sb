@@ -71,3 +71,8 @@ _[Click here to learn how to configure a PM2 ecosystem config.](https://pm2.keym
 - [Installation guide.](https://pm2.io/docs/runtime/guide/installation/)
 - [Configuring an ecosystem config.](https://pm2.keymetrics.io/docs/usage/application-declaration/)
 - [Log rotator.](https://github.com/keymetrics/pm2-logrotate)
+
+## TODO
+
+- [ ] Improve Lighthouse scores, fix issues from report.
+- [ ] Fix Manifest warnings/errors.
