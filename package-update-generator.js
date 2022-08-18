@@ -2,22 +2,39 @@ const packageJSON = require("./package.json");
 
 const ignorePackages = [""];
 
-const makeNPMCommand = (dependencies, save = "") =>
-  ["uninstall", "install"]
-    .map((command) => {
-      const packages = Object.keys(dependencies)
-        .filter((key) => !ignorePackages.includes(key))
-        .join(" ");
+const configs = [
+  {
+    action: "uninstall",
+    keys: ["devDependencies", "dependencies"],
+  },
+  {
+    action: "install",
+    keys: ["devDependencies"],
+    save: "--save-dev",
+  },
+  {
+    action: "install",
+    keys: ["dependencies"],
+    save: "--save",
+  },
+];
 
-      return `npm ${command} ${packages}`;
-    })
-    .join(" && ") +
-  " " +
-  save;
+function mapper(config) {
+  const packageNames = [];
+  for (let key of config.keys)
+    if (packageJSON[key])
+      for (let packageName of Object.keys(packageJSON[key]))
+        if (!ignorePackages.includes(packageName))
+          packageNames.push(packageName);
+  if (packageNames.length) {
+    if (config.save) packageNames.push(config.save);
+    return `npm ${config.action} ${packageNames.join(" ")}`;
+  }
+}
 
-console.log(
-  [
-    makeNPMCommand(packageJSON.devDependencies, "--save-dev"),
-    makeNPMCommand(packageJSON.dependencies),
-  ].join(" && ")
-);
+const commands = configs
+  .map(mapper)
+  .filter(Boolean)
+  .join(" && ");
+
+console.log(`\n${commands}\n`);

@@ -9,19 +9,20 @@ const staticRouter = require("./static");
 
 const server = express();
 
+// Initialize port to use for the server.
+
+const port = shared.CONSTANT.PORT.SERVER;
+
 // Listen for requests on server port.
 
-server.listen(shared.CONSTANT.PORT.SERVER, () => {
+server.listen(port, () => {
   // Log environment.
 
-  shared.util.log.environment2(`in ${isEnv.name}.`, { flag: "minimal" });
+  shared.util.log.environment2(`in ${isEnv.name}.`);
 
   // Log listener.
 
-  shared.util.log.express(
-    `server listening on port ${shared.CONSTANT.PORT.SERVER}`,
-    { flag: "minimal" }
-  );
+  shared.util.log.express(`server listening on port ${port}`);
 });
 
 // Set "trust proxy" in live environments.

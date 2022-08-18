@@ -18,14 +18,14 @@ async function authenticateMiddleware(req, res, next) {
 
       // Verify token data using jsonwebtoken and assign it to res locals.
 
-      res.locals.token = await util.jwt.verify(bearerToken);
+      if (bearerToken) res.locals.token = await util.jwt.verify(bearerToken);
     }
 
-    // If an error isn't thrown, go to next middleware.
+    // Go to next middleware.
 
     next();
   } catch (error) {
-    // Log failed authentication.
+    // Log authentication error.
 
     shared.util.log.info("Authenticate Middleware: " + error.toString());
 

@@ -13,37 +13,41 @@ const shared = require("../../shared");
 */
 
 function statusMiddleware(req, res, next) {
-  if (req.method === "GET" && req.url === "/health") {
-    // If request is for application health...
+  // Response configs for handling status requests. Order is important.
 
-    // Log request.
+  const responses = [
+    {
+      condition: req.method === "GET" && req.url === "/health",
+      log: "OK health",
+      status: 200,
+    },
+    {
+      condition: process.env.MAINTENANCE_MODE === "true",
+      log: "In maintenance mode",
+      status: 503,
+    },
+    {
+      condition: req.method === "GET" && req.url === "/status",
+      log: "OK status",
+      status: 200,
+    },
+  ];
 
-    shared.util.log.info("OK health.");
+  // Set response to first response config with a truthy condition.
 
-    // Send client a 200 ("OK") status.
+  const response = responses.find((r) => r.condition);
 
-    res.sendStatus(200);
-  } else if (process.env.MAINTENANCE_MODE === "true") {
-    // Else, if application is in maintenance mode...
+  // If a response was found...
 
-    // Send client a 503 ("Service Unavailable") status.
+  if (response) {
+    // Log info using the info emoji.
 
-    res.sendStatus(503);
-  } else if (req.method === "GET" && req.url === "/status") {
-    // Else, if request is for application status...
+    shared.util.log.info(response.log);
 
-    // Log request.
+    // Send client the response status.
 
-    shared.util.log.info("OK status.");
-
-    // Send client a 200 ("OK") status.
-
-    res.sendStatus(200);
-  } else {
-    // Else, go to next middleware.
-
-    next();
-  }
+    res.sendStatus(response.status);
+  } else next();
 }
 
 module.exports = statusMiddleware;

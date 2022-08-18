@@ -10,7 +10,7 @@ const routeInitialize = (req, res) =>
       github: shared.CONSTANT.URL.GITHUB,
     },
     footnote:
-      "The data for this page was fetched from the server @ /express/routes/initialize.js.",
+      "The data for this page was fetched from the server @ express/routes/initialize.js.",
   });
 
 module.exports = routeInitialize;

@@ -32,21 +32,21 @@ function serverErrorHandler(err, res, req) {
     serverError.stack = values.error?.stack || err.stack;
 
     serverError.user_id =
-      req.session?.id ||
-      req.session?.uid ||
       req.session?.user_id ||
-      res.locals.user?.id ||
-      res.locals.user?.uid ||
+      req.session?.uid ||
+      req.session?.id ||
       res.locals.user?.user_id ||
-      res.locals.token?.id ||
+      res.locals.user?.uid ||
+      res.locals.user?.id ||
+      res.locals.token?.user_id ||
       res.locals.token?.uid ||
-      res.locals.token?.user_id;
+      res.locals.token?.id;
 
     serverError.ip = req.ip || "";
 
     // Log server error message.
 
-    shared.util.log.error(serverError.message, { flag: "minimal" });
+    shared.util.log.error(serverError.message);
 
     // Parse flat user agent using bowser.
 
@@ -75,12 +75,11 @@ function serverErrorHandler(err, res, req) {
 
       // If trace is local, log it.
 
-      if (isLocalTrace) shared.util.log.at(trace.trim(), { flag: "minimal" });
+      if (isLocalTrace) shared.util.log.at(trace.trim());
     }
 
-    // Save server error in the database.
-
-    // database.controller.error.create(serverError);
+    // Save server error in the database...
+    //   database.controller.error.create(serverError);
   } catch (error) {
     // Log any middleware errors as error logs.
 
